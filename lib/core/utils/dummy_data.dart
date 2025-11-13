@@ -11,26 +11,54 @@ final dummyUser = User(
   carPlate: 'DXY-8021',
 );
 
+final _cities = [
+  'Midtown Loop',
+  'Harbor Front',
+  'Airport Express',
+  'Old Town',
+];
+
 final dummyRides = List.generate(
   12,
-  (index) => Ride(
-    id: 'ride-$index',
-    pickupAddress: '123 Sunset Blvd, City $index',
-    destinationAddress: 'Downtown Plaza ${index + 2}',
-    pickupTime: DateTime.now().subtract(Duration(hours: index * 3)),
-    dropTime: DateTime.now().subtract(Duration(hours: (index * 3) - 1)),
-    price: 18 + index * 3.5,
-    distanceKm: 6.5 + index,
-    avgTimeMinutes: 18 + index,
-    status: index % 3 == 0
-        ? 'incoming'
+  (index) {
+    final city = _cities[index % _cities.length];
+    final surge = 1.0 + (index % 4) * 0.15;
+    final demandIndex = 0.55 + (index % 3) * 0.18;
+    final window = index % 3 == 0
+        ? '17:00 - 19:00'
         : index % 3 == 1
-            ? 'completed'
-            : 'on_trip',
-    passengerName: 'Passenger ${index + 1}',
-    passengerAvatarUrl: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1',
-    carImageUrl: 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d',
-  ),
+            ? '06:00 - 08:00'
+            : '22:00 - 23:30';
+    final cancellationRisk = 0.02 + (index % 4) * 0.01;
+    return Ride(
+      id: 'ride-$index',
+      pickupAddress: '123 Sunset Blvd, City $index',
+      destinationAddress: 'Downtown Plaza ${index + 2}',
+      pickupTime: DateTime.now().subtract(Duration(hours: index * 3)),
+      dropTime: DateTime.now().subtract(Duration(hours: (index * 3) - 1)),
+      price: 18 + index * 3.5,
+      distanceKm: 6.5 + index,
+      avgTimeMinutes: 18 + index,
+      status: index % 3 == 0
+          ? 'incoming'
+          : index % 3 == 1
+              ? 'completed'
+              : 'on_trip',
+      passengerName: 'Passenger ${index + 1}',
+      passengerAvatarUrl:
+          'https://images.unsplash.com/photo-1524504388940-b1c1722653e1',
+      carImageUrl:
+          'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d',
+      meta: {
+        'city': city,
+        'surge': surge,
+        'demandIndex': demandIndex,
+        'hotspotWindow': window,
+        'cancellationRisk': cancellationRisk,
+        'earningTarget': 32 + index * 1.5,
+      },
+    );
+  },
 );
 
 final dummyTransactions = List.generate(

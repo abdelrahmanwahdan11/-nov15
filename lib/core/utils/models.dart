@@ -35,7 +35,8 @@ class Ride {
     required this.passengerAvatarUrl,
     required this.carImageUrl,
     this.rating,
-  });
+    Map<String, dynamic>? meta,
+  }) : meta = meta ?? {};
 
   final String id;
   final String pickupAddress;
@@ -50,6 +51,7 @@ class Ride {
   final String passengerAvatarUrl;
   final String carImageUrl;
   double? rating;
+  final Map<String, dynamic> meta;
 }
 
 class TransactionItem {

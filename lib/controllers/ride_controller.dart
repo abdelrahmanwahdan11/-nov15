@@ -22,6 +22,7 @@ class RideController {
   Stream<List<Ride>> get ridesStream => _ridesStreamController.stream;
   Stream<List<TransactionItem>> get transactionsStream =>
       _transactionsController.stream;
+  List<Ride> get allRides => List.unmodifiable(_rides);
 
   Future<void> loadInitial() async {
     await Future.delayed(const Duration(milliseconds: 600));
@@ -56,6 +57,14 @@ class RideController {
             'https://images.unsplash.com/photo-1524504388940-b1c1722653e1',
         carImageUrl:
             'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d',
+        meta: {
+          'city': 'Expansion Hub ${(nextIndex + index) % 4 + 1}',
+          'surge': 1.0 + ((index + nextIndex) % 3) * 0.12,
+          'demandIndex': 0.6 + ((index + nextIndex) % 3) * 0.17,
+          'hotspotWindow': index.isEven ? '15:00 - 17:00' : '09:00 - 11:00',
+          'cancellationRisk': 0.03 + (index % 3) * 0.01,
+          'earningTarget': 28 + index * 1.8,
+        },
       ),
     ));
     _ridesStreamController.add(List.of(_rides));

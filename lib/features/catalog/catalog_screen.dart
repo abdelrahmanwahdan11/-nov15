@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../controllers/catalog_controller.dart';
 import '../../core/localization/localization_extensions.dart';
+import '../../core/utils/insight_utils.dart';
+import '../../core/widgets/ai_info_button.dart';
 import '../../core/widgets/animated_image_overlay_card.dart';
 import '../../core/widgets/filter_chips_row.dart';
 import '../../core/widgets/search_bar.dart';
@@ -78,7 +80,21 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         back: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(item.subtitle, style: Theme.of(context).textTheme.bodyLarge),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    item.subtitle,
+                                    style: Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                ),
+                                AIInfoButton(
+                                  headlineKey: 'catalog_insights',
+                                  insightsBuilder: (l10n) =>
+                                      InsightUtils.catalogInsights(l10n, item),
+                                ),
+                              ],
+                            ),
                             const SizedBox(height: 8),
                             Text('Price: \$${item.price.toStringAsFixed(2)}'),
                             Text('Distance: ${item.distanceKm.toStringAsFixed(1)} km'),
