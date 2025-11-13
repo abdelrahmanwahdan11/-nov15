@@ -1116,3 +1116,161 @@ const innovationStageNextSteps = <String, String>{
   'scale': 'Package lab learnings into nightly rollout playbook.',
 };
 
+
+const defaultMasteryPulse = MasteryPulse(
+  id: 'mastery_pulse_default',
+  focusTheme: 'Harbor cadence warmup',
+  momentum: 0.54,
+  energy: 0.68,
+  microPractice: 'Run the 60-second rider welcome reset twice.',
+  pathways: <String>[
+    'Harbor express greetings',
+    'Twilight merge timing',
+    'Evening calm anchor',
+  ],
+  coachNote: 'Crew mentors flagged a prime hour to sharpen twilight merges.',
+);
+
+final dummyMasteryModules = <MasteryModule>[
+  MasteryModule(
+    id: 'module_signal_sense',
+    title: 'Signal sense sprint',
+    subtitle: 'Micro-drills to react to surge signals faster.',
+    focusArea: 'Signal anticipation',
+    lessons: 8,
+    completedLessons: 3,
+    progress: 0.38,
+    icon: '⚡️',
+    microPractice: 'Mirror surge dashboard every 15 minutes.',
+    reflectionPrompt: 'What signal helped you pivot faster today?',
+    isFocus: true,
+  ),
+  MasteryModule(
+    id: 'module_rider_presence',
+    title: 'Rider presence loop',
+    subtitle: 'Elevate greetings, tone, and closure sequences.',
+    focusArea: 'Passenger experience',
+    lessons: 6,
+    completedLessons: 2,
+    progress: 0.33,
+    icon: '🌟',
+    microPractice: 'Layer a positive close-out mantra on departures.',
+    reflectionPrompt: 'How did you reset the cabin tone between rides?',
+    isFocus: false,
+  ),
+  MasteryModule(
+    id: 'module_energy_flow',
+    title: 'Energy flow map',
+    subtitle: 'Design hydration, nutrition, and rest checkpoints.',
+    focusArea: 'Driver resilience',
+    lessons: 5,
+    completedLessons: 1,
+    progress: 0.2,
+    icon: '💧',
+    microPractice: 'Schedule the breathing deck before surge windows.',
+    reflectionPrompt: 'Which ritual kept your energy stable tonight?',
+    isFocus: false,
+  ),
+];
+
+final dummyMasteryWorkshops = <MasteryWorkshop>[
+  MasteryWorkshop(
+    id: 'workshop_harbor',
+    title: 'Harbor twilight choreography',
+    focus: 'Signal anticipation',
+    host: 'Amina · Crew mentor',
+    date: 'Thu · 19:00',
+    highlight: 'Live breakdown of surge tells from last week.',
+    enrolled: true,
+  ),
+  MasteryWorkshop(
+    id: 'workshop_presence',
+    title: 'Presence and warmth clinic',
+    focus: 'Passenger experience',
+    host: 'Leo · Rider whisperer',
+    date: 'Sat · 15:30',
+    highlight: 'Practice warm-up scripts with live feedback.',
+    enrolled: false,
+  ),
+  MasteryWorkshop(
+    id: 'workshop_energy',
+    title: 'Energy map co-design',
+    focus: 'Driver resilience',
+    host: 'Maya · Wellness studio',
+    date: 'Sun · 10:00',
+    highlight: 'Pair your planner with recovery rituals.',
+    enrolled: false,
+  ),
+];
+
+final dummyMasteryBadges = <MasteryBadge>[
+  MasteryBadge(
+    id: 'badge_signal_chaser',
+    title: 'Signal chaser',
+    description: 'React to three surge cues in under two minutes.',
+    icon: '🚨',
+    moduleIds: <String>['module_signal_sense'],
+    progress: 0.38,
+    threshold: 0.8,
+    unlocked: false,
+  ),
+  MasteryBadge(
+    id: 'badge_host_hero',
+    title: 'Host hero',
+    description: 'Maintain 4.9 warmth average across the week.',
+    icon: '🤝',
+    moduleIds: <String>['module_rider_presence', 'module_signal_sense'],
+    progress: 0.35,
+    threshold: 0.75,
+    unlocked: false,
+  ),
+  MasteryBadge(
+    id: 'badge_energy_sage',
+    title: 'Energy sage',
+    description: 'Hit three wellness check-ins during surge shifts.',
+    icon: '🧘‍♀️',
+    moduleIds: <String>['module_energy_flow'],
+    progress: 0.2,
+    threshold: 0.7,
+    unlocked: false,
+  ),
+];
+
+final dummyMasteryReflections = <MasteryReflection>[
+  MasteryReflection(
+    id: 'reflection_1',
+    prompt: 'Signal anticipation',
+    response: 'Caught the ferry surge six minutes early after the planner ping.',
+    timestamp: DateTime.now().subtract(const Duration(hours: 6)),
+  ),
+  MasteryReflection(
+    id: 'reflection_2',
+    prompt: 'Passenger experience',
+    response: 'Soft jazz loop kept the cabin calm during the storm detour.',
+    timestamp: DateTime.now().subtract(const Duration(days: 1, hours: 2)),
+  ),
+];
+
+const dummyMasteryPathways = <String>[
+  'Twilight merge choreography',
+  'Crew co-pilot callouts',
+  'Rider warmth cadences',
+  'Hydration resets every 90 minutes',
+  'Focus breath in staging lane',
+  'Post-ride gratitude loop',
+];
+
+const dummyMasteryCoachNotes = <String>[
+  'Prime-time cadence ready — lean on the harbor micro-drill tonight.',
+  'Crew mentors noticed sharper greetings — keep the warmth rising.',
+  'Signals humming — rotate through your surge dashboards every 10 minutes.',
+  'Energy map aligned — stack a hydration check before the late sprint.',
+];
+
+const dummyMasteryMicroPractices = <String>[
+  'Run the 3-2-1 breath stack before entering a hotspot.',
+  'Swap playlists at each third ride to refresh tone.',
+  'Log a 20-second gratitude note after each five-ride set.',
+  'Stretch shoulders while waiting in the staging lane.',
+  'Check mirror posture when the beacon signal flashes.',
+];

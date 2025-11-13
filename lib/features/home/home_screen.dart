@@ -4,6 +4,7 @@ import '../../controllers/app_controller.dart';
 import '../../controllers/community_controller.dart';
 import '../../controllers/impact_controller.dart';
 import '../../controllers/innovation_controller.dart';
+import '../../controllers/mastery_controller.dart';
 import '../../controllers/momentum_controller.dart';
 import '../../controllers/ride_controller.dart';
 import '../../controllers/wellness_controller.dart';
@@ -33,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final ImpactController _impactController = ImpactController.instance;
   final InnovationController _innovationController =
       InnovationController.instance;
+  final MasteryController _masteryController = MasteryController.instance;
   bool _loading = true;
 
   @override
@@ -50,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _communityController.init();
     _impactController.init();
     _innovationController.init();
+    _masteryController.init();
   }
 
   @override
@@ -172,6 +175,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(height: 12),
                           FilledButton.tonalIcon(
                             onPressed: () =>
+                                Navigator.of(context).pushNamed(RouteNames.mastery),
+                            icon: const Icon(Icons.school_outlined),
+                            label: Text(l10n.translate('mastery_studio')),
+                          ),
+                          const SizedBox(height: 12),
+                          FilledButton.tonalIcon(
+                            onPressed: () =>
                                 Navigator.of(context).pushNamed(RouteNames.innovation),
                             icon: const Icon(Icons.lightbulb_outline),
                             label: Text(l10n.translate('innovation_lab')),
@@ -269,6 +279,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return _CommunityQuickCard(
                                     pulse: pulse,
                                     circle: circle,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          ValueListenableBuilder<MasteryPulse>(
+                            valueListenable: _masteryController.pulse,
+                            builder: (context, pulse, _) {
+                              return ValueListenableBuilder<List<MasteryModule>>(
+                                valueListenable: _masteryController.modules,
+                                builder: (context, modules, __) {
+                                  MasteryModule? focusModule;
+                                  if (modules.isNotEmpty) {
+                                    focusModule = modules.firstWhere(
+                                      (module) => module.isFocus,
+                                      orElse: () => modules.first,
+                                    );
+                                  }
+                                  return _MasteryQuickCard(
+                                    pulse: pulse,
+                                    module: focusModule,
                                   );
                                 },
                               );
@@ -590,6 +622,86 @@ class _CommunityQuickCard extends StatelessWidget {
               onPressed: () =>
                   Navigator.of(context).pushNamed(RouteNames.community),
               child: Text(l10n.translate('community_open_full')),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MasteryQuickCard extends StatelessWidget {
+  const _MasteryQuickCard({required this.pulse, this.module});
+
+  final MasteryPulse pulse;
+  final MasteryModule? module;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final progress = module?.progress ?? pulse.momentum;
+    final focusTitle = module?.title ?? pulse.focusTheme;
+    final insights = InsightUtils.masteryNudges(l10n, pulse, module).take(2).toList();
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.12),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l10n.translate('mastery_studio'), style: theme.textTheme.titleMedium),
+          const SizedBox(height: 6),
+          Text(focusTitle, style: theme.textTheme.labelLarge),
+          const SizedBox(height: 12),
+          LinearProgressIndicator(
+            value: progress.clamp(0.0, 1.0),
+            minHeight: 8,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            '${l10n.translate('mastery_module_progress_label')}: ${(progress * 100).toStringAsFixed(0)}%',
+            style: theme.textTheme.bodySmall,
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: pulse.pathways
+                .take(2)
+                .map(
+                  (path) => Chip(
+                    label: Text(path),
+                    backgroundColor:
+                        theme.colorScheme.primary.withOpacity(0.12),
+                  ),
+                )
+                .toList(),
+          ),
+          const SizedBox(height: 12),
+          ...insights.map(
+            (insight) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              child: Text(
+                insight,
+                style: theme.textTheme.bodySmall,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FilledButton.tonalIcon(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(RouteNames.mastery),
+              icon: const Icon(Icons.school_outlined),
+              label: Text(l10n.translate('mastery_view_full')),
             ),
           ),
         ],

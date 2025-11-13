@@ -1128,3 +1128,177 @@ class InnovationBlueprint {
     );
   }
 }
+
+class MasteryPulse {
+  const MasteryPulse({
+    required this.id,
+    required this.focusTheme,
+    required this.momentum,
+    required this.energy,
+    required this.microPractice,
+    required this.pathways,
+    required this.coachNote,
+  });
+
+  final String id;
+  final String focusTheme;
+  final double momentum;
+  final double energy;
+  final String microPractice;
+  final List<String> pathways;
+  final String coachNote;
+
+  MasteryPulse copyWith({
+    String? focusTheme,
+    double? momentum,
+    double? energy,
+    String? microPractice,
+    List<String>? pathways,
+    String? coachNote,
+  }) {
+    return MasteryPulse(
+      id: id,
+      focusTheme: focusTheme ?? this.focusTheme,
+      momentum: momentum ?? this.momentum,
+      energy: energy ?? this.energy,
+      microPractice: microPractice ?? this.microPractice,
+      pathways: pathways != null
+          ? List<String>.from(pathways)
+          : List<String>.from(this.pathways),
+      coachNote: coachNote ?? this.coachNote,
+    );
+  }
+}
+
+class MasteryModule {
+  const MasteryModule({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.focusArea,
+    required this.lessons,
+    required this.completedLessons,
+    required this.progress,
+    required this.icon,
+    required this.microPractice,
+    required this.reflectionPrompt,
+    required this.isFocus,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String focusArea;
+  final int lessons;
+  final int completedLessons;
+  final double progress;
+  final String icon;
+  final String microPractice;
+  final String reflectionPrompt;
+  final bool isFocus;
+
+  MasteryModule copyWith({
+    int? completedLessons,
+    double? progress,
+    bool? isFocus,
+    String? microPractice,
+  }) {
+    return MasteryModule(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      focusArea: focusArea,
+      lessons: lessons,
+      completedLessons: completedLessons ?? this.completedLessons,
+      progress: progress ?? this.progress,
+      icon: icon,
+      microPractice: microPractice ?? this.microPractice,
+      reflectionPrompt: reflectionPrompt,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class MasteryWorkshop {
+  const MasteryWorkshop({
+    required this.id,
+    required this.title,
+    required this.focus,
+    required this.host,
+    required this.date,
+    required this.highlight,
+    required this.enrolled,
+  });
+
+  final String id;
+  final String title;
+  final String focus;
+  final String host;
+  final String date;
+  final String highlight;
+  final bool enrolled;
+
+  MasteryWorkshop copyWith({bool? enrolled}) {
+    return MasteryWorkshop(
+      id: id,
+      title: title,
+      focus: focus,
+      host: host,
+      date: date,
+      highlight: highlight,
+      enrolled: enrolled ?? this.enrolled,
+    );
+  }
+}
+
+class MasteryBadge {
+  const MasteryBadge({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.icon,
+    required this.moduleIds,
+    required this.progress,
+    required this.threshold,
+    required this.unlocked,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final String icon;
+  final List<String> moduleIds;
+  final double progress;
+  final double threshold;
+  final bool unlocked;
+
+  MasteryBadge copyWith({
+    double? progress,
+    bool? unlocked,
+  }) {
+    return MasteryBadge(
+      id: id,
+      title: title,
+      description: description,
+      icon: icon,
+      moduleIds: List<String>.from(moduleIds),
+      progress: progress ?? this.progress,
+      threshold: threshold,
+      unlocked: unlocked ?? this.unlocked,
+    );
+  }
+}
+
+class MasteryReflection {
+  const MasteryReflection({
+    required this.id,
+    required this.prompt,
+    required this.response,
+    required this.timestamp,
+  });
+
+  final String id;
+  final String prompt;
+  final String response;
+  final DateTime timestamp;
+}

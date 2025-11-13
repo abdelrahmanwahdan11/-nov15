@@ -169,4 +169,31 @@ class InsightUtils {
     'Metro partnership trial opened a temporary green lane',
     'Hydration reminder triggered alongside wellness check-in',
   ];
+
+  static List<String> masteryNudges(
+    AppLocalizations l10n,
+    MasteryPulse pulse,
+    MasteryModule? module,
+  ) {
+    final moduleTitle = module?.title ?? pulse.focusTheme;
+    final progress = module != null
+        ? '${(module.progress * 100).clamp(0, 100).toStringAsFixed(0)}%'
+        : '${(pulse.momentum * 100).toStringAsFixed(0)}%';
+    final focus = module?.focusArea ?? moduleTitle;
+    final cues = <String>[
+      '${l10n.translate('mastery_micro_practice')}: ${pulse.microPractice}',
+      '${l10n.translate('mastery_module_progress_label')}: $progress',
+      '${l10n.translate('mastery_focus_pathways')}: ${pulse.pathways.take(2).join(' • ')}',
+      '${l10n.translate('mastery_coach_message')}: ${pulse.coachNote}',
+    ];
+    if (module != null) {
+      cues.add(
+        '${l10n.translate('mastery_next_action')}: ${module.reflectionPrompt}',
+      );
+      cues.add(
+        '${l10n.translate('mastery_focus_label')}: $focus',
+      );
+    }
+    return cues;
+  }
 }

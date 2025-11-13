@@ -20,6 +20,7 @@ import '../../features/insights/insights_screen.dart';
 import '../../features/insights/strategy_lab_screen.dart';
 import '../../features/impact/impact_screen.dart';
 import '../../features/innovation/innovation_screen.dart';
+import '../../features/mastery/mastery_screen.dart';
 import '../../features/momentum/momentum_screen.dart';
 import '../../features/my_rides/my_rides_screen.dart';
 import '../../features/on_trip/on_trip_screen.dart';
@@ -96,6 +97,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const ImpactScreen());
       case RouteNames.innovation:
         return MaterialPageRoute(builder: (_) => const InnovationScreen());
+      case RouteNames.mastery:
+        return MaterialPageRoute(builder: (_) => const MasteryScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
