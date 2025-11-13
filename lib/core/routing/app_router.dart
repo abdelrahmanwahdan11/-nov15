@@ -17,6 +17,7 @@ import '../../features/history/history_screen.dart';
 import '../../features/home/home_screen.dart';
 import '../../features/insights/insights_screen.dart';
 import '../../features/insights/strategy_lab_screen.dart';
+import '../../features/momentum/momentum_screen.dart';
 import '../../features/my_rides/my_rides_screen.dart';
 import '../../features/on_trip/on_trip_screen.dart';
 import '../../features/onboarding/onboarding_screen.dart';
@@ -84,6 +85,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const StrategyLabScreen());
       case RouteNames.wellness:
         return MaterialPageRoute(builder: (_) => const WellnessScreen());
+      case RouteNames.momentum:
+        return MaterialPageRoute(builder: (_) => const MomentumScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

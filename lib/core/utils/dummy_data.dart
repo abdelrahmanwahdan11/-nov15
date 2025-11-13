@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'models.dart';
 
 final dummyUser = User(
@@ -321,6 +323,196 @@ final dummyShiftScenarios = <ShiftScenario>[
         category: 'quality',
       ),
     ],
+  ),
+];
+
+final defaultMomentumPulse = MomentumPulse(
+  level: 4,
+  xp: 620,
+  xpToNext: 900,
+  streakDays: 6,
+  message: 'Momentum is surging heading into evening commutes.',
+  highlights: [
+    'Precision craft +18%',
+    'Acceptance streak ×6',
+    'Focus: Airport express',
+  ],
+);
+
+final dummySkillTracks = <SkillTrack>[
+  SkillTrack(
+    id: 'precision-craft',
+    title: 'Precision craft',
+    subtitle: 'Sharpen pickups and arrivals for consistent five-star flow.',
+    focusArea: 'quality',
+    icon: '🎯',
+    level: 2,
+    progress: 0.58,
+    highlight: '3 flawless pickups streak',
+    milestones: [
+      SkillMilestone(
+        id: 'precision-arrival',
+        title: 'Pinpoint arrivals',
+        description: 'Arrive within 2 minutes of ETA on 6 rides.',
+        totalSteps: 6,
+        completedSteps: 3,
+        xpReward: 120,
+        focusTag: 'focus',
+      ),
+      SkillMilestone(
+        id: 'precision-pickup',
+        title: 'Landing zone clarity',
+        description: 'Share precise pickup cues with 4 passengers.',
+        totalSteps: 4,
+        completedSteps: 2,
+        xpReward: 90,
+        focusTag: 'calm',
+      ),
+      SkillMilestone(
+        id: 'precision-map',
+        title: 'Route clarity notes',
+        description: 'Log map notes for 3 tricky blocks.',
+        totalSteps: 3,
+        completedSteps: 1,
+        xpReward: 75,
+        focusTag: 'focus',
+      ),
+    ],
+  ),
+  SkillTrack(
+    id: 'demand-wave',
+    title: 'Demand wave',
+    subtitle: 'Orchestrate demand spikes with nimble repositioning.',
+    focusArea: 'growth',
+    icon: '🌊',
+    level: 3,
+    progress: 0.66,
+    highlight: 'Surge surfer badge unlocked',
+    milestones: [
+      SkillMilestone(
+        id: 'wave-cadence',
+        title: 'Cadence mapping',
+        description: 'Capture 5 micro-notes after each surge pivot.',
+        totalSteps: 5,
+        completedSteps: 4,
+        xpReward: 140,
+        focusTag: 'energize',
+      ),
+      SkillMilestone(
+        id: 'wave-airport',
+        title: 'Airport sprint',
+        description: 'Stack 3 efficient airport round-trips.',
+        totalSteps: 3,
+        completedSteps: 1,
+        xpReward: 110,
+        focusTag: 'focus',
+      ),
+      SkillMilestone(
+        id: 'wave-night',
+        title: 'Night shift sync',
+        description: 'Keep energy above 70% through 2 night shifts.',
+        totalSteps: 2,
+        completedSteps: 1,
+        xpReward: 100,
+        focusTag: 'energize',
+      ),
+    ],
+  ),
+  SkillTrack(
+    id: 'community-ally',
+    title: 'Community ally',
+    subtitle: 'Grow rider loyalty with micro moments and kindness cues.',
+    focusArea: 'loyalty',
+    icon: '🤝',
+    level: 1,
+    progress: 0.42,
+    highlight: 'Two gratitude mentions today',
+    milestones: [
+      SkillMilestone(
+        id: 'ally-feedback',
+        title: 'Feedback loops',
+        description: 'Collect 4 rider preferences inside the app.',
+        totalSteps: 4,
+        completedSteps: 1,
+        xpReward: 70,
+        focusTag: 'calm',
+      ),
+      SkillMilestone(
+        id: 'ally-gesture',
+        title: 'Micro gestures',
+        description: 'Log 6 micro appreciation gestures.',
+        totalSteps: 6,
+        completedSteps: 2,
+        xpReward: 95,
+        focusTag: 'energize',
+      ),
+      SkillMilestone(
+        id: 'ally-recovery',
+        title: 'Ride recovery',
+        description: 'Turn 3 delayed starts into 5★ closes.',
+        totalSteps: 3,
+        completedSteps: 0,
+        xpReward: 130,
+        focusTag: 'focus',
+      ),
+    ],
+  ),
+];
+
+final dummyMomentumChallenges = <MomentumChallenge>[
+  MomentumChallenge(
+    id: 'challenge_acceptance',
+    title: 'Acceptance streak',
+    subtitle: 'Maintain a 95% acceptance rate through tonight.',
+    icon: Icons.bolt,
+    target: 8,
+    progress: 5,
+    focusArea: 'growth',
+    rewardXp: 160,
+  ),
+  MomentumChallenge(
+    id: 'challenge_rating',
+    title: 'Rating glow',
+    subtitle: 'Secure three 5★ feedback moments before midnight.',
+    icon: Icons.stars,
+    target: 3,
+    progress: 1,
+    focusArea: 'quality',
+    rewardXp: 130,
+  ),
+  MomentumChallenge(
+    id: 'challenge_energy',
+    title: 'Energy balance',
+    subtitle: 'Hold energy above 70% through three segments.',
+    icon: Icons.local_fire_department,
+    target: 3,
+    progress: 2,
+    focusArea: 'wellness',
+    rewardXp: 115,
+  ),
+];
+
+final dummyCoachSignals = <CoachSignal>[
+  const CoachSignal(
+    id: 'signal_lanewave',
+    title: 'Lane wave tipping point',
+    caption: 'Midtown loop heat is cresting — catch the 18:40 crest.',
+    tag: 'growth',
+    emoji: '📈',
+  ),
+  const CoachSignal(
+    id: 'signal_calm',
+    title: 'Calm cadence ready',
+    caption: 'Breath deck “wave cadence” syncs with your next run.',
+    tag: 'wellness',
+    emoji: '🌬️',
+  ),
+  const CoachSignal(
+    id: 'signal_loyal',
+    title: 'Loyalty sparks',
+    caption: 'Two riders mentioned shout-outs — send gratitude notes.',
+    tag: 'loyalty',
+    emoji: '💌',
   ),
 ];
 

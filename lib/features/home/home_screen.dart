@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../controllers/app_controller.dart';
+import '../../controllers/momentum_controller.dart';
 import '../../controllers/ride_controller.dart';
 import '../../controllers/wellness_controller.dart';
 import '../../core/localization/localization_extensions.dart';
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final ValueNotifier<bool> _online = ValueNotifier(false);
   final RideController _rideController = RideController.instance;
   final WellnessController _wellnessController = WellnessController.instance;
+  final MomentumController _momentumController = MomentumController.instance;
   bool _loading = true;
 
   @override
@@ -36,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
     });
     _wellnessController.init();
+    _momentumController.init();
   }
 
   @override
@@ -142,6 +145,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             label: Text(l10n.translate('wellness_studio')),
                           ),
                           const SizedBox(height: 12),
+                          FilledButton.tonalIcon(
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed(RouteNames.momentum),
+                            icon: const Icon(Icons.flag),
+                            label: Text(l10n.translate('momentum_hub')),
+                          ),
+                          const SizedBox(height: 12),
                           OutlinedButton.icon(
                             onPressed: () =>
                                 Navigator.of(context).pushNamed(RouteNames.insights),
@@ -200,6 +210,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             valueListenable: _wellnessController.snapshot,
                             builder: (context, snapshot, _) {
                               return _WellnessQuickCard(snapshot: snapshot);
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          ValueListenableBuilder<MomentumPulse>(
+                            valueListenable: _momentumController.pulse,
+                            builder: (context, pulse, _) {
+                              return ValueListenableBuilder<SkillTrack?>(
+                                valueListenable: _momentumController.focusTrack,
+                                builder: (context, track, __) {
+                                  return _MomentumQuickCard(
+                                    pulse: pulse,
+                                    track: track,
+                                  );
+                                },
+                              );
                             },
                           ),
                         ],
@@ -293,6 +318,116 @@ class _WellnessQuickCard extends StatelessWidget {
                   Navigator.of(context).pushNamed(RouteNames.wellness),
               child: Text(l10n.translate('open_wellness_full')),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MomentumQuickCard extends StatelessWidget {
+  const _MomentumQuickCard({required this.pulse, this.track});
+
+  final MomentumPulse pulse;
+  final SkillTrack? track;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.12),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.translate('momentum_quick_header'),
+            style: theme.textTheme.titleMedium,
+          ),
+          const SizedBox(height: 6),
+          Text(pulse.message, style: theme.textTheme.bodySmall),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${l10n.translate('momentum_level')} ${pulse.level}',
+                      style: theme.textTheme.labelLarge,
+                    ),
+                    const SizedBox(height: 6),
+                    LinearProgressIndicator(
+                      value: pulse.progress,
+                      minHeight: 6,
+                      backgroundColor:
+                          theme.colorScheme.onSurface.withOpacity(0.08),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        theme.colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '${pulse.xp}/${pulse.xpToNext} ${l10n.translate('momentum_xp')}',
+                      style: theme.textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+              ),
+              if (track != null) ...[
+                const SizedBox(width: 12),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${track!.icon} ${track!.title}',
+                      style: theme.textTheme.labelLarge,
+                    ),
+                    const SizedBox(height: 6),
+                    SizedBox(
+                      width: 90,
+                      child: LinearProgressIndicator(
+                        value: track!.progress,
+                        minHeight: 6,
+                        backgroundColor:
+                            theme.colorScheme.onSurface.withOpacity(0.08),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          theme.colorScheme.secondary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.translate('momentum_action_next'),
+                      style: theme.textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+              ],
+            ],
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: pulse.highlights
+                .take(2)
+                .map(
+                  (highlight) => Chip(
+                    label: Text(highlight, style: theme.textTheme.labelSmall),
+                    backgroundColor:
+                        theme.colorScheme.primary.withOpacity(0.12),
+                  ),
+                )
+                .toList(),
           ),
         ],
       ),

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class User {
   User({
     required this.id,
@@ -429,6 +431,177 @@ class WellnessSnapshot {
           ? List<String>.from(anchorNotes)
           : List<String>.from(this.anchorNotes),
       vibe: vibe ?? this.vibe,
+    );
+  }
+}
+
+class SkillMilestone {
+  const SkillMilestone({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.totalSteps,
+    required this.completedSteps,
+    required this.xpReward,
+    this.focusTag,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final int totalSteps;
+  final int completedSteps;
+  final int xpReward;
+  final String? focusTag;
+
+  bool get isComplete => completedSteps >= totalSteps;
+  double get progress =>
+      totalSteps == 0 ? 0 : (completedSteps / totalSteps).clamp(0.0, 1.0);
+
+  SkillMilestone copyWith({int? completedSteps}) {
+    return SkillMilestone(
+      id: id,
+      title: title,
+      description: description,
+      totalSteps: totalSteps,
+      completedSteps: completedSteps ?? this.completedSteps,
+      xpReward: xpReward,
+      focusTag: focusTag,
+    );
+  }
+}
+
+class SkillTrack {
+  const SkillTrack({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.focusArea,
+    required this.icon,
+    required this.level,
+    required this.progress,
+    required this.milestones,
+    required this.highlight,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String focusArea;
+  final String icon;
+  final int level;
+  final double progress;
+  final List<SkillMilestone> milestones;
+  final String highlight;
+
+  SkillTrack copyWith({
+    double? progress,
+    List<SkillMilestone>? milestones,
+    int? level,
+    String? highlight,
+  }) {
+    return SkillTrack(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      focusArea: focusArea,
+      icon: icon,
+      level: level ?? this.level,
+      progress: progress ?? this.progress,
+      milestones: milestones ?? this.milestones,
+      highlight: highlight ?? this.highlight,
+    );
+  }
+}
+
+class MomentumChallenge {
+  const MomentumChallenge({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.target,
+    required this.progress,
+    required this.focusArea,
+    required this.rewardXp,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final IconData? icon;
+  final int target;
+  final int progress;
+  final String focusArea;
+  final int rewardXp;
+
+  bool get isComplete => progress >= target;
+  double get percent => target == 0 ? 0 : progress / target;
+
+  MomentumChallenge copyWith({int? progress}) {
+    return MomentumChallenge(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      icon: icon,
+      target: target,
+      progress: progress ?? this.progress,
+      focusArea: focusArea,
+      rewardXp: rewardXp,
+    );
+  }
+}
+
+class CoachSignal {
+  const CoachSignal({
+    required this.id,
+    required this.title,
+    required this.caption,
+    required this.tag,
+    required this.emoji,
+  });
+
+  final String id;
+  final String title;
+  final String caption;
+  final String tag;
+  final String emoji;
+}
+
+class MomentumPulse {
+  const MomentumPulse({
+    required this.level,
+    required this.xp,
+    required this.xpToNext,
+    required this.streakDays,
+    required this.message,
+    required this.highlights,
+  });
+
+  final int level;
+  final int xp;
+  final int xpToNext;
+  final int streakDays;
+  final String message;
+  final List<String> highlights;
+
+  double get progress => xpToNext == 0 ? 0 : (xp / xpToNext).clamp(0.0, 1.0);
+
+  MomentumPulse copyWith({
+    int? level,
+    int? xp,
+    int? xpToNext,
+    int? streakDays,
+    String? message,
+    List<String>? highlights,
+  }) {
+    return MomentumPulse(
+      level: level ?? this.level,
+      xp: xp ?? this.xp,
+      xpToNext: xpToNext ?? this.xpToNext,
+      streakDays: streakDays ?? this.streakDays,
+      message: message ?? this.message,
+      highlights: highlights ?? List<String>.from(this.highlights),
     );
   }
 }
