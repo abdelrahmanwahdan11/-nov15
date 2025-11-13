@@ -124,6 +124,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             icon: const Icon(Icons.timeline),
                             label: Text(l10n.translate('shift_planner')),
                           ),
+                          const SizedBox(height: 12),
+                          OutlinedButton.icon(
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed(RouteNames.insights),
+                            icon: const Icon(Icons.auto_graph),
+                            label: Text(l10n.translate('view_full_insights')),
+                          ),
                           const SizedBox(height: 16),
                           ValueListenableBuilder<Ride?>(
                             valueListenable: _rideController.currentRide,

@@ -13,7 +13,6 @@ class PerformanceScreen extends StatelessWidget {
       (l10n.translate('average_rating'), 4.9),
       (l10n.translate('total_distance'), 18230.0),
     ];
-    final l10n = context.l10n;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.translate('performance'))),
       body: Padding(

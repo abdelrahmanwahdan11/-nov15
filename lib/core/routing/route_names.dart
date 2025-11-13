@@ -21,4 +21,5 @@ class RouteNames {
   static const catalog = '/catalog';
   static const compare = '/compare';
   static const search = '/search';
+  static const insights = '/insights';
 }

@@ -15,6 +15,7 @@ import '../../features/earnings/earnings_screen.dart';
 import '../../features/help_faq/help_faq_screen.dart';
 import '../../features/history/history_screen.dart';
 import '../../features/home/home_screen.dart';
+import '../../features/insights/insights_screen.dart';
 import '../../features/my_rides/my_rides_screen.dart';
 import '../../features/on_trip/on_trip_screen.dart';
 import '../../features/onboarding/onboarding_screen.dart';
@@ -75,6 +76,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => CompareItemsScreen(items: items));
       case RouteNames.search:
         return MaterialPageRoute(builder: (_) => const SearchScreen());
+      case RouteNames.insights:
+        return MaterialPageRoute(builder: (_) => const InsightsScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

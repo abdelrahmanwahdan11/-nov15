@@ -125,3 +125,81 @@ class NotificationItem {
   final DateTime dateTime;
   final String type;
 }
+
+enum TrendDirection { up, down, steady }
+
+class DemandPulse {
+  DemandPulse({
+    required this.area,
+    required this.window,
+    required this.direction,
+    required this.change,
+    required this.potentialTrips,
+    required this.focusMinutes,
+  });
+
+  final String area;
+  final String window;
+  final TrendDirection direction;
+  final double change;
+  final int potentialTrips;
+  final int focusMinutes;
+
+  DemandPulse copyWith({
+    TrendDirection? direction,
+    double? change,
+    int? potentialTrips,
+    int? focusMinutes,
+  }) {
+    return DemandPulse(
+      area: area,
+      window: window,
+      direction: direction ?? this.direction,
+      change: change ?? this.change,
+      potentialTrips: potentialTrips ?? this.potentialTrips,
+      focusMinutes: focusMinutes ?? this.focusMinutes,
+    );
+  }
+}
+
+class DemandHeatCell {
+  DemandHeatCell({
+    required this.dayIndex,
+    required this.slotKey,
+    required this.intensity,
+    required this.potentialTrips,
+  });
+
+  final int dayIndex;
+  final String slotKey;
+  final double intensity;
+  final int potentialTrips;
+
+  DemandHeatCell copyWith({
+    double? intensity,
+    int? potentialTrips,
+  }) {
+    return DemandHeatCell(
+      dayIndex: dayIndex,
+      slotKey: slotKey,
+      intensity: intensity ?? this.intensity,
+      potentialTrips: potentialTrips ?? this.potentialTrips,
+    );
+  }
+}
+
+class FocusAreaSnapshot {
+  FocusAreaSnapshot({
+    required this.area,
+    required this.window,
+    required this.surge,
+    required this.rideCount,
+    required this.demandScore,
+  });
+
+  final String area;
+  final String window;
+  final double surge;
+  final int rideCount;
+  final double demandScore;
+}

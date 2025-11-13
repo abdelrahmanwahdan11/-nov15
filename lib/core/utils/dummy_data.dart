@@ -90,3 +90,77 @@ final dummyCatalogItems = List.generate(
     },
   ),
 );
+
+final dummyDemandHeatCells = <DemandHeatCell>[
+  DemandHeatCell(dayIndex: 1, slotKey: 'am', intensity: 0.62, potentialTrips: 6),
+  DemandHeatCell(dayIndex: 1, slotKey: 'mid', intensity: 0.48, potentialTrips: 4),
+  DemandHeatCell(dayIndex: 1, slotKey: 'pm', intensity: 0.8, potentialTrips: 8),
+  DemandHeatCell(dayIndex: 2, slotKey: 'am', intensity: 0.74, potentialTrips: 7),
+  DemandHeatCell(dayIndex: 2, slotKey: 'mid', intensity: 0.57, potentialTrips: 5),
+  DemandHeatCell(dayIndex: 2, slotKey: 'pm', intensity: 0.83, potentialTrips: 9),
+  DemandHeatCell(dayIndex: 3, slotKey: 'am', intensity: 0.51, potentialTrips: 4),
+  DemandHeatCell(dayIndex: 3, slotKey: 'mid', intensity: 0.69, potentialTrips: 6),
+  DemandHeatCell(dayIndex: 3, slotKey: 'pm', intensity: 0.9, potentialTrips: 10),
+  DemandHeatCell(dayIndex: 4, slotKey: 'am', intensity: 0.58, potentialTrips: 5),
+  DemandHeatCell(dayIndex: 4, slotKey: 'mid', intensity: 0.64, potentialTrips: 6),
+  DemandHeatCell(dayIndex: 4, slotKey: 'pm', intensity: 0.77, potentialTrips: 8),
+];
+
+final dummyDemandPulses = <DemandPulse>[
+  DemandPulse(
+    area: 'Airport Express',
+    window: '05:00 - 07:00',
+    direction: TrendDirection.up,
+    change: 0.14,
+    potentialTrips: 9,
+    focusMinutes: 32,
+  ),
+  DemandPulse(
+    area: 'Midtown Loop',
+    window: '11:00 - 13:00',
+    direction: TrendDirection.steady,
+    change: 0.04,
+    potentialTrips: 6,
+    focusMinutes: 26,
+  ),
+  DemandPulse(
+    area: 'Harbor Front',
+    window: '19:00 - 21:00',
+    direction: TrendDirection.up,
+    change: 0.18,
+    potentialTrips: 10,
+    focusMinutes: 34,
+  ),
+  DemandPulse(
+    area: 'Old Town',
+    window: '22:00 - 23:30',
+    direction: TrendDirection.down,
+    change: -0.06,
+    potentialTrips: 4,
+    focusMinutes: 18,
+  ),
+];
+
+final dummyFocusSnapshots = <FocusAreaSnapshot>[
+  FocusAreaSnapshot(
+    area: 'Airport Express',
+    window: '05:00 - 07:00',
+    surge: 1.35,
+    rideCount: 14,
+    demandScore: 0.86,
+  ),
+  FocusAreaSnapshot(
+    area: 'Midtown Loop',
+    window: '07:00 - 09:00',
+    surge: 1.22,
+    rideCount: 11,
+    demandScore: 0.78,
+  ),
+  FocusAreaSnapshot(
+    area: 'Harbor Front',
+    window: '17:00 - 19:00',
+    surge: 1.41,
+    rideCount: 13,
+    demandScore: 0.9,
+  ),
+];
