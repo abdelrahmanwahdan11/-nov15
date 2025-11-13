@@ -26,6 +26,7 @@ import '../../features/search/search_screen.dart';
 import '../../features/settings/settings_screen.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/trip_details/trip_details_screen.dart';
+import '../../features/wellness/wellness_screen.dart';
 import 'route_names.dart';
 
 class AppRouter {
@@ -81,6 +82,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const InsightsScreen());
       case RouteNames.strategyLab:
         return MaterialPageRoute(builder: (_) => const StrategyLabScreen());
+      case RouteNames.wellness:
+        return MaterialPageRoute(builder: (_) => const WellnessScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

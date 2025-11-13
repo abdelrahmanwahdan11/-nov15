@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../controllers/app_controller.dart';
 import '../../controllers/ride_controller.dart';
+import '../../controllers/wellness_controller.dart';
 import '../../core/localization/localization_extensions.dart';
 import '../../core/routing/route_names.dart';
 import '../../core/utils/insight_utils.dart';
@@ -21,6 +22,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final ValueNotifier<bool> _online = ValueNotifier(false);
   final RideController _rideController = RideController.instance;
+  final WellnessController _wellnessController = WellnessController.instance;
   bool _loading = true;
 
   @override
@@ -33,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     });
+    _wellnessController.init();
   }
 
   @override
@@ -132,6 +135,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             label: Text(l10n.translate('strategy_lab')),
                           ),
                           const SizedBox(height: 12),
+                          FilledButton.tonalIcon(
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed(RouteNames.wellness),
+                            icon: const Icon(Icons.self_improvement),
+                            label: Text(l10n.translate('wellness_studio')),
+                          ),
+                          const SizedBox(height: 12),
                           OutlinedButton.icon(
                             onPressed: () =>
                                 Navigator.of(context).pushNamed(RouteNames.insights),
@@ -185,6 +195,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               );
                             },
                           ),
+                          const SizedBox(height: 24),
+                          ValueListenableBuilder<WellnessSnapshot>(
+                            valueListenable: _wellnessController.snapshot,
+                            builder: (context, snapshot, _) {
+                              return _WellnessQuickCard(snapshot: snapshot);
+                            },
+                          ),
                         ],
                       ),
                     );
@@ -192,6 +209,128 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
         ),
       ),
+    );
+  }
+}
+
+
+
+class _WellnessQuickCard extends StatelessWidget {
+  const _WellnessQuickCard({required this.snapshot});
+
+  final WellnessSnapshot snapshot;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.15),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.translate('wellness_mini_header'),
+            style: theme.textTheme.titleMedium,
+          ),
+          const SizedBox(height: 6),
+          Text(snapshot.message, style: theme.textTheme.bodySmall),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: snapshot.anchorNotes
+                .take(3)
+                .map(
+                  (note) => Chip(
+                    label: Text(note, style: theme.textTheme.labelSmall),
+                    backgroundColor:
+                        theme.colorScheme.primary.withOpacity(0.12),
+                  ),
+                )
+                .toList(),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: _MiniGauge(
+                  label: l10n.translate('wellness_alignment'),
+                  value: snapshot.alignmentScore,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _MiniGauge(
+                  label: l10n.translate('wellness_energy'),
+                  value: snapshot.energyScore,
+                  color: theme.colorScheme.secondary,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _MiniGauge(
+                  label: l10n.translate('wellness_focus'),
+                  value: snapshot.focusScore,
+                  color: theme.colorScheme.tertiary ?? theme.colorScheme.primary,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(RouteNames.wellness),
+              child: Text(l10n.translate('open_wellness_full')),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _MiniGauge extends StatelessWidget {
+  const _MiniGauge({
+    required this.label,
+    required this.value,
+    required this.color,
+  });
+
+  final String label;
+  final double value;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: theme.textTheme.labelSmall),
+        const SizedBox(height: 4),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: LinearProgressIndicator(
+            minHeight: 6,
+            value: value.clamp(0.0, 1.0),
+            color: color,
+            backgroundColor: color.withOpacity(0.12),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text('${(value * 100).round()}%', style: theme.textTheme.labelSmall),
+      ],
     );
   }
 }

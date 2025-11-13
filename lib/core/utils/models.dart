@@ -322,3 +322,113 @@ class PlannerSummary {
   final double averageDemand;
   final double confidence;
 }
+
+class MindfulRitual {
+  const MindfulRitual({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.durationMinutes,
+    required this.focusTag,
+    required this.imageUrl,
+    this.completed = false,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final int durationMinutes;
+  final String focusTag;
+  final String imageUrl;
+  final bool completed;
+
+  MindfulRitual copyWith({bool? completed, String? focusTag}) {
+    return MindfulRitual(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      durationMinutes: durationMinutes,
+      focusTag: focusTag ?? this.focusTag,
+      imageUrl: imageUrl,
+      completed: completed ?? this.completed,
+    );
+  }
+}
+
+class BreathGuide {
+  const BreathGuide({
+    required this.id,
+    required this.title,
+    required this.inhaleSeconds,
+    required this.holdSeconds,
+    required this.exhaleSeconds,
+    required this.cycles,
+    required this.description,
+    required this.focusTag,
+  });
+
+  final String id;
+  final String title;
+  final int inhaleSeconds;
+  final int holdSeconds;
+  final int exhaleSeconds;
+  final int cycles;
+  final String description;
+  final String focusTag;
+}
+
+class RecoveryMoment {
+  const RecoveryMoment({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.durationMinutes,
+    required this.vibes,
+    required this.icon,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final int durationMinutes;
+  final List<String> vibes;
+  final String icon;
+}
+
+class WellnessSnapshot {
+  const WellnessSnapshot({
+    required this.alignmentScore,
+    required this.energyScore,
+    required this.focusScore,
+    required this.message,
+    required this.anchorNotes,
+    required this.vibe,
+  });
+
+  final double alignmentScore;
+  final double energyScore;
+  final double focusScore;
+  final String message;
+  final List<String> anchorNotes;
+  final String vibe;
+
+  WellnessSnapshot copyWith({
+    double? alignmentScore,
+    double? energyScore,
+    double? focusScore,
+    String? message,
+    List<String>? anchorNotes,
+    String? vibe,
+  }) {
+    return WellnessSnapshot(
+      alignmentScore: alignmentScore ?? this.alignmentScore,
+      energyScore: energyScore ?? this.energyScore,
+      focusScore: focusScore ?? this.focusScore,
+      message: message ?? this.message,
+      anchorNotes: anchorNotes != null
+          ? List<String>.from(anchorNotes)
+          : List<String>.from(this.anchorNotes),
+      vibe: vibe ?? this.vibe,
+    );
+  }
+}

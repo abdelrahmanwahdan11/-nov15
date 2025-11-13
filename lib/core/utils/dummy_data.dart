@@ -323,3 +323,161 @@ final dummyShiftScenarios = <ShiftScenario>[
     ],
   ),
 ];
+
+final defaultWellnessSnapshot = WellnessSnapshot(
+  alignmentScore: 0.62,
+  energyScore: 0.58,
+  focusScore: 0.66,
+  message: 'Centered and ready for adaptive driving.',
+  anchorNotes: [
+    'Prime window: 17:00 micro reset',
+    'Hydration reminder logged',
+    '3 ride streak poised',
+  ],
+  vibe: 'calm',
+);
+
+final dummyMindfulRituals = <MindfulRitual>[
+  MindfulRitual(
+    id: 'ritual_sunrise',
+    title: 'Sunrise alignment',
+    subtitle: 'Lengthen spine and reset shoulders before accepting rides.',
+    durationMinutes: 3,
+    focusTag: 'calm',
+    imageUrl:
+        'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=80',
+  ),
+  MindfulRitual(
+    id: 'ritual_breath',
+    title: 'Grounding breath',
+    subtitle: 'Sync breath with next shift segment to ease transitions.',
+    durationMinutes: 2,
+    focusTag: 'calm',
+    imageUrl:
+        'https://images.unsplash.com/photo-1526402469535-74b31b414c5b?auto=format&fit=crop&w=900&q=80',
+  ),
+  MindfulRitual(
+    id: 'ritual_focus',
+    title: 'Focus ignition',
+    subtitle: 'Prime reaction time with gentle visual sprints.',
+    durationMinutes: 4,
+    focusTag: 'focus',
+    imageUrl:
+        'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80',
+  ),
+  MindfulRitual(
+    id: 'ritual_energy',
+    title: 'Energy loop',
+    subtitle: 'Activate posture and breath for festival rush hours.',
+    durationMinutes: 5,
+    focusTag: 'energize',
+    imageUrl:
+        'https://images.unsplash.com/photo-1517832207067-4db24a2ae47c?auto=format&fit=crop&w=900&q=80',
+  ),
+  MindfulRitual(
+    id: 'ritual_night',
+    title: 'Twilight unwind',
+    subtitle: 'Release night tension and close the shift with clarity.',
+    durationMinutes: 3,
+    focusTag: 'calm',
+    imageUrl:
+        'https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=900&q=80',
+  ),
+];
+
+final dummyBreathGuides = <BreathGuide>[
+  BreathGuide(
+    id: 'breath_box',
+    title: 'Box balance',
+    inhaleSeconds: 4,
+    holdSeconds: 4,
+    exhaleSeconds: 4,
+    cycles: 5,
+    description: 'Stabilize heart rate before surge windows.',
+    focusTag: 'calm',
+  ),
+  BreathGuide(
+    id: 'breath_peak',
+    title: 'Peak priming',
+    inhaleSeconds: 3,
+    holdSeconds: 1,
+    exhaleSeconds: 3,
+    cycles: 8,
+    description: 'Quick focus burst when approaching airport queue.',
+    focusTag: 'focus',
+  ),
+  BreathGuide(
+    id: 'breath_wave',
+    title: 'Wave cadence',
+    inhaleSeconds: 5,
+    holdSeconds: 2,
+    exhaleSeconds: 6,
+    cycles: 6,
+    description: 'Longer waves for late night calm and clarity.',
+    focusTag: 'calm',
+  ),
+  BreathGuide(
+    id: 'breath_power',
+    title: 'Power lift',
+    inhaleSeconds: 2,
+    holdSeconds: 0,
+    exhaleSeconds: 4,
+    cycles: 10,
+    description: 'Supercharge reaction time before festival exits.',
+    focusTag: 'energize',
+  ),
+  BreathGuide(
+    id: 'breath_flow',
+    title: 'Flow sync',
+    inhaleSeconds: 4,
+    holdSeconds: 2,
+    exhaleSeconds: 5,
+    cycles: 7,
+    description: 'Align micro-breaks with planner focus blocks.',
+    focusTag: 'focus',
+  ),
+];
+
+final dummyRecoveryMoments = <RecoveryMoment>[
+  RecoveryMoment(
+    id: 'moment_light',
+    title: 'Window light reset',
+    subtitle: 'Face natural light, roll shoulders, reset breathing.',
+    durationMinutes: 2,
+    vibes: ['calm', 'focus'],
+    icon: '🌤️',
+  ),
+  RecoveryMoment(
+    id: 'moment_stretch',
+    title: 'Seat stretch loop',
+    subtitle: 'Lower-back twists and ankle circles between pickups.',
+    durationMinutes: 3,
+    vibes: ['focus', 'energize'],
+    icon: '🧘',
+  ),
+  RecoveryMoment(
+    id: 'moment_walk',
+    title: 'Micro walk pulse',
+    subtitle: 'Two-minute walk around the vehicle for circulation.',
+    durationMinutes: 2,
+    vibes: ['energize'],
+    icon: '🚶',
+  ),
+  RecoveryMoment(
+    id: 'moment_audio',
+    title: 'Audio shift check',
+    subtitle: 'Play focus playlist curated for the upcoming route.',
+    durationMinutes: 1,
+    vibes: ['focus'],
+    icon: '🎧',
+  ),
+  RecoveryMoment(
+    id: 'moment_breathe',
+    title: 'Calm hold',
+    subtitle: 'Close eyes, inhale steadily, and soften jaw tension.',
+    durationMinutes: 2,
+    vibes: ['calm'],
+    icon: '🌬️',
+  ),
+];
+
