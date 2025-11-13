@@ -1678,3 +1678,159 @@ class CosmosArtifact {
     );
   }
 }
+
+class FusionPulse {
+  const FusionPulse({
+    required this.headline,
+    required this.alignment,
+    required this.cohesion,
+    required this.window,
+    required this.focus,
+    required this.nextSync,
+    required this.highlight,
+  });
+
+  final String headline;
+  final double alignment;
+  final double cohesion;
+  final String window;
+  final String focus;
+  final String nextSync;
+  final String highlight;
+
+  FusionPulse copyWith({
+    String? headline,
+    double? alignment,
+    double? cohesion,
+    String? window,
+    String? focus,
+    String? nextSync,
+    String? highlight,
+  }) {
+    return FusionPulse(
+      headline: headline ?? this.headline,
+      alignment: alignment ?? this.alignment,
+      cohesion: cohesion ?? this.cohesion,
+      window: window ?? this.window,
+      focus: focus ?? this.focus,
+      nextSync: nextSync ?? this.nextSync,
+      highlight: highlight ?? this.highlight,
+    );
+  }
+}
+
+class FusionStrand {
+  const FusionStrand({
+    required this.id,
+    required this.icon,
+    required this.title,
+    required this.snapshot,
+    required this.alignment,
+    required this.flow,
+    this.isFocus = false,
+  });
+
+  final String id;
+  final String icon;
+  final String title;
+  final String snapshot;
+  final double alignment;
+  final double flow;
+  final bool isFocus;
+
+  FusionStrand copyWith({bool? isFocus, double? alignment, double? flow}) {
+    return FusionStrand(
+      id: id,
+      icon: icon,
+      title: title,
+      snapshot: snapshot,
+      alignment: alignment ?? this.alignment,
+      flow: flow ?? this.flow,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class FusionCanvas {
+  const FusionCanvas({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.threads,
+    required this.heat,
+    required this.cohesion,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final List<String> threads;
+  final double heat;
+  final double cohesion;
+
+  FusionCanvas copyWith({double? heat, double? cohesion}) {
+    return FusionCanvas(
+      id: id,
+      title: title,
+      description: description,
+      threads: List<String>.from(threads),
+      heat: heat ?? this.heat,
+      cohesion: cohesion ?? this.cohesion,
+    );
+  }
+}
+
+class FusionExperiment {
+  const FusionExperiment({
+    required this.id,
+    required this.title,
+    required this.intent,
+    required this.stage,
+    required this.confidence,
+    this.active = false,
+  });
+
+  final String id;
+  final String title;
+  final String intent;
+  final String stage;
+  final double confidence;
+  final bool active;
+
+  FusionExperiment copyWith({bool? active, String? stage, double? confidence}) {
+    return FusionExperiment(
+      id: id,
+      title: title,
+      intent: intent,
+      stage: stage ?? this.stage,
+      confidence: confidence ?? this.confidence,
+      active: active ?? this.active,
+    );
+  }
+}
+
+class FusionSignal {
+  const FusionSignal({
+    required this.id,
+    required this.title,
+    required this.detail,
+    required this.urgency,
+    this.captured = false,
+  });
+
+  final String id;
+  final String title;
+  final String detail;
+  final int urgency;
+  final bool captured;
+
+  FusionSignal copyWith({bool? captured, int? urgency}) {
+    return FusionSignal(
+      id: id,
+      title: title,
+      detail: detail,
+      urgency: urgency ?? this.urgency,
+      captured: captured ?? this.captured,
+    );
+  }
+}

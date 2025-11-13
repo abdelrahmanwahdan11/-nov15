@@ -12,6 +12,7 @@ import '../../features/chat/chat_list_screen.dart';
 import '../../features/compare_items/compare_items_screen.dart';
 import '../../features/community/community_screen.dart';
 import '../../features/cosmos/cosmos_screen.dart';
+import '../../features/fusion/fusion_screen.dart';
 import '../../features/documents/documents_screen.dart';
 import '../../features/earnings/earnings_screen.dart';
 import '../../features/help_faq/help_faq_screen.dart';
@@ -105,6 +106,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HorizonScreen());
       case RouteNames.cosmos:
         return MaterialPageRoute(builder: (_) => const CosmosScreen());
+      case RouteNames.fusion:
+        return MaterialPageRoute(builder: (_) => const FusionScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

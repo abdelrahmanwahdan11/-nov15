@@ -1620,3 +1620,147 @@ final dummyCosmosTrajectories = <String>[
   'Nightfall sprint 23:45',
   'Lunch wave 12:05',
 ];
+
+final defaultFusionPulse = FusionPulse(
+  headline: 'Fusion lattice warming up',
+  alignment: 0.72,
+  cohesion: 0.64,
+  window: '18:00 - 22:00',
+  focus: 'Harbor storytelling lane',
+  nextSync: 'Sync check 19:40',
+  highlight: 'Blend premium playlists with express airport returns.',
+);
+
+final dummyFusionStrands = <FusionStrand>[
+  FusionStrand(
+    id: 'fusion-strand-story',
+    icon: '🎙️',
+    title: 'Story lane',
+    snapshot: 'Curated narratives for loyalty riders.',
+    alignment: 0.78,
+    flow: 0.66,
+    isFocus: true,
+  ),
+  FusionStrand(
+    id: 'fusion-strand-sonic',
+    icon: '🎧',
+    title: 'Sonic sync',
+    snapshot: 'Adaptive soundscapes for peak vibes.',
+    alignment: 0.69,
+    flow: 0.71,
+  ),
+  FusionStrand(
+    id: 'fusion-strand-lux',
+    icon: '💎',
+    title: 'Lux weave',
+    snapshot: 'Treat arrival rituals for VIP bookings.',
+    alignment: 0.74,
+    flow: 0.58,
+  ),
+  FusionStrand(
+    id: 'fusion-strand-groove',
+    icon: '🎶',
+    title: 'Groove stitch',
+    snapshot: 'Micro-celebrations on milestone drop-offs.',
+    alignment: 0.62,
+    flow: 0.64,
+  ),
+];
+
+final dummyFusionCanvases = <FusionCanvas>[
+  FusionCanvas(
+    id: 'fusion-canvas-twilight',
+    title: 'Twilight blend',
+    description: 'Harbor golden hour stitched with airport returns.',
+    threads: ['Harbor', 'Airport', 'Old town'],
+    heat: 0.7,
+    cohesion: 0.6,
+  ),
+  FusionCanvas(
+    id: 'fusion-canvas-late',
+    title: 'Late night glow',
+    description: 'After-show pickups fused with skyline detours.',
+    threads: ['Arena', 'Downtown', 'Skyline'],
+    heat: 0.65,
+    cohesion: 0.68,
+  ),
+  FusionCanvas(
+    id: 'fusion-canvas-dawn',
+    title: 'Dawn resonance',
+    description: 'Sunrise airport runs layered with cafe stories.',
+    threads: ['Airport', 'Cafe row', 'Financial'],
+    heat: 0.58,
+    cohesion: 0.72,
+  ),
+];
+
+final dummyFusionExperiments = <FusionExperiment>[
+  FusionExperiment(
+    id: 'fusion-experiment-playlist',
+    title: 'Playlist concierge',
+    intent: 'Co-create sonic palettes with regular riders.',
+    stage: 'Pilot',
+    confidence: 0.62,
+  ),
+  FusionExperiment(
+    id: 'fusion-experiment-moment',
+    title: 'Moment markers',
+    intent: 'Trigger celebratory lighting on milestones.',
+    stage: 'Sprint',
+    confidence: 0.57,
+  ),
+  FusionExperiment(
+    id: 'fusion-experiment-scout',
+    title: 'Story scout',
+    intent: 'Capture rider stories for loyalty follow-ups.',
+    stage: 'Explore',
+    confidence: 0.5,
+  ),
+];
+
+final dummyFusionSignals = <FusionSignal>[
+  FusionSignal(
+    id: 'fusion-signal-harbor',
+    title: 'Harbor storytellers',
+    detail: 'Writers meetup requesting immersive arrivals.',
+    urgency: 3,
+  ),
+  FusionSignal(
+    id: 'fusion-signal-campus',
+    title: 'Campus showcase',
+    detail: 'Student creators expecting custom playlists.',
+    urgency: 2,
+  ),
+  FusionSignal(
+    id: 'fusion-signal-lounge',
+    title: 'Sky lounge revival',
+    detail: 'Premium flyers seeking signature send-offs.',
+    urgency: 4,
+  ),
+];
+
+const dummyFusionHeadlines = <String>[
+  'Fusion lattice humming 9% above baseline',
+  'Premium riders seeking curated sonic blends tonight',
+  'Story-driven loops unlocking repeat bookings',
+];
+
+const dummyFusionHighlights = <String>[
+  'Layer skyline detours with a celebratory soundtrack.',
+  'Pair story prompts with arrival rituals for top riders.',
+  'Cue a sonic lift before airport farewell runs.',
+];
+
+const dummyFusionFocuses = <String>[
+  'Harbor storytelling lane',
+  'Skyline celebration loop',
+  'Airport twilight weave',
+  'Downtown creator express',
+];
+
+const dummyFusionSyncs = <String>[
+  'Sync check 19:40',
+  'Sync check 22:10',
+  'Sync check 05:20',
+  'Sync check 13:45',
+];

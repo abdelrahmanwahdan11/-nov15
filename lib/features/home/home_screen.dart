@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../controllers/app_controller.dart';
 import '../../controllers/community_controller.dart';
 import '../../controllers/cosmos_controller.dart';
+import '../../controllers/fusion_controller.dart';
 import '../../controllers/impact_controller.dart';
 import '../../controllers/horizon_controller.dart';
 import '../../controllers/innovation_controller.dart';
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final CommunityController _communityController =
       CommunityController.instance;
   final CosmosController _cosmosController = CosmosController.instance;
+  final FusionController _fusionController = FusionController.instance;
   final ImpactController _impactController = ImpactController.instance;
   final InnovationController _innovationController =
       InnovationController.instance;
@@ -59,6 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _masteryController.init();
     _horizonController.init();
     _cosmosController.init();
+    _fusionController.init();
   }
 
   @override
@@ -365,6 +368,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return _CosmosQuickCard(
                                     pulse: pulse,
                                     constellation: focusConstellation,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          ValueListenableBuilder<FusionPulse>(
+                            valueListenable: _fusionController.pulse,
+                            builder: (context, pulse, _) {
+                              return ValueListenableBuilder<List<FusionStrand>>(
+                                valueListenable: _fusionController.strands,
+                                builder: (context, strands, __) {
+                                  FusionStrand? focusStrand;
+                                  if (strands.isNotEmpty) {
+                                    focusStrand = strands.firstWhere(
+                                      (strand) => strand.isFocus,
+                                      orElse: () => strands.first,
+                                    );
+                                  }
+                                  return _FusionQuickCard(
+                                    pulse: pulse,
+                                    strand: focusStrand,
                                   );
                                 },
                               );
@@ -1069,6 +1094,98 @@ class _CosmosQuickCard extends StatelessWidget {
               onPressed: () => Navigator.of(context).pushNamed(RouteNames.cosmos),
               icon: const Icon(Icons.public),
               label: Text(l10n.translate('cosmos_quick_open')),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FusionQuickCard extends StatelessWidget {
+  const _FusionQuickCard({required this.pulse, this.strand});
+
+  final FusionPulse pulse;
+  final FusionStrand? strand;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final alignment = (pulse.alignment.clamp(0.0, 1.0) * 100).round();
+    final cohesion = (pulse.cohesion.clamp(0.0, 1.0) * 100).round();
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.12),
+        ),
+        gradient: LinearGradient(
+          colors: [
+            theme.colorScheme.primary.withOpacity(0.08),
+            theme.colorScheme.surface.withOpacity(0.45),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.translate('fusion_quick_header'),
+            style: theme.textTheme.titleMedium,
+          ),
+          const SizedBox(height: 6),
+          Text(pulse.highlight, style: theme.textTheme.bodySmall),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: [
+              _QuickChip(
+                icon: Icons.auto_fix_high,
+                label:
+                    '${l10n.translate('fusion_quick_focus')}: ${pulse.focus}',
+              ),
+              _QuickChip(
+                icon: Icons.equalizer,
+                label:
+                    '${l10n.translate('fusion_quick_alignment')}: $alignment%',
+              ),
+              _QuickChip(
+                icon: Icons.scatter_plot,
+                label:
+                    '${l10n.translate('fusion_quick_cohesion')}: $cohesion%',
+              ),
+              _QuickChip(
+                icon: Icons.schedule,
+                label:
+                    '${l10n.translate('fusion_next_sync')}: ${pulse.nextSync}',
+              ),
+            ],
+          ),
+          if (strand != null) ...[
+            const SizedBox(height: 12),
+            Text('${strand!.icon} ${strand!.title}',
+                style: theme.textTheme.labelLarge),
+            const SizedBox(height: 4),
+            Text(strand!.snapshot, style: theme.textTheme.bodySmall),
+            const SizedBox(height: 4),
+            Text(
+              '${l10n.translate('fusion_flow')}: ${(strand!.flow * 100).round()}%',
+              style: theme.textTheme.labelSmall,
+            ),
+          ],
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FilledButton.tonalIcon(
+              onPressed: () => Navigator.of(context).pushNamed(RouteNames.fusion),
+              icon: const Icon(Icons.blur_linear),
+              label: Text(l10n.translate('fusion_quick_open')),
             ),
           ),
         ],
