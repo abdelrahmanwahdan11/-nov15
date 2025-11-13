@@ -16,6 +16,7 @@ import '../../features/earnings/earnings_screen.dart';
 import '../../features/help_faq/help_faq_screen.dart';
 import '../../features/history/history_screen.dart';
 import '../../features/home/home_screen.dart';
+import '../../features/horizon/horizon_screen.dart';
 import '../../features/insights/insights_screen.dart';
 import '../../features/insights/strategy_lab_screen.dart';
 import '../../features/impact/impact_screen.dart';
@@ -99,6 +100,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const InnovationScreen());
       case RouteNames.mastery:
         return MaterialPageRoute(builder: (_) => const MasteryScreen());
+      case RouteNames.horizon:
+        return MaterialPageRoute(builder: (_) => const HorizonScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

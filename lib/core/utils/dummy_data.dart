@@ -1274,3 +1274,167 @@ const dummyMasteryMicroPractices = <String>[
   'Stretch shoulders while waiting in the staging lane.',
   'Check mirror posture when the beacon signal flashes.',
 ];
+
+const defaultHorizonPulse = HorizonPulse(
+  headline: 'City grid shift tilts toward riverside districts',
+  alignment: 0.68,
+  runwayDays: 11,
+  confidence: 0.62,
+  guidingQuestion: 'Where will the next 15-ride streak emerge?',
+  focusThemes: <String>[
+    'Harbor night festival',
+    'Airport express experiments',
+    'Downtown micro-shift overlap',
+  ],
+  signalHighlights: <String>[
+    '48hr micro-climate spike',
+    'Rider concierge trials',
+    'Multi-modal hub upgrade',
+  ],
+  nextWindow: 'Thu 18:00',
+);
+
+final dummyHorizonScenarios = <HorizonScenario>[
+  HorizonScenario(
+    id: 'scenario_1',
+    title: 'Riverwalk surge lanes',
+    timeframe: 'Next 7 days',
+    impact: 0.76,
+    probability: 0.64,
+    focus: 'Evening festival routes',
+    narrative:
+        'Night festival foot traffic spills over to private rides with premium fares.',
+    isFocus: true,
+  ),
+  HorizonScenario(
+    id: 'scenario_2',
+    title: 'Airport midnight corridor',
+    timeframe: '14 day outlook',
+    impact: 0.58,
+    probability: 0.52,
+    focus: 'Late-night arrival waves',
+    narrative:
+        'Flight schedule changes add late pulses that need flexible driver coverage.',
+  ),
+  HorizonScenario(
+    id: 'scenario_3',
+    title: 'Old town street closures',
+    timeframe: '21 day outlook',
+    impact: 0.44,
+    probability: 0.48,
+    focus: 'Detour aware loops',
+    narrative:
+        'Planned restorations reduce parking but increase short-stay shuttle demand.',
+  ),
+];
+
+final dummyHorizonSignals = <HorizonSignal>[
+  HorizonSignal(
+    id: 'signal_1',
+    title: 'Harbor decks reopening',
+    category: 'City ops',
+    description:
+        'Dock spaces reopen with capacity for live events and pop-up dining zones.',
+    momentum: 0.72,
+    confidence: 0.61,
+  ),
+  HorizonSignal(
+    id: 'signal_2',
+    title: 'Concierge pilot invites',
+    category: 'Premium',
+    description:
+        'Hotel concierge partners request elevated greeting scripts during weekends.',
+    momentum: 0.55,
+    confidence: 0.66,
+  ),
+  HorizonSignal(
+    id: 'signal_3',
+    title: 'Riverside sound checks',
+    category: 'Events',
+    description:
+        'Sound checks confirmed for nightly stage warmups leading to pre-ride gatherings.',
+    momentum: 0.48,
+    confidence: 0.52,
+  ),
+];
+
+final dummyHorizonRunway = <HorizonRunwayMarker>[
+  HorizonRunwayMarker(
+    id: 'runway_1',
+    title: 'Tune riverside playlist arc',
+    timeframe: 'Within 48h',
+    priority: 'High',
+    notes: 'Blend calm intros with upbeat closes for festival exits.',
+  ),
+  HorizonRunwayMarker(
+    id: 'runway_2',
+    title: 'Prep airport micro-break kit',
+    timeframe: 'Next 5 days',
+    priority: 'Medium',
+    notes: 'Add hydration + stretch cards near baggage pickup cues.',
+  ),
+  HorizonRunwayMarker(
+    id: 'runway_3',
+    title: 'Map old town detour loops',
+    timeframe: 'Next 10 days',
+    priority: 'Medium',
+    notes: 'Coordinate with community hub for lane-by-lane voice notes.',
+  ),
+];
+
+final dummyHorizonBlueprints = <HorizonBlueprint>[
+  HorizonBlueprint(
+    id: 'blueprint_1',
+    pillar: 'Experience',
+    summary: 'Deliver signature riverwalk send-offs with music cues.',
+    owner: 'Crew ambience lead',
+    status: 'Activating',
+    confidence: 0.74,
+    actions: <String>[
+      'Sync playlists with festival calendar',
+      'Test 2-minute warm welcome script',
+      'Share vibe notes in crew lounge',
+    ],
+    nextWindow: 'Thu dusk',
+  ),
+  HorizonBlueprint(
+    id: 'blueprint_2',
+    pillar: 'Coverage',
+    summary: 'Layer midnight airport corridor coverage with tag-team slots.',
+    owner: 'Momentum coach',
+    status: 'In review',
+    confidence: 0.63,
+    actions: <String>[
+      'Pair drivers for 2-hour rotations',
+      'Add hydration reminders at shift handoffs',
+      'Log rider comfort scores nightly',
+    ],
+    nextWindow: 'Mon 23:30',
+  ),
+  HorizonBlueprint(
+    id: 'blueprint_3',
+    pillar: 'Signals',
+    summary: 'Capture detour intel before old town resurfacing.',
+    owner: 'Community scout',
+    status: 'Queued',
+    confidence: 0.51,
+    actions: <String>[
+      'Walk detour loops with crew scout',
+      'Record audio markers for tricky turns',
+      'Publish quick map overlays',
+    ],
+    nextWindow: 'Fri AM',
+  ),
+];
+
+const dummyHorizonHeadlines = <String>[
+  'Future shifts lean into riverside evenings',
+  'Transit revamp creates midnight micro-waves',
+  'Signals cluster around cross-dock experiments',
+];
+
+const dummyHorizonQuestions = <String>[
+  'Which route unlocks the next signature rider story?',
+  'How do we choreograph coverage before the surge appears?',
+  'Where can delight and efficiency intersect this week?',
+];

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../controllers/app_controller.dart';
 import '../../controllers/community_controller.dart';
 import '../../controllers/impact_controller.dart';
+import '../../controllers/horizon_controller.dart';
 import '../../controllers/innovation_controller.dart';
 import '../../controllers/mastery_controller.dart';
 import '../../controllers/momentum_controller.dart';
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final InnovationController _innovationController =
       InnovationController.instance;
   final MasteryController _masteryController = MasteryController.instance;
+  final HorizonController _horizonController = HorizonController.instance;
   bool _loading = true;
 
   @override
@@ -53,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _impactController.init();
     _innovationController.init();
     _masteryController.init();
+    _horizonController.init();
   }
 
   @override
@@ -182,6 +185,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(height: 12),
                           FilledButton.tonalIcon(
                             onPressed: () =>
+                                Navigator.of(context).pushNamed(RouteNames.horizon),
+                            icon: const Icon(Icons.auto_awesome),
+                            label: Text(l10n.translate('horizon_studio')),
+                          ),
+                          const SizedBox(height: 12),
+                          FilledButton.tonalIcon(
+                            onPressed: () =>
                                 Navigator.of(context).pushNamed(RouteNames.innovation),
                             icon: const Icon(Icons.lightbulb_outline),
                             label: Text(l10n.translate('innovation_lab')),
@@ -301,6 +311,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return _MasteryQuickCard(
                                     pulse: pulse,
                                     module: focusModule,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          ValueListenableBuilder<HorizonPulse>(
+                            valueListenable: _horizonController.pulse,
+                            builder: (context, pulse, _) {
+                              return ValueListenableBuilder<List<HorizonScenario>>(
+                                valueListenable: _horizonController.scenarios,
+                                builder: (context, scenarios, __) {
+                                  HorizonScenario? focusScenario;
+                                  if (scenarios.isNotEmpty) {
+                                    focusScenario = scenarios.firstWhere(
+                                      (scenario) => scenario.isFocus,
+                                      orElse: () => scenarios.first,
+                                    );
+                                  }
+                                  return _HorizonQuickCard(
+                                    pulse: pulse,
+                                    scenario: focusScenario,
                                   );
                                 },
                               );
@@ -702,6 +734,88 @@ class _MasteryQuickCard extends StatelessWidget {
                   Navigator.of(context).pushNamed(RouteNames.mastery),
               icon: const Icon(Icons.school_outlined),
               label: Text(l10n.translate('mastery_view_full')),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HorizonQuickCard extends StatelessWidget {
+  const _HorizonQuickCard({required this.pulse, this.scenario});
+
+  final HorizonPulse pulse;
+  final HorizonScenario? scenario;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final alignment = (pulse.alignment * 100).clamp(0, 100).toStringAsFixed(0);
+    final confidence = (pulse.confidence * 100).clamp(0, 100).toStringAsFixed(0);
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(color: theme.colorScheme.primary.withOpacity(0.12)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.translate('horizon_quick_header'),
+            style: theme.textTheme.titleMedium,
+          ),
+          const SizedBox(height: 6),
+          Text(pulse.headline, style: theme.textTheme.bodySmall),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  '${l10n.translate('horizon_alignment')}: $alignment%',
+                  style: theme.textTheme.bodySmall,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  '${l10n.translate('horizon_confidence')}: $confidence%',
+                  style: theme.textTheme.bodySmall,
+                ),
+              ),
+            ],
+          ),
+          if (scenario != null) ...[
+            const SizedBox(height: 12),
+            Text(
+              scenario!.title,
+              style: theme.textTheme.labelLarge,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              '${scenario!.timeframe} · ${scenario!.focus}',
+              style: theme.textTheme.bodySmall,
+            ),
+          ],
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: pulse.signalHighlights
+                .map((highlight) => TagChip(label: highlight, isSelected: false))
+                .toList(),
+          ),
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FilledButton.tonalIcon(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(RouteNames.horizon),
+              icon: const Icon(Icons.auto_awesome),
+              label: Text(l10n.translate('horizon_open_full')),
             ),
           ),
         ],

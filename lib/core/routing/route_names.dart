@@ -29,4 +29,5 @@ class RouteNames {
   static const impact = '/impact';
   static const innovation = '/innovation';
   static const mastery = '/mastery';
+  static const horizon = '/horizon';
 }

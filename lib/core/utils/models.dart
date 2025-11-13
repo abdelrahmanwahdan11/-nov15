@@ -1302,3 +1302,184 @@ class MasteryReflection {
   final String response;
   final DateTime timestamp;
 }
+
+class HorizonPulse {
+  const HorizonPulse({
+    required this.headline,
+    required this.alignment,
+    required this.runwayDays,
+    required this.confidence,
+    required this.guidingQuestion,
+    required this.focusThemes,
+    required this.signalHighlights,
+    required this.nextWindow,
+  });
+
+  final String headline;
+  final double alignment;
+  final int runwayDays;
+  final double confidence;
+  final String guidingQuestion;
+  final List<String> focusThemes;
+  final List<String> signalHighlights;
+  final String nextWindow;
+
+  HorizonPulse copyWith({
+    String? headline,
+    double? alignment,
+    int? runwayDays,
+    double? confidence,
+    String? guidingQuestion,
+    List<String>? focusThemes,
+    List<String>? signalHighlights,
+    String? nextWindow,
+  }) {
+    return HorizonPulse(
+      headline: headline ?? this.headline,
+      alignment: alignment ?? this.alignment,
+      runwayDays: runwayDays ?? this.runwayDays,
+      confidence: confidence ?? this.confidence,
+      guidingQuestion: guidingQuestion ?? this.guidingQuestion,
+      focusThemes: focusThemes ?? List<String>.from(this.focusThemes),
+      signalHighlights:
+          signalHighlights ?? List<String>.from(this.signalHighlights),
+      nextWindow: nextWindow ?? this.nextWindow,
+    );
+  }
+}
+
+class HorizonScenario {
+  const HorizonScenario({
+    required this.id,
+    required this.title,
+    required this.timeframe,
+    required this.impact,
+    required this.probability,
+    required this.focus,
+    required this.narrative,
+    this.isFocus = false,
+  });
+
+  final String id;
+  final String title;
+  final String timeframe;
+  final double impact;
+  final double probability;
+  final String focus;
+  final String narrative;
+  final bool isFocus;
+
+  HorizonScenario copyWith({bool? isFocus, double? impact, double? probability}) {
+    return HorizonScenario(
+      id: id,
+      title: title,
+      timeframe: timeframe,
+      impact: impact ?? this.impact,
+      probability: probability ?? this.probability,
+      focus: focus,
+      narrative: narrative,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class HorizonSignal {
+  const HorizonSignal({
+    required this.id,
+    required this.title,
+    required this.category,
+    required this.description,
+    required this.momentum,
+    required this.confidence,
+    this.flagged = false,
+  });
+
+  final String id;
+  final String title;
+  final String category;
+  final String description;
+  final double momentum;
+  final double confidence;
+  final bool flagged;
+
+  HorizonSignal copyWith({bool? flagged, double? momentum, double? confidence}) {
+    return HorizonSignal(
+      id: id,
+      title: title,
+      category: category,
+      description: description,
+      momentum: momentum ?? this.momentum,
+      confidence: confidence ?? this.confidence,
+      flagged: flagged ?? this.flagged,
+    );
+  }
+}
+
+class HorizonRunwayMarker {
+  const HorizonRunwayMarker({
+    required this.id,
+    required this.title,
+    required this.timeframe,
+    required this.priority,
+    required this.notes,
+    this.completed = false,
+  });
+
+  final String id;
+  final String title;
+  final String timeframe;
+  final String priority;
+  final String notes;
+  final bool completed;
+
+  HorizonRunwayMarker copyWith({bool? completed}) {
+    return HorizonRunwayMarker(
+      id: id,
+      title: title,
+      timeframe: timeframe,
+      priority: priority,
+      notes: notes,
+      completed: completed ?? this.completed,
+    );
+  }
+}
+
+class HorizonBlueprint {
+  const HorizonBlueprint({
+    required this.id,
+    required this.pillar,
+    required this.summary,
+    required this.owner,
+    required this.status,
+    required this.confidence,
+    required this.actions,
+    required this.nextWindow,
+  });
+
+  final String id;
+  final String pillar;
+  final String summary;
+  final String owner;
+  final String status;
+  final double confidence;
+  final List<String> actions;
+  final String nextWindow;
+
+  HorizonBlueprint copyWith({
+    String? status,
+    double? confidence,
+    String? nextWindow,
+    List<String>? actions,
+  }) {
+    return HorizonBlueprint(
+      id: id,
+      pillar: pillar,
+      summary: summary,
+      owner: owner,
+      status: status ?? this.status,
+      confidence: confidence ?? this.confidence,
+      actions: actions ?? List<String>.from(this.actions),
+      nextWindow: nextWindow ?? this.nextWindow,
+    );
+  }
+}
