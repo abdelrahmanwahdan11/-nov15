@@ -30,4 +30,5 @@ class RouteNames {
   static const innovation = '/innovation';
   static const mastery = '/mastery';
   static const horizon = '/horizon';
+  static const cosmos = '/cosmos';
 }

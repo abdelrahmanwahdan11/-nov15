@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../controllers/app_controller.dart';
 import '../../controllers/community_controller.dart';
+import '../../controllers/cosmos_controller.dart';
 import '../../controllers/impact_controller.dart';
 import '../../controllers/horizon_controller.dart';
 import '../../controllers/innovation_controller.dart';
@@ -32,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final MomentumController _momentumController = MomentumController.instance;
   final CommunityController _communityController =
       CommunityController.instance;
+  final CosmosController _cosmosController = CosmosController.instance;
   final ImpactController _impactController = ImpactController.instance;
   final InnovationController _innovationController =
       InnovationController.instance;
@@ -56,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _innovationController.init();
     _masteryController.init();
     _horizonController.init();
+    _cosmosController.init();
   }
 
   @override
@@ -188,6 +191,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Navigator.of(context).pushNamed(RouteNames.horizon),
                             icon: const Icon(Icons.auto_awesome),
                             label: Text(l10n.translate('horizon_studio')),
+                          ),
+                          const SizedBox(height: 12),
+                          FilledButton.tonalIcon(
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed(RouteNames.cosmos),
+                            icon: const Icon(Icons.public),
+                            label: Text(l10n.translate('cosmos_studio')),
                           ),
                           const SizedBox(height: 12),
                           FilledButton.tonalIcon(
@@ -333,6 +343,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return _HorizonQuickCard(
                                     pulse: pulse,
                                     scenario: focusScenario,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          ValueListenableBuilder<CosmosPulse>(
+                            valueListenable: _cosmosController.pulse,
+                            builder: (context, pulse, _) {
+                              return ValueListenableBuilder<List<CosmosConstellation>>(
+                                valueListenable: _cosmosController.constellations,
+                                builder: (context, constellations, __) {
+                                  CosmosConstellation? focusConstellation;
+                                  if (constellations.isNotEmpty) {
+                                    focusConstellation = constellations.firstWhere(
+                                      (constellation) => constellation.isFocus,
+                                      orElse: () => constellations.first,
+                                    );
+                                  }
+                                  return _CosmosQuickCard(
+                                    pulse: pulse,
+                                    constellation: focusConstellation,
                                   );
                                 },
                               );
@@ -892,6 +924,180 @@ class _InnovationQuickCard extends StatelessWidget {
               label: Text(l10n.translate('innovation_lab')),
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CosmosQuickCard extends StatelessWidget {
+  const _CosmosQuickCard({required this.pulse, this.constellation});
+
+  final CosmosPulse pulse;
+  final CosmosConstellation? constellation;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final magnetism = (pulse.magnetism.clamp(0.0, 1.0) * 100).round();
+    final signal = (pulse.signalStrength.clamp(0.0, 1.0) * 100).round();
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.12),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.translate('cosmos_quick_header'),
+            style: theme.textTheme.titleMedium,
+          ),
+          const SizedBox(height: 6),
+          Text(pulse.highlight, style: theme.textTheme.bodySmall),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${l10n.translate('cosmos_magnetism')}: $magnetism%',
+                      style: theme.textTheme.labelLarge,
+                    ),
+                    const SizedBox(height: 6),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
+                      child: LinearProgressIndicator(
+                        value: pulse.magnetism.clamp(0.0, 1.0),
+                        minHeight: 6,
+                        backgroundColor:
+                            theme.colorScheme.onSurface.withOpacity(0.08),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          theme.colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${l10n.translate('cosmos_signal')}: $signal%',
+                      style: theme.textTheme.labelLarge,
+                    ),
+                    const SizedBox(height: 6),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
+                      child: LinearProgressIndicator(
+                        value: pulse.signalStrength.clamp(0.0, 1.0),
+                        minHeight: 6,
+                        backgroundColor:
+                            theme.colorScheme.onSurface.withOpacity(0.08),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          theme.colorScheme.secondary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: [
+              _QuickChip(
+                icon: Icons.star_border_rounded,
+                label:
+                    '${l10n.translate('cosmos_alliances')}: ${pulse.activeAlliances}',
+              ),
+              _QuickChip(
+                icon: Icons.schedule,
+                label:
+                    '${l10n.translate('cosmos_quick_window')}: ${pulse.window}',
+              ),
+            ],
+          ),
+          if (constellation != null) ...[
+            const SizedBox(height: 12),
+            Text(
+              '${constellation!.icon} ${constellation!.title}',
+              style: theme.textTheme.labelLarge,
+            ),
+            const SizedBox(height: 4),
+            Text(constellation!.snapshot, style: theme.textTheme.bodySmall),
+            const SizedBox(height: 4),
+            Text(
+              '${l10n.translate('cosmos_focus_label')}: ${constellation!.anchor}',
+              style: theme.textTheme.labelSmall,
+            ),
+          ],
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: [
+              _QuickChip(
+                icon: Icons.auto_fix_high,
+                label:
+                    '${l10n.translate('cosmos_quick_focus')}: ${pulse.focus}',
+              ),
+              _QuickChip(
+                icon: Icons.rocket_launch,
+                label:
+                    '${l10n.translate('cosmos_next_trajectory')}: ${pulse.nextTrajectory}',
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FilledButton.tonalIcon(
+              onPressed: () => Navigator.of(context).pushNamed(RouteNames.cosmos),
+              icon: const Icon(Icons.public),
+              label: Text(l10n.translate('cosmos_quick_open')),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _QuickChip extends StatelessWidget {
+  const _QuickChip({required this.icon, required this.label});
+
+  final IconData icon;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+        color: theme.colorScheme.primary.withOpacity(0.08),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 16, color: theme.colorScheme.primary),
+          const SizedBox(width: 6),
+          Text(label, style: theme.textTheme.labelSmall),
         ],
       ),
     );

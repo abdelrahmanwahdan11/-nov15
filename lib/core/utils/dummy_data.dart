@@ -1438,3 +1438,185 @@ const dummyHorizonQuestions = <String>[
   'How do we choreograph coverage before the surge appears?',
   'Where can delight and efficiency intersect this week?',
 ];
+final defaultCosmosPulse = CosmosPulse(
+  headline: 'Night orbit alignment rising',
+  magnetism: 0.78,
+  signalStrength: 0.66,
+  activeAlliances: 4,
+  window: '21:00 - 23:30',
+  highlight: 'Pair harbor pickups with airport drop-offs for a double boost.',
+  nextTrajectory: 'Dawn corridor 05:40',
+  focus: 'Harbor → Airport corridor',
+);
+
+final dummyCosmosConstellations = <CosmosConstellation>[
+  CosmosConstellation(
+    id: 'cosmos-constellation-airport',
+    title: 'Aero Nexus',
+    icon: '🛫',
+    anchor: 'Airport Express',
+    resonance: 0.82,
+    window: '05:00 - 07:30',
+    snapshot: 'Early flyers syncing with harbor shuttles.',
+    isFocus: true,
+  ),
+  CosmosConstellation(
+    id: 'cosmos-constellation-harbor',
+    title: 'Harbor Tide',
+    icon: '⚓',
+    anchor: 'Harbor Front',
+    resonance: 0.74,
+    window: '19:00 - 21:30',
+    snapshot: 'Evening cruise departures with premium tips.',
+  ),
+  CosmosConstellation(
+    id: 'cosmos-constellation-midtown',
+    title: 'Midtown Current',
+    icon: '🌆',
+    anchor: 'Midtown Loop',
+    resonance: 0.68,
+    window: '11:30 - 14:00',
+    snapshot: 'Lunch rush stacking with corporate bookings.',
+  ),
+  CosmosConstellation(
+    id: 'cosmos-constellation-nightfall',
+    title: 'Nightfall Relay',
+    icon: '🌙',
+    anchor: 'Old Town',
+    resonance: 0.7,
+    window: '22:00 - 00:30',
+    snapshot: 'Late-night concerts feeding cross-city rides.',
+  ),
+];
+
+final dummyCosmosOrbits = <CosmosOrbit>[
+  CosmosOrbit(
+    id: 'orbit-airport-corridor',
+    label: 'Airport corridor',
+    window: '05:00 - 07:30',
+    magnetic: 0.76,
+    trajectory: 0.18,
+    tone: 'High uplift',
+  ),
+  CosmosOrbit(
+    id: 'orbit-harbor-link',
+    label: 'Harbor link',
+    window: '18:30 - 21:15',
+    magnetic: 0.71,
+    trajectory: 0.12,
+    tone: 'Steady surge',
+  ),
+  CosmosOrbit(
+    id: 'orbit-midtown-fusion',
+    label: 'Midtown fusion',
+    window: '11:00 - 13:30',
+    magnetic: 0.63,
+    trajectory: -0.04,
+    tone: 'Balanced flow',
+  ),
+  CosmosOrbit(
+    id: 'orbit-night-relay',
+    label: 'Night relay',
+    window: '22:15 - 00:45',
+    magnetic: 0.69,
+    trajectory: 0.08,
+    tone: 'Rising sparks',
+  ),
+];
+
+final dummyCosmosBeacons = <CosmosBeacon>[
+  CosmosBeacon(
+    id: 'cosmos-beacon-airport',
+    title: 'Runway ripple',
+    subtitle: 'Align departures with downtown returns.',
+    energy: 0.82,
+    urgency: 3,
+  ),
+  CosmosBeacon(
+    id: 'cosmos-beacon-harbor',
+    title: 'Pier sync',
+    subtitle: 'Pinpoint cruise unload surge windows.',
+    energy: 0.74,
+    urgency: 2,
+  ),
+  CosmosBeacon(
+    id: 'cosmos-beacon-midtown',
+    title: 'Lunch fusion',
+    subtitle: 'Bundle office lunch runs with express rides.',
+    energy: 0.61,
+    urgency: 1,
+  ),
+];
+
+final dummyCosmosExpeditions = <CosmosExpedition>[
+  CosmosExpedition(
+    id: 'cosmos-expedition-dawn',
+    title: 'Dawn corridor relay',
+    window: 'Tomorrow 05:30',
+    focus: 'Back-to-back airport shifts with zero idle time.',
+    progress: 0.42,
+  ),
+  CosmosExpedition(
+    id: 'cosmos-expedition-sunset',
+    title: 'Sunset harbor sync',
+    window: 'Tonight 19:00',
+    focus: 'Stack harbor pickups with premium drop-offs.',
+    progress: 0.58,
+  ),
+  CosmosExpedition(
+    id: 'cosmos-expedition-night',
+    title: 'Night relay sprint',
+    window: 'Tonight 23:00',
+    focus: 'Bridge late-night events into dawn airport runs.',
+    progress: 0.33,
+  ),
+];
+
+final dummyCosmosArtifacts = <CosmosArtifact>[
+  CosmosArtifact(
+    id: 'cosmos-artifact-playbook',
+    title: 'Orbit playbook 2.0',
+    summary: 'Curated moves linking harbor and airport runs.',
+    tag: 'Strategy',
+  ),
+  CosmosArtifact(
+    id: 'cosmos-artifact-signal',
+    title: 'Signal harmonics',
+    summary: 'Top driver sequences for night relay coverage.',
+    tag: 'Signals',
+  ),
+  CosmosArtifact(
+    id: 'cosmos-artifact-alliance',
+    title: 'Alliance ledger',
+    summary: 'Partner perks unlocked with aligned arrivals.',
+    tag: 'Alliances',
+  ),
+];
+
+final dummyCosmosHeadlines = <String>[
+  'Constellation uplift detected across harbor lanes',
+  'Night orbit alignment surging 12% above baseline',
+  'Magnetic flux primed for dawn express gains',
+  'Alliance mesh syncing with city-wide demand pulses',
+];
+
+final dummyCosmosHighlights = <String>[
+  'Anchor a triple loop before the dawn corridor opens.',
+  'Sync harbor arrivals with airport departures for prime boosts.',
+  'Pair Midtown lunches with express return legs.',
+  'Set night relay checkpoints for smoother handoffs.',
+];
+
+final dummyCosmosFocuses = <String>[
+  'Harbor → Airport corridor',
+  'Midtown → Harbor express',
+  'Downtown → Night relay arc',
+  'Airport → Midtown lunch ladder',
+];
+
+final dummyCosmosTrajectories = <String>[
+  'Sunrise surge 05:20',
+  'Twilight cascade 19:10',
+  'Nightfall sprint 23:45',
+  'Lunch wave 12:05',
+];

@@ -1483,3 +1483,198 @@ class HorizonBlueprint {
     );
   }
 }
+class CosmosPulse {
+  const CosmosPulse({
+    required this.headline,
+    required this.magnetism,
+    required this.signalStrength,
+    required this.activeAlliances,
+    required this.window,
+    required this.highlight,
+    required this.nextTrajectory,
+    required this.focus,
+  });
+
+  final String headline;
+  final double magnetism;
+  final double signalStrength;
+  final int activeAlliances;
+  final String window;
+  final String highlight;
+  final String nextTrajectory;
+  final String focus;
+
+  CosmosPulse copyWith({
+    String? headline,
+    double? magnetism,
+    double? signalStrength,
+    int? activeAlliances,
+    String? window,
+    String? highlight,
+    String? nextTrajectory,
+    String? focus,
+  }) {
+    return CosmosPulse(
+      headline: headline ?? this.headline,
+      magnetism: magnetism ?? this.magnetism,
+      signalStrength: signalStrength ?? this.signalStrength,
+      activeAlliances: activeAlliances ?? this.activeAlliances,
+      window: window ?? this.window,
+      highlight: highlight ?? this.highlight,
+      nextTrajectory: nextTrajectory ?? this.nextTrajectory,
+      focus: focus ?? this.focus,
+    );
+  }
+}
+
+class CosmosConstellation {
+  const CosmosConstellation({
+    required this.id,
+    required this.title,
+    required this.icon,
+    required this.anchor,
+    required this.resonance,
+    required this.window,
+    required this.snapshot,
+    this.isFocus = false,
+  });
+
+  final String id;
+  final String title;
+  final String icon;
+  final String anchor;
+  final double resonance;
+  final String window;
+  final String snapshot;
+  final bool isFocus;
+
+  CosmosConstellation copyWith({
+    bool? isFocus,
+    double? resonance,
+    String? window,
+  }) {
+    return CosmosConstellation(
+      id: id,
+      title: title,
+      icon: icon,
+      anchor: anchor,
+      resonance: resonance ?? this.resonance,
+      window: window ?? this.window,
+      snapshot: snapshot,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class CosmosOrbit {
+  const CosmosOrbit({
+    required this.id,
+    required this.label,
+    required this.window,
+    required this.magnetic,
+    required this.trajectory,
+    required this.tone,
+  });
+
+  final String id;
+  final String label;
+  final String window;
+  final double magnetic;
+  final double trajectory;
+  final String tone;
+
+  CosmosOrbit copyWith({double? magnetic, double? trajectory, String? window}) {
+    return CosmosOrbit(
+      id: id,
+      label: label,
+      window: window ?? this.window,
+      magnetic: magnetic ?? this.magnetic,
+      trajectory: trajectory ?? this.trajectory,
+      tone: tone,
+    );
+  }
+}
+
+class CosmosBeacon {
+  const CosmosBeacon({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.energy,
+    required this.urgency,
+    this.boosted = false,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final double energy;
+  final int urgency;
+  final bool boosted;
+
+  CosmosBeacon copyWith({bool? boosted, double? energy, int? urgency}) {
+    return CosmosBeacon(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      energy: energy ?? this.energy,
+      urgency: urgency ?? this.urgency,
+      boosted: boosted ?? this.boosted,
+    );
+  }
+}
+
+class CosmosExpedition {
+  const CosmosExpedition({
+    required this.id,
+    required this.title,
+    required this.window,
+    required this.focus,
+    required this.progress,
+    this.enrolled = false,
+  });
+
+  final String id;
+  final String title;
+  final String window;
+  final String focus;
+  final double progress;
+  final bool enrolled;
+
+  CosmosExpedition copyWith({bool? enrolled, double? progress}) {
+    return CosmosExpedition(
+      id: id,
+      title: title,
+      window: window,
+      focus: focus,
+      progress: progress ?? this.progress,
+      enrolled: enrolled ?? this.enrolled,
+    );
+  }
+}
+
+class CosmosArtifact {
+  const CosmosArtifact({
+    required this.id,
+    required this.title,
+    required this.summary,
+    required this.tag,
+    this.saved = false,
+  });
+
+  final String id;
+  final String title;
+  final String summary;
+  final String tag;
+  final bool saved;
+
+  CosmosArtifact copyWith({bool? saved}) {
+    return CosmosArtifact(
+      id: id,
+      title: title,
+      summary: summary,
+      tag: tag,
+      saved: saved ?? this.saved,
+    );
+  }
+}
