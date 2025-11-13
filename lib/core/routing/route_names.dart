@@ -22,4 +22,5 @@ class RouteNames {
   static const compare = '/compare';
   static const search = '/search';
   static const insights = '/insights';
+  static const strategyLab = '/strategy-lab';
 }

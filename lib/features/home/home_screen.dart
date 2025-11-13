@@ -125,6 +125,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             label: Text(l10n.translate('shift_planner')),
                           ),
                           const SizedBox(height: 12),
+                          FilledButton.tonalIcon(
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed(RouteNames.strategyLab),
+                            icon: const Icon(Icons.bolt),
+                            label: Text(l10n.translate('strategy_lab')),
+                          ),
+                          const SizedBox(height: 12),
                           OutlinedButton.icon(
                             onPressed: () =>
                                 Navigator.of(context).pushNamed(RouteNames.insights),

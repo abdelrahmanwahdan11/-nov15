@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../controllers/insight_controller.dart';
+import '../../controllers/planner_controller.dart';
 import '../../core/localization/app_localizations.dart';
 import '../../core/localization/localization_extensions.dart';
+import '../../core/routing/route_names.dart';
 import '../../core/utils/dummy_data.dart';
 import '../../core/utils/models.dart';
 import '../../core/widgets/demand_heatmap.dart';
@@ -17,16 +19,23 @@ class InsightsScreen extends StatefulWidget {
 
 class _InsightsScreenState extends State<InsightsScreen> {
   final InsightController _controller = InsightController.instance;
+  final PlannerController _plannerController = PlannerController.instance;
   late Future<void> _initFuture;
 
   @override
   void initState() {
     super.initState();
-    _initFuture = _controller.init();
+    _initFuture = Future.wait([
+      _controller.init(),
+      _plannerController.init(),
+    ]).then((_) {});
   }
 
   Future<void> _handleRefresh() async {
-    await _controller.regenerateInsights();
+    await Future.wait([
+      _controller.regenerateInsights(),
+      _plannerController.regeneratePlan(),
+    ]);
   }
 
   Future<void> _handleGoalChanged(int value) async {
@@ -73,6 +82,8 @@ class _InsightsScreenState extends State<InsightsScreen> {
                     );
                   },
                 ),
+                const SizedBox(height: 20),
+                _StrategyLabPreview(controller: _plannerController),
                 const SizedBox(height: 28),
                 _SectionHeader(title: l10n.translate('focus_areas')),
                 const SizedBox(height: 12),
@@ -148,6 +159,170 @@ class _InsightsScreenState extends State<InsightsScreen> {
             ),
           );
         },
+      ),
+    );
+  }
+}
+
+class _StrategyLabPreview extends StatelessWidget {
+  const _StrategyLabPreview({required this.controller});
+
+  final PlannerController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    return InkWell(
+      onTap: () => Navigator.of(context).pushNamed(RouteNames.strategyLab),
+      borderRadius: BorderRadius.circular(28),
+      child: Ink(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.primary.withOpacity(0.08),
+          borderRadius: BorderRadius.circular(28),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.bolt, color: theme.colorScheme.primary),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    l10n.translate('strategy_lab'),
+                    style: theme.textTheme.titleMedium,
+                  ),
+                ),
+                Icon(Icons.navigate_next, color: theme.colorScheme.primary),
+              ],
+            ),
+            const SizedBox(height: 12),
+            ValueListenableBuilder<ShiftScenario?>(
+              valueListenable: controller.activeScenario,
+              builder: (_, scenario, __) {
+                if (scenario == null) {
+                  return Text(
+                    l10n.translate('strategy_lab_subtitle'),
+                    style: theme.textTheme.bodyMedium,
+                  );
+                }
+                final tags = scenario.tags.join(' • ');
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 320),
+                  child: Column(
+                    key: ValueKey<String>(scenario.id),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        scenario.title,
+                        style: theme.textTheme.titleSmall,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        scenario.subtitle,
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                      if (tags.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          tags,
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ],
+                    ],
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            StreamBuilder<PlannerSummary>(
+              stream: controller.summaryStream,
+              builder: (_, snapshot) {
+                final summary = snapshot.data;
+                if (summary == null) {
+                  return Text(
+                    l10n.translate('strategy_lab_subtitle'),
+                    style: theme.textTheme.bodySmall,
+                  );
+                }
+                final demand = (summary.averageDemand * 100).round();
+                final confidence = (summary.confidence * 100).round();
+                return Wrap(
+                  spacing: 12,
+                  runSpacing: 8,
+                  children: [
+                    _MetricChip(
+                      label: l10n.translate('planner_projected_earnings'),
+                      value: '\$${summary.projectedEarnings.round()}',
+                    ),
+                    _MetricChip(
+                      label: l10n.translate('planner_expected_trips'),
+                      value: '${summary.expectedTrips}',
+                    ),
+                    _MetricChip(
+                      label: l10n.translate('planner_avg_demand'),
+                      value: '$demand%',
+                    ),
+                    _MetricChip(
+                      label: l10n.translate('planner_confidence'),
+                      value: '$confidence%',
+                    ),
+                  ],
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            Text(
+              l10n.translate('open_strategy_lab'),
+              style: theme.textTheme.labelLarge?.copyWith(
+                color: theme.colorScheme.primary,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MetricChip extends StatelessWidget {
+  const _MetricChip({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+      decoration: BoxDecoration(
+        color: theme.cardColor,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: theme.colorScheme.primary.withOpacity(0.06),
+            blurRadius: 10,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: theme.textTheme.bodySmall),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: theme.textTheme.titleSmall?.copyWith(
+              color: theme.colorScheme.primary,
+            ),
+          ),
+        ],
       ),
     );
   }

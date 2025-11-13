@@ -16,6 +16,7 @@ import '../../features/help_faq/help_faq_screen.dart';
 import '../../features/history/history_screen.dart';
 import '../../features/home/home_screen.dart';
 import '../../features/insights/insights_screen.dart';
+import '../../features/insights/strategy_lab_screen.dart';
 import '../../features/my_rides/my_rides_screen.dart';
 import '../../features/on_trip/on_trip_screen.dart';
 import '../../features/onboarding/onboarding_screen.dart';
@@ -78,6 +79,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case RouteNames.insights:
         return MaterialPageRoute(builder: (_) => const InsightsScreen());
+      case RouteNames.strategyLab:
+        return MaterialPageRoute(builder: (_) => const StrategyLabScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

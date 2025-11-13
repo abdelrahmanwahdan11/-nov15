@@ -203,3 +203,122 @@ class FocusAreaSnapshot {
   final int rideCount;
   final double demandScore;
 }
+
+class ShiftSegmentPlan {
+  ShiftSegmentPlan({
+    required this.id,
+    required this.label,
+    required this.start,
+    required this.end,
+    required this.demandScore,
+    required this.expectedTrips,
+  });
+
+  final String id;
+  final String label;
+  final String start;
+  final String end;
+  final double demandScore;
+  final int expectedTrips;
+
+  ShiftSegmentPlan copyWith({
+    double? demandScore,
+    int? expectedTrips,
+  }) {
+    return ShiftSegmentPlan(
+      id: id,
+      label: label,
+      start: start,
+      end: end,
+      demandScore: demandScore ?? this.demandScore,
+      expectedTrips: expectedTrips ?? this.expectedTrips,
+    );
+  }
+}
+
+class MomentumAction {
+  MomentumAction({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.impact,
+    required this.category,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final String impact;
+  final String category;
+
+  MomentumAction copyWith({
+    String? impact,
+    String? description,
+  }) {
+    return MomentumAction(
+      id: id,
+      title: title,
+      description: description ?? this.description,
+      impact: impact ?? this.impact,
+      category: category,
+    );
+  }
+}
+
+class ShiftScenario {
+  ShiftScenario({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.focusArea,
+    required this.earningTarget,
+    required this.surgeBoost,
+    required this.riskLevel,
+    required this.tags,
+    required this.timeline,
+    required this.actions,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String focusArea;
+  final int earningTarget;
+  final double surgeBoost;
+  final double riskLevel;
+  final List<String> tags;
+  final List<ShiftSegmentPlan> timeline;
+  final List<MomentumAction> actions;
+
+  ShiftScenario copyWith({
+    List<ShiftSegmentPlan>? timeline,
+    List<MomentumAction>? actions,
+  }) {
+    return ShiftScenario(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      focusArea: focusArea,
+      earningTarget: earningTarget,
+      surgeBoost: surgeBoost,
+      riskLevel: riskLevel,
+      tags: tags,
+      timeline: timeline ?? this.timeline,
+      actions: actions ?? this.actions,
+    );
+  }
+}
+
+class PlannerSummary {
+  PlannerSummary({
+    required this.projectedEarnings,
+    required this.expectedTrips,
+    required this.averageDemand,
+    required this.confidence,
+  });
+
+  final double projectedEarnings;
+  final int expectedTrips;
+  final double averageDemand;
+  final double confidence;
+}
