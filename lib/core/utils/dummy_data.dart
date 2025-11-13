@@ -673,3 +673,145 @@ final dummyRecoveryMoments = <RecoveryMoment>[
   ),
 ];
 
+const defaultCirclePulse = CirclePulse(
+  collaborationIndex: 0.74,
+  shareRate: 0.62,
+  assistRate: 0.58,
+  message: 'Crew sync window aligning — share your best quick wins.',
+  highlights: <String>[
+    '3 quick handoffs converted in Harbor circle',
+    'Shared playlist boosted late-night vibe',
+    'North ridge team swapped surge intel',
+    'Two new driver buddies joined your lane',
+  ],
+);
+
+final dummyCrewCircles = <CrewCircle>[
+  CrewCircle(
+    id: 'circle_harbor',
+    name: 'Harbor wave',
+    tagline: 'Sunset airport mastery.',
+    icon: '🌊',
+    energy: 0.82,
+    activeDrivers: 38,
+    signatureMoves: <String>['Airport relay', 'Runway greet', 'Harbor calm'],
+    nextSync: '18:30 crew focus',
+    joined: false,
+  ),
+  CrewCircle(
+    id: 'circle_city',
+    name: 'City pulse',
+    tagline: 'Downtown lunch rush tacticians.',
+    icon: '🏙️',
+    energy: 0.68,
+    activeDrivers: 52,
+    signatureMoves: <String>['Micro-loop', 'Lunch express', 'Signal swap'],
+    nextSync: '12:15 mic-drop',
+    joined: false,
+  ),
+  CrewCircle(
+    id: 'circle_night',
+    name: 'Night aurora',
+    tagline: 'Late-night vibe keepers.',
+    icon: '🌌',
+    energy: 0.9,
+    activeDrivers: 24,
+    signatureMoves: <String>['Glow trail', 'Silent arrival', 'Rewind playlist'],
+    nextSync: '22:00 glow brief',
+    joined: false,
+  ),
+];
+
+final dummyPeerBeacons = <PeerBeacon>[
+  PeerBeacon(
+    id: 'beacon_airport',
+    circleId: 'circle_harbor',
+    driverName: 'Layla M.',
+    message: 'Shifted pickups to level 3 and cut wait time by 6 min.',
+    timeAgo: '7 min ago',
+    boosts: 14,
+    tags: <String>['wait time', 'airport'],
+    isBoosted: false,
+  ),
+  PeerBeacon(
+    id: 'beacon_city',
+    circleId: 'circle_city',
+    driverName: 'Rashid Q.',
+    message: 'Bundle lunch stops along metro line — riders tipping high.',
+    timeAgo: '22 min ago',
+    boosts: 19,
+    tags: <String>['tips', 'bundles'],
+    isBoosted: false,
+  ),
+  PeerBeacon(
+    id: 'beacon_night',
+    circleId: 'circle_night',
+    driverName: 'Nora L.',
+    message: 'Glow playlist update dropped — pairs with twilight sprint.',
+    timeAgo: '39 min ago',
+    boosts: 11,
+    tags: <String>['playlist', 'night'],
+    isBoosted: false,
+  ),
+];
+
+final dummyCommunitySprints = <CommunitySprint>[
+  CommunitySprint(
+    id: 'sprint_airport',
+    circleId: 'circle_harbor',
+    title: 'Twilight express relay',
+    timeframe: 'Tonight • 18:00 - 21:00',
+    description: 'Coordinate arrivals and share lane cues to double accepts.',
+    focusTags: <String>['airport', 'coordination', 'surge'],
+    joined: false,
+  ),
+  CommunitySprint(
+    id: 'sprint_city',
+    circleId: 'circle_city',
+    title: 'Lunch micro-loop remix',
+    timeframe: 'Tomorrow • 11:00 - 14:00',
+    description: 'Run the three-stop loop and share live bundle pings.',
+    focusTags: <String>['bundles', 'downtown'],
+    joined: false,
+  ),
+  CommunitySprint(
+    id: 'sprint_night',
+    circleId: 'circle_night',
+    title: 'Aurora vibe drop',
+    timeframe: 'Friday • 21:30 - 00:30',
+    description: 'Swap calm cues and co-create new night rider rituals.',
+    focusTags: <String>['night', 'experience'],
+    joined: false,
+  ),
+];
+
+final dummyCommunityResources = <CommunityResource>[
+  CommunityResource(
+    id: 'resource_debrief',
+    title: '3-step crew debrief',
+    subtitle: 'Collect wins, remix challenges, align on next windows.',
+    format: 'Playbook',
+    duration: '5 min read',
+    vibe: 'focus',
+    isSaved: false,
+  ),
+  CommunityResource(
+    id: 'resource_playlist',
+    title: 'Night aurora playlist',
+    subtitle: 'Ambient beats curated by the twilight squad.',
+    format: 'Playlist',
+    duration: '36 min',
+    vibe: 'calm',
+    isSaved: false,
+  ),
+  CommunityResource(
+    id: 'resource_script',
+    title: 'Welcome script refresh',
+    subtitle: 'Crowdsourced openers that earn instant rapport.',
+    format: 'Audio bites',
+    duration: '8 min listen',
+    vibe: 'energize',
+    isSaved: false,
+  ),
+];
+

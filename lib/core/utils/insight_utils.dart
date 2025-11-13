@@ -18,6 +18,8 @@ class ShiftWindowData {
 }
 
 class InsightUtils {
+  static final Random _random = Random();
+
   static List<String> rideInsights(AppLocalizations l10n, Ride ride) {
     final surge = (ride.meta['surge'] as double?) ?? 1.0;
     final demandIndex = (ride.meta['demandIndex'] as double?) ?? 0.6;
@@ -102,4 +104,29 @@ class InsightUtils {
     }
     return l10n.translate('demand_calm');
   }
+
+  static List<String> shuffleHighlights(List<String> highlights) {
+    final copy = List<String>.from(highlights);
+    copy.shuffle(_random);
+    return copy.take(4).toList();
+  }
+
+  static String nextCommunityMessage(String current) {
+    if (_communityMessages.isEmpty) {
+      return current;
+    }
+    final index = _communityMessages.indexOf(current);
+    if (index == -1) {
+      return _communityMessages[_random.nextInt(_communityMessages.length)];
+    }
+    final nextIndex = (index + 1) % _communityMessages.length;
+    return _communityMessages[nextIndex];
+  }
+
+  static const List<String> _communityMessages = <String>[
+    'Crew sync window aligning — share your best quick wins.',
+    'Momentum sparks rising in the harbor circle, drop a beacon.',
+    'Fresh rider kudos landed. Pay it forward with a new tactic.',
+    'New playlist vibes unlocked. Pair it with a twilight sprint.',
+  ];
 }

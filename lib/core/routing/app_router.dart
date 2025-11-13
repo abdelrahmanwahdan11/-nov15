@@ -10,6 +10,7 @@ import '../../features/catalog/catalog_screen.dart';
 import '../../features/chat/chat_detail_screen.dart';
 import '../../features/chat/chat_list_screen.dart';
 import '../../features/compare_items/compare_items_screen.dart';
+import '../../features/community/community_screen.dart';
 import '../../features/documents/documents_screen.dart';
 import '../../features/earnings/earnings_screen.dart';
 import '../../features/help_faq/help_faq_screen.dart';
@@ -87,6 +88,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const WellnessScreen());
       case RouteNames.momentum:
         return MaterialPageRoute(builder: (_) => const MomentumScreen());
+      case RouteNames.community:
+        return MaterialPageRoute(builder: (_) => const CommunityScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

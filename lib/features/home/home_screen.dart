@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../controllers/app_controller.dart';
+import '../../controllers/community_controller.dart';
 import '../../controllers/momentum_controller.dart';
 import '../../controllers/ride_controller.dart';
 import '../../controllers/wellness_controller.dart';
@@ -25,6 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final RideController _rideController = RideController.instance;
   final WellnessController _wellnessController = WellnessController.instance;
   final MomentumController _momentumController = MomentumController.instance;
+  final CommunityController _communityController =
+      CommunityController.instance;
   bool _loading = true;
 
   @override
@@ -39,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     _wellnessController.init();
     _momentumController.init();
+    _communityController.init();
   }
 
   @override
@@ -152,6 +156,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             label: Text(l10n.translate('momentum_hub')),
                           ),
                           const SizedBox(height: 12),
+                          FilledButton.tonalIcon(
+                            onPressed: () =>
+                                Navigator.of(context).pushNamed(RouteNames.community),
+                            icon: const Icon(Icons.groups_2_outlined),
+                            label: Text(l10n.translate('community_lounge')),
+                          ),
+                          const SizedBox(height: 12),
                           OutlinedButton.icon(
                             onPressed: () =>
                                 Navigator.of(context).pushNamed(RouteNames.insights),
@@ -222,6 +233,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return _MomentumQuickCard(
                                     pulse: pulse,
                                     track: track,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          ValueListenableBuilder<CirclePulse>(
+                            valueListenable: _communityController.pulse,
+                            builder: (context, pulse, _) {
+                              return ValueListenableBuilder<CrewCircle?>(
+                                valueListenable: _communityController.activeCircle,
+                                builder: (context, circle, __) {
+                                  return _CommunityQuickCard(
+                                    pulse: pulse,
+                                    circle: circle,
                                   );
                                 },
                               );
@@ -428,6 +454,91 @@ class _MomentumQuickCard extends StatelessWidget {
                   ),
                 )
                 .toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CommunityQuickCard extends StatelessWidget {
+  const _CommunityQuickCard({required this.pulse, this.circle});
+
+  final CirclePulse pulse;
+  final CrewCircle? circle;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.12),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.translate('community_quick_header'),
+            style: theme.textTheme.titleMedium,
+          ),
+          const SizedBox(height: 6),
+          Text(pulse.message, style: theme.textTheme.bodySmall),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: _MiniGauge(
+                  label: l10n.translate('community_collaboration'),
+                  value: pulse.collaborationIndex,
+                  color: theme.colorScheme.primary,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _MiniGauge(
+                  label: l10n.translate('community_share_rate'),
+                  value: pulse.shareRate,
+                  color: theme.colorScheme.secondary,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: pulse.highlights
+                .take(3)
+                .map(
+                  (highlight) => Chip(
+                    label: Text(highlight, style: theme.textTheme.labelSmall),
+                    backgroundColor:
+                        theme.colorScheme.primary.withOpacity(0.12),
+                  ),
+                )
+                .toList(),
+          ),
+          if (circle != null) ...[
+            const SizedBox(height: 12),
+            Text(
+              '${circle!.icon} ${circle!.name} • ${circle!.activeDrivers} ${l10n.translate('community_active_drivers')}',
+              style: theme.textTheme.labelMedium,
+            ),
+          ],
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(RouteNames.community),
+              child: Text(l10n.translate('community_open_full')),
+            ),
           ),
         ],
       ),

@@ -25,4 +25,5 @@ class RouteNames {
   static const strategyLab = '/strategy-lab';
   static const wellness = '/wellness';
   static const momentum = '/momentum';
+  static const community = '/community';
 }

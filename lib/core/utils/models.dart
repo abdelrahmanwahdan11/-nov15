@@ -605,3 +605,183 @@ class MomentumPulse {
     );
   }
 }
+
+class CrewCircle {
+  const CrewCircle({
+    required this.id,
+    required this.name,
+    required this.tagline,
+    required this.icon,
+    required this.energy,
+    required this.activeDrivers,
+    required this.signatureMoves,
+    required this.nextSync,
+    required this.joined,
+  });
+
+  final String id;
+  final String name;
+  final String tagline;
+  final String icon;
+  final double energy;
+  final int activeDrivers;
+  final List<String> signatureMoves;
+  final String nextSync;
+  final bool joined;
+
+  CrewCircle copyWith({
+    double? energy,
+    int? activeDrivers,
+    bool? joined,
+    List<String>? signatureMoves,
+    String? nextSync,
+  }) {
+    return CrewCircle(
+      id: id,
+      name: name,
+      tagline: tagline,
+      icon: icon,
+      energy: energy ?? this.energy,
+      activeDrivers: activeDrivers ?? this.activeDrivers,
+      signatureMoves:
+          signatureMoves ?? List<String>.from(this.signatureMoves),
+      nextSync: nextSync ?? this.nextSync,
+      joined: joined ?? this.joined,
+    );
+  }
+}
+
+class CirclePulse {
+  const CirclePulse({
+    required this.collaborationIndex,
+    required this.shareRate,
+    required this.assistRate,
+    required this.message,
+    required this.highlights,
+  });
+
+  final double collaborationIndex;
+  final double shareRate;
+  final double assistRate;
+  final String message;
+  final List<String> highlights;
+
+  CirclePulse copyWith({
+    double? collaborationIndex,
+    double? shareRate,
+    double? assistRate,
+    String? message,
+    List<String>? highlights,
+  }) {
+    return CirclePulse(
+      collaborationIndex: collaborationIndex ?? this.collaborationIndex,
+      shareRate: shareRate ?? this.shareRate,
+      assistRate: assistRate ?? this.assistRate,
+      message: message ?? this.message,
+      highlights: highlights ?? List<String>.from(this.highlights),
+    );
+  }
+}
+
+class PeerBeacon {
+  const PeerBeacon({
+    required this.id,
+    required this.circleId,
+    required this.driverName,
+    required this.message,
+    required this.timeAgo,
+    required this.boosts,
+    required this.tags,
+    required this.isBoosted,
+  });
+
+  final String id;
+  final String circleId;
+  final String driverName;
+  final String message;
+  final String timeAgo;
+  final int boosts;
+  final List<String> tags;
+  final bool isBoosted;
+
+  PeerBeacon copyWith({
+    int? boosts,
+    bool? isBoosted,
+    List<String>? tags,
+  }) {
+    return PeerBeacon(
+      id: id,
+      circleId: circleId,
+      driverName: driverName,
+      message: message,
+      timeAgo: timeAgo,
+      boosts: boosts ?? this.boosts,
+      tags: tags ?? List<String>.from(this.tags),
+      isBoosted: isBoosted ?? this.isBoosted,
+    );
+  }
+}
+
+class CommunitySprint {
+  const CommunitySprint({
+    required this.id,
+    required this.circleId,
+    required this.title,
+    required this.timeframe,
+    required this.description,
+    required this.focusTags,
+    required this.joined,
+  });
+
+  final String id;
+  final String circleId;
+  final String title;
+  final String timeframe;
+  final String description;
+  final List<String> focusTags;
+  final bool joined;
+
+  CommunitySprint copyWith({bool? joined}) {
+    return CommunitySprint(
+      id: id,
+      circleId: circleId,
+      title: title,
+      timeframe: timeframe,
+      description: description,
+      focusTags: List<String>.from(focusTags),
+      joined: joined ?? this.joined,
+    );
+  }
+}
+
+class CommunityResource {
+  const CommunityResource({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.format,
+    required this.duration,
+    required this.vibe,
+    required this.isSaved,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String format;
+  final String duration;
+  final String vibe;
+  final bool isSaved;
+
+  CommunityResource copyWith({bool? isSaved}) {
+    return CommunityResource(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      format: format,
+      duration: duration,
+      vibe: vibe,
+      isSaved: isSaved ?? this.isSaved,
+    );
+  }
+}
