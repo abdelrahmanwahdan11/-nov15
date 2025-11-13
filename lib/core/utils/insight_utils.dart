@@ -129,4 +129,44 @@ class InsightUtils {
     'Fresh rider kudos landed. Pay it forward with a new tactic.',
     'New playlist vibes unlocked. Pair it with a twilight sprint.',
   ];
+
+  static List<String> reshuffleImpactHighlights(List<String> current) {
+    final pool = <String>{
+      ...current,
+      ..._impactHighlightPool,
+    }.toList();
+    if (pool.isEmpty) {
+      return current;
+    }
+    pool.shuffle(_random);
+    return pool.take(4).toList();
+  }
+
+  static String nextImpactMessage(String current) {
+    if (_impactMessages.isEmpty) {
+      return current;
+    }
+    final index = _impactMessages.indexOf(current);
+    if (index == -1) {
+      return _impactMessages[_random.nextInt(_impactMessages.length)];
+    }
+    final nextIndex = (index + 1) % _impactMessages.length;
+    return _impactMessages[nextIndex];
+  }
+
+  static const List<String> _impactMessages = <String>[
+    'Regenerative loop engaged — keep smooth coasts through downtown.',
+    'Solar buffer topped up. Shift charges to off-peak for extra credit.',
+    'City pledge streak alive — capture one more rider story tonight.',
+    'Green lane express is surging. Align your window to ride the wave.',
+  ];
+
+  static const List<String> _impactHighlightPool = <String>[
+    'Two-minute idle scan unlocked a new saved hotspot',
+    'Riders shared 5 eco kudos in the last hour',
+    'Clean kilometres passed the weekly baseline',
+    'Charging queue trimmed by syncing with planner auto-slot',
+    'Metro partnership trial opened a temporary green lane',
+    'Hydration reminder triggered alongside wellness check-in',
+  ];
 }

@@ -785,3 +785,187 @@ class CommunityResource {
     );
   }
 }
+
+class ImpactPulse {
+  const ImpactPulse({
+    required this.city,
+    required this.co2Saved,
+    required this.cleanKm,
+    required this.renewableShare,
+    required this.streakDays,
+    required this.message,
+    required this.highlights,
+  });
+
+  final String city;
+  final double co2Saved;
+  final double cleanKm;
+  final double renewableShare;
+  final int streakDays;
+  final String message;
+  final List<String> highlights;
+
+  ImpactPulse copyWith({
+    String? city,
+    double? co2Saved,
+    double? cleanKm,
+    double? renewableShare,
+    int? streakDays,
+    String? message,
+    List<String>? highlights,
+  }) {
+    return ImpactPulse(
+      city: city ?? this.city,
+      co2Saved: co2Saved ?? this.co2Saved,
+      cleanKm: cleanKm ?? this.cleanKm,
+      renewableShare: renewableShare ?? this.renewableShare,
+      streakDays: streakDays ?? this.streakDays,
+      message: message ?? this.message,
+      highlights: highlights ?? List<String>.from(this.highlights),
+    );
+  }
+}
+
+class ImpactGoal {
+  const ImpactGoal({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.current,
+    required this.target,
+    required this.unit,
+    required this.trend,
+    required this.direction,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final double current;
+  final double target;
+  final String unit;
+  final double trend;
+  final TrendDirection direction;
+
+  double get progress =>
+      target == 0 ? 0 : (current / target).clamp(0.0, 1.0);
+
+  ImpactGoal copyWith({
+    double? current,
+    double? target,
+    double? trend,
+    TrendDirection? direction,
+  }) {
+    return ImpactGoal(
+      id: id,
+      title: title,
+      description: description,
+      current: current ?? this.current,
+      target: target ?? this.target,
+      unit: unit,
+      trend: trend ?? this.trend,
+      direction: direction ?? this.direction,
+    );
+  }
+}
+
+class ImpactInitiative {
+  const ImpactInitiative({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.category,
+    required this.hours,
+    required this.impactScore,
+    required this.joined,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String icon;
+  final String category;
+  final String hours;
+  final double impactScore;
+  final bool joined;
+
+  ImpactInitiative copyWith({
+    double? impactScore,
+    bool? joined,
+    String? hours,
+  }) {
+    return ImpactInitiative(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      icon: icon,
+      category: category,
+      hours: hours ?? this.hours,
+      impactScore: impactScore ?? this.impactScore,
+      joined: joined ?? this.joined,
+    );
+  }
+}
+
+class ImpactAction {
+  const ImpactAction({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.tag,
+    required this.impactValue,
+    required this.completed,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final String tag;
+  final double impactValue;
+  final bool completed;
+
+  ImpactAction copyWith({bool? completed, double? impactValue}) {
+    return ImpactAction(
+      id: id,
+      title: title,
+      description: description,
+      tag: tag,
+      impactValue: impactValue ?? this.impactValue,
+      completed: completed ?? this.completed,
+    );
+  }
+}
+
+class ImpactRipple {
+  const ImpactRipple({
+    required this.id,
+    required this.title,
+    required this.value,
+    required this.unit,
+    required this.change,
+    required this.direction,
+  });
+
+  final String id;
+  final String title;
+  final double value;
+  final String unit;
+  final double change;
+  final TrendDirection direction;
+
+  ImpactRipple copyWith({
+    double? value,
+    double? change,
+    TrendDirection? direction,
+  }) {
+    return ImpactRipple(
+      id: id,
+      title: title,
+      value: value ?? this.value,
+      unit: unit,
+      change: change ?? this.change,
+      direction: direction ?? this.direction,
+    );
+  }
+}

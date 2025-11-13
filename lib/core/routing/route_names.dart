@@ -26,4 +26,5 @@ class RouteNames {
   static const wellness = '/wellness';
   static const momentum = '/momentum';
   static const community = '/community';
+  static const impact = '/impact';
 }

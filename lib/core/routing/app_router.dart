@@ -18,6 +18,7 @@ import '../../features/history/history_screen.dart';
 import '../../features/home/home_screen.dart';
 import '../../features/insights/insights_screen.dart';
 import '../../features/insights/strategy_lab_screen.dart';
+import '../../features/impact/impact_screen.dart';
 import '../../features/momentum/momentum_screen.dart';
 import '../../features/my_rides/my_rides_screen.dart';
 import '../../features/on_trip/on_trip_screen.dart';
@@ -90,6 +91,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const MomentumScreen());
       case RouteNames.community:
         return MaterialPageRoute(builder: (_) => const CommunityScreen());
+      case RouteNames.impact:
+        return MaterialPageRoute(builder: (_) => const ImpactScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

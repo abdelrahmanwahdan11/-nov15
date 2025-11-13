@@ -815,3 +815,148 @@ final dummyCommunityResources = <CommunityResource>[
   ),
 ];
 
+const impactFocusModes = <String>['efficiency', 'sustainability', 'experience'];
+
+const defaultImpactPulse = ImpactPulse(
+  city: 'Harbor grid & downtown spine',
+  co2Saved: 42.0,
+  cleanKm: 128.0,
+  renewableShare: 0.62,
+  streakDays: 4,
+  message: 'Regenerative shift active — keep idle dips under 6 min.',
+  highlights: <String>[
+    '8 riders opted into green routing today',
+    'Idle time trimmed by 12% vs yesterday',
+    '3 shared rides stacked in waterfront zone',
+    'Charging session scheduled off-peak automatically',
+  ],
+);
+
+final dummyImpactGoals = <ImpactGoal>[
+  ImpactGoal(
+    id: 'impact_goal_idle',
+    title: 'Cut idle emissions',
+    description: 'Hold idle windows under 6 minutes per trip cluster.',
+    current: 38,
+    target: 55,
+    unit: 'kg CO₂e',
+    trend: 0.18,
+    direction: TrendDirection.up,
+  ),
+  ImpactGoal(
+    id: 'impact_goal_clean_km',
+    title: 'Clean distance streak',
+    description: 'Stack electric-only kilometres during prime demand.',
+    current: 126,
+    target: 180,
+    unit: 'km',
+    trend: 0.09,
+    direction: TrendDirection.up,
+  ),
+  ImpactGoal(
+    id: 'impact_goal_pledge',
+    title: 'Rider delight pledges',
+    description: 'Share the sustainability pledge after every pooled ride.',
+    current: 9,
+    target: 15,
+    unit: 'pledges',
+    trend: 0.03,
+    direction: TrendDirection.steady,
+  ),
+];
+
+final dummyImpactInitiatives = <ImpactInitiative>[
+  ImpactInitiative(
+    id: 'initiative_microhub',
+    title: 'Micro-hub recharge relay',
+    subtitle: 'Pair midday breaks with solar micro-hub top-ups.',
+    icon: '🔋',
+    category: 'energy',
+    hours: '30 min / day',
+    impactScore: 0.82,
+    joined: false,
+  ),
+  ImpactInitiative(
+    id: 'initiative_greenlane',
+    title: 'Green lane express',
+    subtitle: 'Sequence the greenest corridors during rush minutes.',
+    icon: '🌿',
+    category: 'routing',
+    hours: '2 hrs / shift',
+    impactScore: 0.76,
+    joined: false,
+  ),
+  ImpactInitiative(
+    id: 'initiative_story',
+    title: 'Rider story capsule',
+    subtitle: 'Record quick rider pledges to amplify city impact.',
+    icon: '🎤',
+    category: 'community',
+    hours: '10 min / day',
+    impactScore: 0.68,
+    joined: false,
+  ),
+];
+
+final dummyImpactActions = <ImpactAction>[
+  ImpactAction(
+    id: 'action_precondition',
+    title: 'Pre-condition cabin',
+    description: 'Cool the cabin remotely before pickup to avoid idle AC.',
+    tag: 'efficiency',
+    impactValue: 0.34,
+    completed: false,
+  ),
+  ImpactAction(
+    id: 'action_bundle_share',
+    title: 'Offer pooled pledge',
+    description: 'Invite pooled riders to split pledge and log the moment.',
+    tag: 'experience',
+    impactValue: 0.22,
+    completed: false,
+  ),
+  ImpactAction(
+    id: 'action_charge_shift',
+    title: 'Shift charge timing',
+    description: 'Move top-up to off-peak renewable window tonight.',
+    tag: 'sustainability',
+    impactValue: 0.28,
+    completed: false,
+  ),
+  ImpactAction(
+    id: 'action_idle_scan',
+    title: 'Idle scan loop',
+    description: 'Run 3-min scan to spot idle heavy corners to avoid.',
+    tag: 'efficiency',
+    impactValue: 0.18,
+    completed: false,
+  ),
+];
+
+final dummyImpactRipples = <ImpactRipple>[
+  ImpactRipple(
+    id: 'ripple_air',
+    title: 'Air quality boost',
+    value: 18.0,
+    unit: '% cleaner vs avg',
+    change: 0.6,
+    direction: TrendDirection.up,
+  ),
+  ImpactRipple(
+    id: 'ripple_rider',
+    title: 'Rider pledge rate',
+    value: 0.64,
+    unit: 'opt-in',
+    change: 0.04,
+    direction: TrendDirection.up,
+  ),
+  ImpactRipple(
+    id: 'ripple_grid',
+    title: 'Grid harmony',
+    value: 0.78,
+    unit: 'renewable',
+    change: -0.02,
+    direction: TrendDirection.steady,
+  ),
+];
+
