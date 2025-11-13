@@ -1739,6 +1739,161 @@ final dummyFusionSignals = <FusionSignal>[
   ),
 ];
 
+final defaultOdysseyPulse = OdysseyPulse(
+  headline: 'Odyssey arc humming with new signals',
+  rhythm: 0.68,
+  momentum: 0.62,
+  window: 'Next 8 hours',
+  focus: 'Sunset harbor streak',
+  nextMilestone: 'Checkpoint at 19:45',
+  storyBeat: 'Line up twilight pickups with creator studio drops.',
+);
+
+final dummyOdysseyChapters = <OdysseyChapter>[
+  OdysseyChapter(
+    id: 'odyssey-chapter-dawn',
+    title: 'Dawn ignition',
+    motif: 'Warm morning rituals with crafted playlists.',
+    progress: 0.72,
+    spotlight: 'Airport express riders asked for mindful openers.',
+    isFocus: true,
+  ),
+  OdysseyChapter(
+    id: 'odyssey-chapter-surge',
+    title: 'Midday surge',
+    motif: 'Sync lunch loops with co-working shuttles.',
+    progress: 0.58,
+    spotlight: 'Coworking loft extended their afternoon window.',
+  ),
+  OdysseyChapter(
+    id: 'odyssey-chapter-twilight',
+    title: 'Twilight story',
+    motif: 'Pair harbor views with film studio call-times.',
+    progress: 0.46,
+    spotlight: 'Indie film crew prepping for night shoots.',
+  ),
+  OdysseyChapter(
+    id: 'odyssey-chapter-night',
+    title: 'Night resonance',
+    motif: 'Layer skyline detours on premium returns.',
+    progress: 0.31,
+    spotlight: 'Sky lounge hints at surprise midnight drop.',
+  ),
+];
+
+final dummyOdysseyRoutes = <OdysseyRoute>[
+  OdysseyRoute(
+    id: 'odyssey-route-harbor',
+    title: 'Harbor → Creator studios',
+    stage: 'Sculpt',
+    distance: 12.4,
+    readiness: 0.66,
+    signal: 'Creator set requests scenic arrival teasers.',
+  ),
+  OdysseyRoute(
+    id: 'odyssey-route-campus',
+    title: 'Campus → Downtown showcase',
+    stage: 'Launch',
+    distance: 9.1,
+    readiness: 0.72,
+    signal: 'Live showcase expects curated intros.',
+    tracking: true,
+  ),
+  OdysseyRoute(
+    id: 'odyssey-route-airport',
+    title: 'Airport → Sunset pier',
+    stage: 'Prototype',
+    distance: 18.7,
+    readiness: 0.54,
+    signal: 'Premium flyers flagged twilight arrival tours.',
+  ),
+  OdysseyRoute(
+    id: 'odyssey-route-sprint',
+    title: 'Night sprint → Skyline',
+    stage: 'Explore',
+    distance: 7.6,
+    readiness: 0.48,
+    signal: 'Late-night creators want micro-celebrations.',
+  ),
+];
+
+final dummyOdysseyBeacons = <OdysseyBeacon>[
+  OdysseyBeacon(
+    id: 'odyssey-beacon-harbor',
+    title: 'Harbor twilight welcome',
+    intent: 'Layer warm lighting on premium returns.',
+    eta: 'In 1h 20m',
+    energy: 0.74,
+  ),
+  OdysseyBeacon(
+    id: 'odyssey-beacon-campus',
+    title: 'Campus creative ping',
+    intent: 'Queue curated audio cues for creators.',
+    eta: 'In 45m',
+    energy: 0.62,
+    boosted: true,
+  ),
+  OdysseyBeacon(
+    id: 'odyssey-beacon-airport',
+    title: 'Airport drift sync',
+    intent: 'Align traveler welcomes with brand rituals.',
+    eta: 'Tomorrow 06:30',
+    energy: 0.55,
+  ),
+];
+
+final dummyOdysseyReflections = <OdysseyReflection>[
+  OdysseyReflection(
+    id: 'odyssey-reflection-morning',
+    prompt: 'What made the morning arc resonate?',
+    lastEntry: 'Paired airport arrivals with a sunrise playlist.',
+    sentiment: 'Hopeful',
+    energy: 0.68,
+  ),
+  OdysseyReflection(
+    id: 'odyssey-reflection-midday',
+    prompt: 'Which midday route felt most aligned?',
+    lastEntry: 'Coworking shuttle appreciated surprise coffee tokens.',
+    sentiment: 'Energized',
+    energy: 0.61,
+  ),
+  OdysseyReflection(
+    id: 'odyssey-reflection-night',
+    prompt: 'How did the night skyline story land?',
+    lastEntry: 'VIP couple loved the custom city trivia stops.',
+    sentiment: 'Grateful',
+    energy: 0.57,
+  ),
+];
+
+final dummyOdysseyFocuses = <String>[
+  'Sunrise runway handshake',
+  'Harbor twilight crescendo',
+  'Campus showcase baton',
+  'Night skyline celebration',
+];
+
+final dummyOdysseyWindows = <String>[
+  'Next 4 hours',
+  'Next 6 hours',
+  'Next 8 hours',
+  'Overnight arc',
+];
+
+final dummyOdysseyMilestones = <String>[
+  'Checkpoint at 19:45',
+  'Bridge sync at 21:10',
+  'Sunrise meetup 06:20',
+  'Creator lounge at 15:30',
+];
+
+final dummyOdysseyBeats = <String>[
+  'Stitch harbor welcomes with creator studio drops.',
+  'Layer midday co-working loops with snack rituals.',
+  'Prime skyline tours with micro-story stops.',
+  'Cue nighttime gratitude notes for loyal riders.',
+];
+
 const dummyFusionHeadlines = <String>[
   'Fusion lattice humming 9% above baseline',
   'Premium riders seeking curated sonic blends tonight',

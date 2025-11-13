@@ -19,6 +19,7 @@ import '../../features/help_faq/help_faq_screen.dart';
 import '../../features/history/history_screen.dart';
 import '../../features/home/home_screen.dart';
 import '../../features/horizon/horizon_screen.dart';
+import '../../features/odyssey/odyssey_screen.dart';
 import '../../features/insights/insights_screen.dart';
 import '../../features/insights/strategy_lab_screen.dart';
 import '../../features/impact/impact_screen.dart';
@@ -108,6 +109,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const CosmosScreen());
       case RouteNames.fusion:
         return MaterialPageRoute(builder: (_) => const FusionScreen());
+      case RouteNames.odyssey:
+        return MaterialPageRoute(builder: (_) => const OdysseyScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -1834,3 +1834,168 @@ class FusionSignal {
     );
   }
 }
+
+class OdysseyPulse {
+  const OdysseyPulse({
+    required this.headline,
+    required this.rhythm,
+    required this.momentum,
+    required this.window,
+    required this.focus,
+    required this.nextMilestone,
+    required this.storyBeat,
+  });
+
+  final String headline;
+  final double rhythm;
+  final double momentum;
+  final String window;
+  final String focus;
+  final String nextMilestone;
+  final String storyBeat;
+
+  OdysseyPulse copyWith({
+    String? headline,
+    double? rhythm,
+    double? momentum,
+    String? window,
+    String? focus,
+    String? nextMilestone,
+    String? storyBeat,
+  }) {
+    return OdysseyPulse(
+      headline: headline ?? this.headline,
+      rhythm: rhythm ?? this.rhythm,
+      momentum: momentum ?? this.momentum,
+      window: window ?? this.window,
+      focus: focus ?? this.focus,
+      nextMilestone: nextMilestone ?? this.nextMilestone,
+      storyBeat: storyBeat ?? this.storyBeat,
+    );
+  }
+}
+
+class OdysseyChapter {
+  const OdysseyChapter({
+    required this.id,
+    required this.title,
+    required this.motif,
+    required this.progress,
+    required this.spotlight,
+    this.isFocus = false,
+  });
+
+  final String id;
+  final String title;
+  final String motif;
+  final double progress;
+  final String spotlight;
+  final bool isFocus;
+
+  OdysseyChapter copyWith({
+    bool? isFocus,
+    double? progress,
+    String? motif,
+    String? spotlight,
+  }) {
+    return OdysseyChapter(
+      id: id,
+      title: title,
+      motif: motif ?? this.motif,
+      progress: progress ?? this.progress,
+      spotlight: spotlight ?? this.spotlight,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class OdysseyRoute {
+  const OdysseyRoute({
+    required this.id,
+    required this.title,
+    required this.stage,
+    required this.distance,
+    required this.readiness,
+    required this.signal,
+    this.tracking = false,
+  });
+
+  final String id;
+  final String title;
+  final String stage;
+  final double distance;
+  final double readiness;
+  final String signal;
+  final bool tracking;
+
+  OdysseyRoute copyWith({bool? tracking, double? readiness, String? stage}) {
+    return OdysseyRoute(
+      id: id,
+      title: title,
+      stage: stage ?? this.stage,
+      distance: distance,
+      readiness: readiness ?? this.readiness,
+      signal: signal,
+      tracking: tracking ?? this.tracking,
+    );
+  }
+}
+
+class OdysseyBeacon {
+  const OdysseyBeacon({
+    required this.id,
+    required this.title,
+    required this.intent,
+    required this.eta,
+    required this.energy,
+    this.boosted = false,
+  });
+
+  final String id;
+  final String title;
+  final String intent;
+  final String eta;
+  final double energy;
+  final bool boosted;
+
+  OdysseyBeacon copyWith({bool? boosted, double? energy, String? eta}) {
+    return OdysseyBeacon(
+      id: id,
+      title: title,
+      intent: intent,
+      eta: eta ?? this.eta,
+      energy: energy ?? this.energy,
+      boosted: boosted ?? this.boosted,
+    );
+  }
+}
+
+class OdysseyReflection {
+  const OdysseyReflection({
+    required this.id,
+    required this.prompt,
+    required this.lastEntry,
+    required this.sentiment,
+    required this.energy,
+  });
+
+  final String id;
+  final String prompt;
+  final String lastEntry;
+  final String sentiment;
+  final double energy;
+
+  OdysseyReflection copyWith({
+    String? lastEntry,
+    String? sentiment,
+    double? energy,
+  }) {
+    return OdysseyReflection(
+      id: id,
+      prompt: prompt,
+      lastEntry: lastEntry ?? this.lastEntry,
+      sentiment: sentiment ?? this.sentiment,
+      energy: energy ?? this.energy,
+    );
+  }
+}

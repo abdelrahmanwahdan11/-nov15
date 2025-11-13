@@ -6,6 +6,7 @@ import '../../controllers/cosmos_controller.dart';
 import '../../controllers/fusion_controller.dart';
 import '../../controllers/impact_controller.dart';
 import '../../controllers/horizon_controller.dart';
+import '../../controllers/odyssey_controller.dart';
 import '../../controllers/innovation_controller.dart';
 import '../../controllers/mastery_controller.dart';
 import '../../controllers/momentum_controller.dart';
@@ -36,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       CommunityController.instance;
   final CosmosController _cosmosController = CosmosController.instance;
   final FusionController _fusionController = FusionController.instance;
+  final OdysseyController _odysseyController = OdysseyController.instance;
   final ImpactController _impactController = ImpactController.instance;
   final InnovationController _innovationController =
       InnovationController.instance;
@@ -62,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _horizonController.init();
     _cosmosController.init();
     _fusionController.init();
+    _odysseyController.init();
   }
 
   @override
@@ -390,6 +393,37 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return _FusionQuickCard(
                                     pulse: pulse,
                                     strand: focusStrand,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          ValueListenableBuilder<OdysseyPulse>(
+                            valueListenable: _odysseyController.pulse,
+                            builder: (context, pulse, _) {
+                              return ValueListenableBuilder<OdysseyChapter?>(
+                                valueListenable: _odysseyController.focusChapter,
+                                builder: (context, chapter, __) {
+                                  return StreamBuilder<List<OdysseyRoute>>(
+                                    stream: _odysseyController.routeStream,
+                                    initialData: const <OdysseyRoute>[],
+                                    builder: (context, snapshot) {
+                                      final routes =
+                                          snapshot.data ?? const <OdysseyRoute>[];
+                                      OdysseyRoute? trackedRoute;
+                                      if (routes.isNotEmpty) {
+                                        trackedRoute = routes.firstWhere(
+                                          (route) => route.tracking,
+                                          orElse: () => routes.first,
+                                        );
+                                      }
+                                      return _OdysseyQuickCard(
+                                        pulse: pulse,
+                                        chapter: chapter,
+                                        route: trackedRoute,
+                                      );
+                                    },
                                   );
                                 },
                               );
@@ -1186,6 +1220,99 @@ class _FusionQuickCard extends StatelessWidget {
               onPressed: () => Navigator.of(context).pushNamed(RouteNames.fusion),
               icon: const Icon(Icons.blur_linear),
               label: Text(l10n.translate('fusion_quick_open')),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _OdysseyQuickCard extends StatelessWidget {
+  const _OdysseyQuickCard({
+    required this.pulse,
+    this.chapter,
+    this.route,
+  });
+
+  final OdysseyPulse pulse;
+  final OdysseyChapter? chapter;
+  final OdysseyRoute? route;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final rhythm = (pulse.rhythm.clamp(0.0, 1.0) * 100).round();
+    final momentum = (pulse.momentum.clamp(0.0, 1.0) * 100).round();
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.14),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.translate('odyssey_quick_header'),
+            style: theme.textTheme.titleMedium,
+          ),
+          const SizedBox(height: 6),
+          Text(pulse.storyBeat, style: theme.textTheme.bodySmall),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 12,
+            runSpacing: 8,
+            children: [
+              _QuickChip(
+                icon: Icons.auto_awesome,
+                label: '${l10n.translate('odyssey_rhythm')}: $rhythm%',
+              ),
+              _QuickChip(
+                icon: Icons.bolt,
+                label: '${l10n.translate('odyssey_momentum')}: $momentum%',
+              ),
+              _QuickChip(
+                icon: Icons.flag,
+                label:
+                    '${l10n.translate('odyssey_milestone_chip')}: ${pulse.nextMilestone}',
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          _QuickChip(
+            icon: Icons.explore,
+            label:
+                '${l10n.translate('odyssey_focus_chip')}: ${pulse.focus}',
+          ),
+          if (chapter != null) ...[
+            const SizedBox(height: 12),
+            Text(chapter!.title, style: theme.textTheme.labelLarge),
+            const SizedBox(height: 4),
+            Text(chapter!.spotlight, style: theme.textTheme.bodySmall),
+          ],
+          if (route != null) ...[
+            const SizedBox(height: 12),
+            Text(l10n.translate('odyssey_quick_route'),
+                style: theme.textTheme.labelMedium),
+            const SizedBox(height: 4),
+            Text(
+              '${route!.title} • ${route!.distance.toStringAsFixed(1)} km',
+              style: theme.textTheme.bodySmall,
+            ),
+          ],
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FilledButton.tonalIcon(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(RouteNames.odyssey),
+              icon: const Icon(Icons.travel_explore),
+              label: Text(l10n.translate('odyssey_quick_open')),
             ),
           ),
         ],
