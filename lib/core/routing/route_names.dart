@@ -27,4 +27,5 @@ class RouteNames {
   static const momentum = '/momentum';
   static const community = '/community';
   static const impact = '/impact';
+  static const innovation = '/innovation';
 }

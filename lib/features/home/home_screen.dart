@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../controllers/app_controller.dart';
 import '../../controllers/community_controller.dart';
 import '../../controllers/impact_controller.dart';
+import '../../controllers/innovation_controller.dart';
 import '../../controllers/momentum_controller.dart';
 import '../../controllers/ride_controller.dart';
 import '../../controllers/wellness_controller.dart';
@@ -30,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final CommunityController _communityController =
       CommunityController.instance;
   final ImpactController _impactController = ImpactController.instance;
+  final InnovationController _innovationController =
+      InnovationController.instance;
   bool _loading = true;
 
   @override
@@ -46,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _momentumController.init();
     _communityController.init();
     _impactController.init();
+    _innovationController.init();
   }
 
   @override
@@ -168,6 +172,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           const SizedBox(height: 12),
                           FilledButton.tonalIcon(
                             onPressed: () =>
+                                Navigator.of(context).pushNamed(RouteNames.innovation),
+                            icon: const Icon(Icons.lightbulb_outline),
+                            label: Text(l10n.translate('innovation_lab')),
+                          ),
+                          const SizedBox(height: 12),
+                          FilledButton.tonalIcon(
+                            onPressed: () =>
                                 Navigator.of(context).pushNamed(RouteNames.impact),
                             icon: const Icon(Icons.eco_outlined),
                             label: Text(l10n.translate('impact_studio')),
@@ -258,6 +269,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                   return _CommunityQuickCard(
                                     pulse: pulse,
                                     circle: circle,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          ValueListenableBuilder<InnovationPulse>(
+                            valueListenable: _innovationController.pulse,
+                            builder: (context, pulse, _) {
+                              return ValueListenableBuilder<List<InnovationPrototype>>(
+                                valueListenable: _innovationController.prototypes,
+                                builder: (context, prototypes, __) {
+                                  return _InnovationQuickCard(
+                                    pulse: pulse,
+                                    prototype:
+                                        prototypes.isEmpty ? null : prototypes.first,
                                   );
                                 },
                               );
@@ -563,6 +590,80 @@ class _CommunityQuickCard extends StatelessWidget {
               onPressed: () =>
                   Navigator.of(context).pushNamed(RouteNames.community),
               child: Text(l10n.translate('community_open_full')),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _InnovationQuickCard extends StatelessWidget {
+  const _InnovationQuickCard({required this.pulse, this.prototype});
+
+  final InnovationPulse pulse;
+  final InnovationPrototype? prototype;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final readiness = (pulse.readiness * 100).clamp(0, 100).toStringAsFixed(0);
+    final focus = pulse.focusLanes.take(2).join(' · ');
+    final focusLabel = focus.isEmpty ? '-' : focus;
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.12),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.translate('innovation_lab'),
+            style: theme.textTheme.titleMedium,
+          ),
+          const SizedBox(height: 6),
+          Text(pulse.headline, style: theme.textTheme.bodySmall),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  '${l10n.translate('innovation_readiness')}: $readiness%',
+                  style: theme.textTheme.bodySmall,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  '${l10n.translate('innovation_focus_lane_label')}: $focusLabel',
+                  style: theme.textTheme.bodySmall,
+                ),
+              ),
+            ],
+          ),
+          if (prototype != null) ...[
+            const SizedBox(height: 12),
+            Text(prototype!.title, style: theme.textTheme.labelLarge),
+            const SizedBox(height: 4),
+            Text(
+              '${l10n.translate('innovation_stage')}: ${prototype!.stage}',
+              style: theme.textTheme.bodySmall,
+            ),
+          ],
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FilledButton.tonalIcon(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(RouteNames.innovation),
+              icon: const Icon(Icons.lightbulb_outline),
+              label: Text(l10n.translate('innovation_lab')),
             ),
           ),
         ],

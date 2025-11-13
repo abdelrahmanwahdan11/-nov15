@@ -969,3 +969,162 @@ class ImpactRipple {
     );
   }
 }
+
+class InnovationPulse {
+  const InnovationPulse({
+    required this.id,
+    required this.headline,
+    required this.readiness,
+    required this.temperature,
+    required this.focusLanes,
+    required this.nextReview,
+    required this.energyBursts,
+  });
+
+  final String id;
+  final String headline;
+  final double readiness;
+  final double temperature;
+  final List<String> focusLanes;
+  final String nextReview;
+  final List<String> energyBursts;
+
+  InnovationPulse copyWith({
+    String? headline,
+    double? readiness,
+    double? temperature,
+    List<String>? focusLanes,
+    String? nextReview,
+    List<String>? energyBursts,
+  }) {
+    return InnovationPulse(
+      id: id,
+      headline: headline ?? this.headline,
+      readiness: readiness ?? this.readiness,
+      temperature: temperature ?? this.temperature,
+      focusLanes:
+          focusLanes != null ? List<String>.from(focusLanes) : List<String>.from(this.focusLanes),
+      nextReview: nextReview ?? this.nextReview,
+      energyBursts: energyBursts != null
+          ? List<String>.from(energyBursts)
+          : List<String>.from(this.energyBursts),
+    );
+  }
+}
+
+class InnovationPrototype {
+  const InnovationPrototype({
+    required this.id,
+    required this.title,
+    required this.summary,
+    required this.stage,
+    required this.progress,
+    required this.confidence,
+    required this.nextStep,
+    required this.tags,
+    required this.lastNote,
+  });
+
+  final String id;
+  final String title;
+  final String summary;
+  final String stage;
+  final double progress;
+  final double confidence;
+  final String nextStep;
+  final List<String> tags;
+  final String lastNote;
+
+  InnovationPrototype copyWith({
+    String? stage,
+    double? progress,
+    double? confidence,
+    String? nextStep,
+    String? lastNote,
+  }) {
+    return InnovationPrototype(
+      id: id,
+      title: title,
+      summary: summary,
+      stage: stage ?? this.stage,
+      progress: progress ?? this.progress,
+      confidence: confidence ?? this.confidence,
+      nextStep: nextStep ?? this.nextStep,
+      tags: List<String>.from(this.tags),
+      lastNote: lastNote ?? this.lastNote,
+    );
+  }
+}
+
+class InnovationExperiment {
+  const InnovationExperiment({
+    required this.id,
+    required this.title,
+    required this.hypothesis,
+    required this.metric,
+    required this.status,
+    required this.signal,
+    required this.confidence,
+  });
+
+  final String id;
+  final String title;
+  final String hypothesis;
+  final String metric;
+  final String status;
+  final String signal;
+  final double confidence;
+
+  InnovationExperiment copyWith({
+    String? status,
+    String? signal,
+    double? confidence,
+  }) {
+    return InnovationExperiment(
+      id: id,
+      title: title,
+      hypothesis: hypothesis,
+      metric: metric,
+      status: status ?? this.status,
+      signal: signal ?? this.signal,
+      confidence: confidence ?? this.confidence,
+    );
+  }
+}
+
+class InnovationBlueprint {
+  const InnovationBlueprint({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.horizon,
+    required this.owner,
+    required this.readiness,
+    required this.phases,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final String horizon;
+  final String owner;
+  final double readiness;
+  final List<String> phases;
+
+  InnovationBlueprint copyWith({
+    double? readiness,
+    List<String>? phases,
+  }) {
+    return InnovationBlueprint(
+      id: id,
+      title: title,
+      description: description,
+      horizon: horizon,
+      owner: owner,
+      readiness: readiness ?? this.readiness,
+      phases: phases != null
+          ? List<String>.from(phases)
+          : List<String>.from(this.phases),
+    );
+  }
+}

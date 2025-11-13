@@ -960,3 +960,159 @@ final dummyImpactRipples = <ImpactRipple>[
   ),
 ];
 
+const innovationFocusLanes = <String>[
+  'predictive navigation',
+  'eco-routing loops',
+  'rider delight',
+  'crew enablement',
+];
+
+const defaultInnovationPulse = InnovationPulse(
+  id: 'innovation_pulse_default',
+  headline: 'Lab ready for twilight pilot loops.',
+  readiness: 0.58,
+  temperature: 0.64,
+  focusLanes: <String>[
+    'predictive navigation',
+    'eco-routing loops',
+    'rider delight',
+  ],
+  nextReview: 'Tonight · 21:30',
+  energyBursts: <String>[
+    'Micro-sprint at Ferry Pier ready.',
+    'Beacon riders want calmer audio cues.',
+    'Downtown detour blueprint trending.',
+  ],
+);
+
+final dummyInnovationPrototypes = <InnovationPrototype>[
+  InnovationPrototype(
+    id: 'prototype_autopilot',
+    title: 'Adaptive autopilot lane',
+    summary: 'Layer AI-assisted cues for dynamic lane merges.',
+    stage: 'discover',
+    progress: 0.32,
+    confidence: 0.42,
+    nextStep: 'Host 3-ride observation loops with mentors.',
+    tags: <String>['automation', 'signal'],
+    lastNote: 'Crew noted smoother arrival glides in beta.',
+  ),
+  InnovationPrototype(
+    id: 'prototype_ritual',
+    title: 'Rider ritual capsule',
+    summary: 'Bundle micro-wellness prompts into welcome flow.',
+    stage: 'design',
+    progress: 0.56,
+    confidence: 0.58,
+    nextStep: 'Storyboard audio cues with wellness studio.',
+    tags: <String>['experience', 'wellness'],
+    lastNote: 'Night riders upvoted the grounding voice track.',
+  ),
+  InnovationPrototype(
+    id: 'prototype_heatmap',
+    title: 'Live demand heatmap overlay',
+    summary: 'Project community beacons into map overlay layers.',
+    stage: 'pilot',
+    progress: 0.78,
+    confidence: 0.7,
+    nextStep: 'Expand pilot to waterfront surge hours.',
+    tags: <String>['insights', 'community'],
+    lastNote: 'Pulse board shows 9 crews requesting beta access.',
+  ),
+];
+
+final dummyInnovationExperiments = <InnovationExperiment>[
+  InnovationExperiment(
+    id: 'experiment_heatmap',
+    title: 'Beacon overlay trial',
+    hypothesis: 'Shared beacon cues lift accept rate by 6%.',
+    metric: 'accept_rate',
+    status: 'running',
+    signal: 'positive',
+    confidence: 0.62,
+  ),
+  InnovationExperiment(
+    id: 'experiment_autopilot',
+    title: 'Assistive lane nudge',
+    hypothesis: 'Lane voice prompts reduce detours per trip.',
+    metric: 'detour_delta',
+    status: 'design',
+    signal: 'forming',
+    confidence: 0.48,
+  ),
+  InnovationExperiment(
+    id: 'experiment_ritual',
+    title: 'Welcome ritual resonance',
+    hypothesis: 'Mindful intro lifts rider rating sentiment.',
+    metric: 'sentiment_index',
+    status: 'pilot',
+    signal: 'upward',
+    confidence: 0.67,
+  ),
+];
+
+final dummyInnovationBlueprints = <InnovationBlueprint>[
+  InnovationBlueprint(
+    id: 'blueprint_harbor',
+    title: 'Harbor twilight express',
+    description: 'Align harbor surge, community beacons, and wellness cues.',
+    horizon: '2 weeks',
+    owner: 'Momentum crew',
+    readiness: 0.66,
+    phases: <String>['Discovery sync', 'Pilot window', 'Scale drop'],
+  ),
+  InnovationBlueprint(
+    id: 'blueprint_rider',
+    title: 'Rider delight ritual',
+    description: 'Blend wellness studio assets with onboarding script.',
+    horizon: '10 days',
+    owner: 'Wellness lab',
+    readiness: 0.58,
+    phases: <String>['Map cues', 'Prototype audio', 'Crew practice'],
+  ),
+  InnovationBlueprint(
+    id: 'blueprint_signal',
+    title: 'Signal fusion board',
+    description: 'Merge momentum tracks with community beacons for alerts.',
+    horizon: '3 weeks',
+    owner: 'Insights guild',
+    readiness: 0.72,
+    phases: <String>['Data braid', 'Pilot pack', 'Rollout'],
+  ),
+];
+
+const dummyInnovationBursts = <String>[
+  'Beacon overlay reducing decision lag.',
+  'Autopilot lane voice prompts scored 4.6/5.',
+  'Crew sprint aligning on twilight surge rituals.',
+  'Rider welcome ritual trending in community lounge.',
+  'Strategy lab feeding two fresh prototype briefs.',
+];
+
+const dummyInnovationHeadlines = <String>[
+  'Prototype momentum cresting near pilot readiness.',
+  'Lab insights highlight rider wow-factor leaps.',
+  'Discovery lanes lighting up for next sprint.',
+  'Scaling blueprint ready for twilight drop.',
+];
+
+const dummyInnovationNotes = <String>[
+  'Rider audio cues rated 4.7 after micro-tweak.',
+  'Navigation overlay resonated with late-night crew.',
+  'Community beacon wants earlier access to ritual deck.',
+  'Momentum coach suggested layering softer prompts.',
+];
+
+const dummyInnovationReviewSlots = <String>[
+  'Tonight · 21:30',
+  'Tomorrow · 07:15',
+  'Weekend Lab · 16:00',
+];
+
+const innovationStageNextSteps = <String, String>{
+  'discover': 'Host rider micro-interviews and capture friction notes.',
+  'design': 'Prototype flows with crew feedback loops in Figma.',
+  'pilot': 'Schedule 3-ride twilight pilot with mentor drivers.',
+  'scale': 'Package lab learnings into nightly rollout playbook.',
+};
+
