@@ -12,6 +12,7 @@ import '../../controllers/mastery_controller.dart';
 import '../../controllers/momentum_controller.dart';
 import '../../controllers/ride_controller.dart';
 import '../../controllers/wellness_controller.dart';
+import '../../controllers/zenith_controller.dart';
 import '../../core/localization/localization_extensions.dart';
 import '../../core/routing/route_names.dart';
 import '../../core/utils/insight_utils.dart';
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final CosmosController _cosmosController = CosmosController.instance;
   final FusionController _fusionController = FusionController.instance;
   final OdysseyController _odysseyController = OdysseyController.instance;
+  final ZenithController _zenithController = ZenithController.instance;
   final ImpactController _impactController = ImpactController.instance;
   final InnovationController _innovationController =
       InnovationController.instance;
@@ -65,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _cosmosController.init();
     _fusionController.init();
     _odysseyController.init();
+    _zenithController.init();
   }
 
   @override
@@ -440,6 +443,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                     pulse: pulse,
                                     prototype:
                                         prototypes.isEmpty ? null : prototypes.first,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          ValueListenableBuilder<ZenithPulse>(
+                            valueListenable: _zenithController.pulse,
+                            builder: (context, pulse, _) {
+                              return ValueListenableBuilder<ZenithVector?>(
+                                valueListenable: _zenithController.focusVector,
+                                builder: (context, focus, __) {
+                                  return _ZenithQuickCard(
+                                    pulse: pulse,
+                                    vector: focus,
                                   );
                                 },
                               );
@@ -1313,6 +1331,85 @@ class _OdysseyQuickCard extends StatelessWidget {
                   Navigator.of(context).pushNamed(RouteNames.odyssey),
               icon: const Icon(Icons.travel_explore),
               label: Text(l10n.translate('odyssey_quick_open')),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ZenithQuickCard extends StatelessWidget {
+  const _ZenithQuickCard({required this.pulse, this.vector});
+
+  final ZenithPulse pulse;
+  final ZenithVector? vector;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+    final clarity = (pulse.clarity * 100).round();
+    final altitude = (pulse.altitude * 100).round();
+    final momentum = (pulse.momentum * 100).round();
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 320),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(
+          color: theme.colorScheme.primary.withOpacity(0.14),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.translate('zenith_quick_header'),
+            style: theme.textTheme.titleMedium,
+          ),
+          const SizedBox(height: 6),
+          Text(pulse.headline, style: theme.textTheme.bodySmall),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 12,
+            runSpacing: 8,
+            children: [
+              _QuickChip(
+                icon: Icons.brightness_5,
+                label: '${l10n.translate('zenith_clarity')}: $clarity%',
+              ),
+              _QuickChip(
+                icon: Icons.terrain,
+                label: '${l10n.translate('zenith_altitude')}: $altitude%',
+              ),
+              _QuickChip(
+                icon: Icons.auto_graph,
+                label: '${l10n.translate('zenith_momentum')}: $momentum%',
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          _QuickChip(
+            icon: Icons.timelapse,
+            label:
+                '${l10n.translate('zenith_quick_window')}: ${pulse.window}',
+          ),
+          if (vector != null) ...[
+            const SizedBox(height: 12),
+            Text('${vector!.icon} ${vector!.title}',
+                style: theme.textTheme.labelLarge),
+            const SizedBox(height: 4),
+            Text(vector!.summary, style: theme.textTheme.bodySmall),
+          ],
+          const SizedBox(height: 12),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FilledButton.tonalIcon(
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(RouteNames.zenith),
+              icon: const Icon(Icons.stars),
+              label: Text(l10n.translate('zenith_quick_open')),
             ),
           ),
         ],

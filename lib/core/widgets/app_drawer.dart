@@ -29,6 +29,7 @@ class AppDrawer extends StatelessWidget {
       _DrawerItem('cosmos', l10n.translate('cosmos_studio'), RouteNames.cosmos),
       _DrawerItem('fusion', l10n.translate('fusion_studio'), RouteNames.fusion),
       _DrawerItem('odyssey', l10n.translate('odyssey_studio'), RouteNames.odyssey),
+      _DrawerItem('zenith', l10n.translate('zenith_studio'), RouteNames.zenith),
       _DrawerItem('innovation', l10n.translate('innovation_lab'), RouteNames.innovation),
       _DrawerItem('impact', l10n.translate('impact_studio'), RouteNames.impact),
       _DrawerItem('wellness', l10n.translate('wellness_studio'), RouteNames.wellness),

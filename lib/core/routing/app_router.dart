@@ -36,6 +36,7 @@ import '../../features/settings/settings_screen.dart';
 import '../../features/splash/splash_screen.dart';
 import '../../features/trip_details/trip_details_screen.dart';
 import '../../features/wellness/wellness_screen.dart';
+import '../../features/zenith/zenith_screen.dart';
 import 'route_names.dart';
 
 class AppRouter {
@@ -111,6 +112,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const FusionScreen());
       case RouteNames.odyssey:
         return MaterialPageRoute(builder: (_) => const OdysseyScreen());
+      case RouteNames.zenith:
+        return MaterialPageRoute(builder: (_) => const ZenithScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

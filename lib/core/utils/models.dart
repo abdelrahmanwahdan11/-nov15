@@ -1999,3 +1999,127 @@ class OdysseyReflection {
     );
   }
 }
+
+class ZenithPulse {
+  const ZenithPulse({
+    required this.headline,
+    required this.clarity,
+    required this.acceleration,
+    required this.altitude,
+    required this.momentum,
+    required this.window,
+    required this.message,
+  });
+
+  final String headline;
+  final double clarity;
+  final double acceleration;
+  final double altitude;
+  final double momentum;
+  final String window;
+  final String message;
+
+  ZenithPulse copyWith({
+    String? headline,
+    double? clarity,
+    double? acceleration,
+    double? altitude,
+    double? momentum,
+    String? window,
+    String? message,
+  }) {
+    return ZenithPulse(
+      headline: headline ?? this.headline,
+      clarity: clarity ?? this.clarity,
+      acceleration: acceleration ?? this.acceleration,
+      altitude: altitude ?? this.altitude,
+      momentum: momentum ?? this.momentum,
+      window: window ?? this.window,
+      message: message ?? this.message,
+    );
+  }
+}
+
+class ZenithVector {
+  const ZenithVector({
+    required this.id,
+    required this.icon,
+    required this.title,
+    required this.summary,
+    required this.momentum,
+    this.isFocus = false,
+  });
+
+  final String id;
+  final String icon;
+  final String title;
+  final String summary;
+  final double momentum;
+  final bool isFocus;
+
+  ZenithVector copyWith({bool? isFocus, double? momentum, String? summary}) {
+    return ZenithVector(
+      id: id,
+      icon: icon,
+      title: title,
+      summary: summary ?? this.summary,
+      momentum: momentum ?? this.momentum,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class ZenithPath {
+  const ZenithPath({
+    required this.id,
+    required this.title,
+    required this.window,
+    required this.distanceKm,
+    required this.progress,
+    this.active = false,
+  });
+
+  final String id;
+  final String title;
+  final String window;
+  final double distanceKm;
+  final double progress;
+  final bool active;
+
+  ZenithPath copyWith({bool? active, double? progress}) {
+    return ZenithPath(
+      id: id,
+      title: title,
+      window: window,
+      distanceKm: distanceKm,
+      progress: progress ?? this.progress,
+      active: active ?? this.active,
+    );
+  }
+}
+
+class ZenithSignal {
+  const ZenithSignal({
+    required this.id,
+    required this.title,
+    required this.detail,
+    required this.severity,
+    this.acknowledged = false,
+  });
+
+  final String id;
+  final String title;
+  final String detail;
+  final int severity;
+  final bool acknowledged;
+
+  ZenithSignal copyWith({bool? acknowledged, String? detail, int? severity}) {
+    return ZenithSignal(
+      id: id,
+      title: title,
+      detail: detail ?? this.detail,
+      severity: severity ?? this.severity,
+      acknowledged: acknowledged ?? this.acknowledged,
+    );
+  }
+}

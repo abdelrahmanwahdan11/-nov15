@@ -1919,3 +1919,125 @@ const dummyFusionSyncs = <String>[
   'Sync check 05:20',
   'Sync check 13:45',
 ];
+
+final ZenithPulse defaultZenithPulse = ZenithPulse(
+  headline: 'Zenith weave trending 7% above guidance',
+  clarity: 0.78,
+  acceleration: 0.64,
+  altitude: 0.88,
+  momentum: 0.71,
+  window: 'Twilight 18:00-22:00',
+  message: 'Prime skyline loops are ready for story-driven riders tonight.',
+);
+
+const List<String> zenithModes = <String>[
+  'Launch cadence',
+  'Navigation sync',
+  'Resonance craft',
+];
+
+const List<String> zenithWindows = <String>[
+  'Sunrise 05:30-09:00',
+  'Midday 11:00-14:00',
+  'Twilight 18:00-22:00',
+  'Midnight 22:00-02:00',
+];
+
+const List<String> zenithPulseHeadlines = <String>[
+  'Zenith weave aligning with high-value rider arcs',
+  'Momentum beams spiking toward late-night skyline loops',
+  'Navigator cues highlighting premium harbor storytellers',
+  'Rhythm arcs stabilizing around creator corridor',
+];
+
+final List<ZenithVector> dummyZenithVectors = <ZenithVector>[
+  const ZenithVector(
+    id: 'zenith-vector-skyline',
+    icon: '🌆',
+    title: 'Skyline anthem',
+    summary: 'Layer skyline arcs with curated arrival audio and gratitude loops.',
+    momentum: 0.72,
+    isFocus: true,
+  ),
+  const ZenithVector(
+    id: 'zenith-vector-harbor',
+    icon: '⚓',
+    title: 'Harbor resonance',
+    summary: 'Blend harbor meetups with maker shout-outs and snack rituals.',
+    momentum: 0.63,
+  ),
+  const ZenithVector(
+    id: 'zenith-vector-campus',
+    icon: '🎓',
+    title: 'Campus pulse',
+    summary: 'Surface campus shuttle loops with micro-coaching moments.',
+    momentum: 0.58,
+  ),
+  const ZenithVector(
+    id: 'zenith-vector-airport',
+    icon: '🛫',
+    title: 'Runway glow',
+    summary: 'Prime runway farewells with reflective journaling cues.',
+    momentum: 0.54,
+  ),
+];
+
+final List<ZenithPath> dummyZenithPaths = <ZenithPath>[
+  const ZenithPath(
+    id: 'zenith-path-skyline',
+    title: 'Skyline orbit',
+    window: 'Twilight 18:00',
+    distanceKm: 14.2,
+    progress: 0.46,
+    active: true,
+  ),
+  const ZenithPath(
+    id: 'zenith-path-harbor',
+    title: 'Harbor weave',
+    window: 'Sunset 19:10',
+    distanceKm: 11.8,
+    progress: 0.38,
+  ),
+  const ZenithPath(
+    id: 'zenith-path-campus',
+    title: 'Campus glide',
+    window: 'Midday 12:20',
+    distanceKm: 9.6,
+    progress: 0.57,
+    active: true,
+  ),
+  const ZenithPath(
+    id: 'zenith-path-airport',
+    title: 'Runway ascent',
+    window: 'Midnight 23:40',
+    distanceKm: 21.4,
+    progress: 0.24,
+  ),
+];
+
+final List<ZenithSignal> dummyZenithSignals = <ZenithSignal>[
+  const ZenithSignal(
+    id: 'zenith-signal-skyline',
+    title: 'Skyline beacon ping',
+    detail: 'Creator corridor expects heightened playlist requests at 20:15.',
+    severity: 3,
+  ),
+  const ZenithSignal(
+    id: 'zenith-signal-harbor',
+    title: 'Harbor cameo',
+    detail: 'Local maker collective ready to co-host arrival rituals.',
+    severity: 2,
+  ),
+  const ZenithSignal(
+    id: 'zenith-signal-campus',
+    title: 'Campus crescendo',
+    detail: 'Students prepping gratitude notes for twilight loops.',
+    severity: 4,
+  ),
+  const ZenithSignal(
+    id: 'zenith-signal-airport',
+    title: 'Runway flare',
+    detail: 'Long-haul travelers requesting reflective farewells.',
+    severity: 3,
+  ),
+];
