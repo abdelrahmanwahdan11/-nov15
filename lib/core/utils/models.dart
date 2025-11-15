@@ -1,0 +1,2125 @@
+import 'package:flutter/material.dart';
+
+class User {
+  User({
+    required this.id,
+    required this.name,
+    required this.avatarUrl,
+    required this.phone,
+    required this.rating,
+    required this.totalTrips,
+    required this.carModel,
+    required this.carPlate,
+  });
+
+  final String id;
+  String name;
+  String avatarUrl;
+  String phone;
+  double rating;
+  int totalTrips;
+  String carModel;
+  String carPlate;
+}
+
+class Ride {
+  Ride({
+    required this.id,
+    required this.pickupAddress,
+    required this.destinationAddress,
+    required this.pickupTime,
+    required this.dropTime,
+    required this.price,
+    required this.distanceKm,
+    required this.avgTimeMinutes,
+    required this.status,
+    required this.passengerName,
+    required this.passengerAvatarUrl,
+    required this.carImageUrl,
+    this.rating,
+    Map<String, dynamic>? meta,
+  }) : meta = meta ?? {};
+
+  final String id;
+  final String pickupAddress;
+  final String destinationAddress;
+  final DateTime pickupTime;
+  final DateTime dropTime;
+  final double price;
+  final double distanceKm;
+  final int avgTimeMinutes;
+  String status;
+  final String passengerName;
+  final String passengerAvatarUrl;
+  final String carImageUrl;
+  double? rating;
+  final Map<String, dynamic> meta;
+}
+
+class TransactionItem {
+  TransactionItem({
+    required this.id,
+    required this.rideId,
+    required this.dateTime,
+    required this.amount,
+    required this.location,
+  });
+
+  final String id;
+  final String rideId;
+  final DateTime dateTime;
+  final double amount;
+  final String location;
+}
+
+class CatalogItem {
+  CatalogItem({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.imageUrl,
+    required this.category,
+    required this.tags,
+    required this.rating,
+    required this.price,
+    required this.distanceKm,
+    required this.meta,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String imageUrl;
+  final String category;
+  final List<String> tags;
+  final double rating;
+  final double price;
+  final double distanceKm;
+  final Map<String, String> meta;
+}
+
+class ComparisonItem {
+  ComparisonItem({
+    required this.id,
+    required this.itemAId,
+    required this.itemBId,
+    required this.metrics,
+  });
+
+  final String id;
+  final String itemAId;
+  final String itemBId;
+  final Map<String, double> metrics;
+}
+
+class NotificationItem {
+  NotificationItem({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.dateTime,
+    required this.type,
+  });
+
+  final String id;
+  final String title;
+  final String body;
+  final DateTime dateTime;
+  final String type;
+}
+
+enum TrendDirection { up, down, steady }
+
+class DemandPulse {
+  DemandPulse({
+    required this.area,
+    required this.window,
+    required this.direction,
+    required this.change,
+    required this.potentialTrips,
+    required this.focusMinutes,
+  });
+
+  final String area;
+  final String window;
+  final TrendDirection direction;
+  final double change;
+  final int potentialTrips;
+  final int focusMinutes;
+
+  DemandPulse copyWith({
+    TrendDirection? direction,
+    double? change,
+    int? potentialTrips,
+    int? focusMinutes,
+  }) {
+    return DemandPulse(
+      area: area,
+      window: window,
+      direction: direction ?? this.direction,
+      change: change ?? this.change,
+      potentialTrips: potentialTrips ?? this.potentialTrips,
+      focusMinutes: focusMinutes ?? this.focusMinutes,
+    );
+  }
+}
+
+class DemandHeatCell {
+  DemandHeatCell({
+    required this.dayIndex,
+    required this.slotKey,
+    required this.intensity,
+    required this.potentialTrips,
+  });
+
+  final int dayIndex;
+  final String slotKey;
+  final double intensity;
+  final int potentialTrips;
+
+  DemandHeatCell copyWith({
+    double? intensity,
+    int? potentialTrips,
+  }) {
+    return DemandHeatCell(
+      dayIndex: dayIndex,
+      slotKey: slotKey,
+      intensity: intensity ?? this.intensity,
+      potentialTrips: potentialTrips ?? this.potentialTrips,
+    );
+  }
+}
+
+class FocusAreaSnapshot {
+  FocusAreaSnapshot({
+    required this.area,
+    required this.window,
+    required this.surge,
+    required this.rideCount,
+    required this.demandScore,
+  });
+
+  final String area;
+  final String window;
+  final double surge;
+  final int rideCount;
+  final double demandScore;
+}
+
+class ShiftSegmentPlan {
+  ShiftSegmentPlan({
+    required this.id,
+    required this.label,
+    required this.start,
+    required this.end,
+    required this.demandScore,
+    required this.expectedTrips,
+  });
+
+  final String id;
+  final String label;
+  final String start;
+  final String end;
+  final double demandScore;
+  final int expectedTrips;
+
+  ShiftSegmentPlan copyWith({
+    double? demandScore,
+    int? expectedTrips,
+  }) {
+    return ShiftSegmentPlan(
+      id: id,
+      label: label,
+      start: start,
+      end: end,
+      demandScore: demandScore ?? this.demandScore,
+      expectedTrips: expectedTrips ?? this.expectedTrips,
+    );
+  }
+}
+
+class MomentumAction {
+  MomentumAction({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.impact,
+    required this.category,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final String impact;
+  final String category;
+
+  MomentumAction copyWith({
+    String? impact,
+    String? description,
+  }) {
+    return MomentumAction(
+      id: id,
+      title: title,
+      description: description ?? this.description,
+      impact: impact ?? this.impact,
+      category: category,
+    );
+  }
+}
+
+class ShiftScenario {
+  ShiftScenario({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.focusArea,
+    required this.earningTarget,
+    required this.surgeBoost,
+    required this.riskLevel,
+    required this.tags,
+    required this.timeline,
+    required this.actions,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String focusArea;
+  final int earningTarget;
+  final double surgeBoost;
+  final double riskLevel;
+  final List<String> tags;
+  final List<ShiftSegmentPlan> timeline;
+  final List<MomentumAction> actions;
+
+  ShiftScenario copyWith({
+    List<ShiftSegmentPlan>? timeline,
+    List<MomentumAction>? actions,
+  }) {
+    return ShiftScenario(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      focusArea: focusArea,
+      earningTarget: earningTarget,
+      surgeBoost: surgeBoost,
+      riskLevel: riskLevel,
+      tags: tags,
+      timeline: timeline ?? this.timeline,
+      actions: actions ?? this.actions,
+    );
+  }
+}
+
+class PlannerSummary {
+  PlannerSummary({
+    required this.projectedEarnings,
+    required this.expectedTrips,
+    required this.averageDemand,
+    required this.confidence,
+  });
+
+  final double projectedEarnings;
+  final int expectedTrips;
+  final double averageDemand;
+  final double confidence;
+}
+
+class MindfulRitual {
+  const MindfulRitual({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.durationMinutes,
+    required this.focusTag,
+    required this.imageUrl,
+    this.completed = false,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final int durationMinutes;
+  final String focusTag;
+  final String imageUrl;
+  final bool completed;
+
+  MindfulRitual copyWith({bool? completed, String? focusTag}) {
+    return MindfulRitual(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      durationMinutes: durationMinutes,
+      focusTag: focusTag ?? this.focusTag,
+      imageUrl: imageUrl,
+      completed: completed ?? this.completed,
+    );
+  }
+}
+
+class BreathGuide {
+  const BreathGuide({
+    required this.id,
+    required this.title,
+    required this.inhaleSeconds,
+    required this.holdSeconds,
+    required this.exhaleSeconds,
+    required this.cycles,
+    required this.description,
+    required this.focusTag,
+  });
+
+  final String id;
+  final String title;
+  final int inhaleSeconds;
+  final int holdSeconds;
+  final int exhaleSeconds;
+  final int cycles;
+  final String description;
+  final String focusTag;
+}
+
+class RecoveryMoment {
+  const RecoveryMoment({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.durationMinutes,
+    required this.vibes,
+    required this.icon,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final int durationMinutes;
+  final List<String> vibes;
+  final String icon;
+}
+
+class WellnessSnapshot {
+  const WellnessSnapshot({
+    required this.alignmentScore,
+    required this.energyScore,
+    required this.focusScore,
+    required this.message,
+    required this.anchorNotes,
+    required this.vibe,
+  });
+
+  final double alignmentScore;
+  final double energyScore;
+  final double focusScore;
+  final String message;
+  final List<String> anchorNotes;
+  final String vibe;
+
+  WellnessSnapshot copyWith({
+    double? alignmentScore,
+    double? energyScore,
+    double? focusScore,
+    String? message,
+    List<String>? anchorNotes,
+    String? vibe,
+  }) {
+    return WellnessSnapshot(
+      alignmentScore: alignmentScore ?? this.alignmentScore,
+      energyScore: energyScore ?? this.energyScore,
+      focusScore: focusScore ?? this.focusScore,
+      message: message ?? this.message,
+      anchorNotes: anchorNotes != null
+          ? List<String>.from(anchorNotes)
+          : List<String>.from(this.anchorNotes),
+      vibe: vibe ?? this.vibe,
+    );
+  }
+}
+
+class SkillMilestone {
+  const SkillMilestone({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.totalSteps,
+    required this.completedSteps,
+    required this.xpReward,
+    this.focusTag,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final int totalSteps;
+  final int completedSteps;
+  final int xpReward;
+  final String? focusTag;
+
+  bool get isComplete => completedSteps >= totalSteps;
+  double get progress =>
+      totalSteps == 0 ? 0 : (completedSteps / totalSteps).clamp(0.0, 1.0);
+
+  SkillMilestone copyWith({int? completedSteps}) {
+    return SkillMilestone(
+      id: id,
+      title: title,
+      description: description,
+      totalSteps: totalSteps,
+      completedSteps: completedSteps ?? this.completedSteps,
+      xpReward: xpReward,
+      focusTag: focusTag,
+    );
+  }
+}
+
+class SkillTrack {
+  const SkillTrack({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.focusArea,
+    required this.icon,
+    required this.level,
+    required this.progress,
+    required this.milestones,
+    required this.highlight,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String focusArea;
+  final String icon;
+  final int level;
+  final double progress;
+  final List<SkillMilestone> milestones;
+  final String highlight;
+
+  SkillTrack copyWith({
+    double? progress,
+    List<SkillMilestone>? milestones,
+    int? level,
+    String? highlight,
+  }) {
+    return SkillTrack(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      focusArea: focusArea,
+      icon: icon,
+      level: level ?? this.level,
+      progress: progress ?? this.progress,
+      milestones: milestones ?? this.milestones,
+      highlight: highlight ?? this.highlight,
+    );
+  }
+}
+
+class MomentumChallenge {
+  const MomentumChallenge({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.target,
+    required this.progress,
+    required this.focusArea,
+    required this.rewardXp,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final IconData? icon;
+  final int target;
+  final int progress;
+  final String focusArea;
+  final int rewardXp;
+
+  bool get isComplete => progress >= target;
+  double get percent => target == 0 ? 0 : progress / target;
+
+  MomentumChallenge copyWith({int? progress}) {
+    return MomentumChallenge(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      icon: icon,
+      target: target,
+      progress: progress ?? this.progress,
+      focusArea: focusArea,
+      rewardXp: rewardXp,
+    );
+  }
+}
+
+class CoachSignal {
+  const CoachSignal({
+    required this.id,
+    required this.title,
+    required this.caption,
+    required this.tag,
+    required this.emoji,
+  });
+
+  final String id;
+  final String title;
+  final String caption;
+  final String tag;
+  final String emoji;
+}
+
+class MomentumPulse {
+  const MomentumPulse({
+    required this.level,
+    required this.xp,
+    required this.xpToNext,
+    required this.streakDays,
+    required this.message,
+    required this.highlights,
+  });
+
+  final int level;
+  final int xp;
+  final int xpToNext;
+  final int streakDays;
+  final String message;
+  final List<String> highlights;
+
+  double get progress => xpToNext == 0 ? 0 : (xp / xpToNext).clamp(0.0, 1.0);
+
+  MomentumPulse copyWith({
+    int? level,
+    int? xp,
+    int? xpToNext,
+    int? streakDays,
+    String? message,
+    List<String>? highlights,
+  }) {
+    return MomentumPulse(
+      level: level ?? this.level,
+      xp: xp ?? this.xp,
+      xpToNext: xpToNext ?? this.xpToNext,
+      streakDays: streakDays ?? this.streakDays,
+      message: message ?? this.message,
+      highlights: highlights ?? List<String>.from(this.highlights),
+    );
+  }
+}
+
+class CrewCircle {
+  const CrewCircle({
+    required this.id,
+    required this.name,
+    required this.tagline,
+    required this.icon,
+    required this.energy,
+    required this.activeDrivers,
+    required this.signatureMoves,
+    required this.nextSync,
+    required this.joined,
+  });
+
+  final String id;
+  final String name;
+  final String tagline;
+  final String icon;
+  final double energy;
+  final int activeDrivers;
+  final List<String> signatureMoves;
+  final String nextSync;
+  final bool joined;
+
+  CrewCircle copyWith({
+    double? energy,
+    int? activeDrivers,
+    bool? joined,
+    List<String>? signatureMoves,
+    String? nextSync,
+  }) {
+    return CrewCircle(
+      id: id,
+      name: name,
+      tagline: tagline,
+      icon: icon,
+      energy: energy ?? this.energy,
+      activeDrivers: activeDrivers ?? this.activeDrivers,
+      signatureMoves:
+          signatureMoves ?? List<String>.from(this.signatureMoves),
+      nextSync: nextSync ?? this.nextSync,
+      joined: joined ?? this.joined,
+    );
+  }
+}
+
+class CirclePulse {
+  const CirclePulse({
+    required this.collaborationIndex,
+    required this.shareRate,
+    required this.assistRate,
+    required this.message,
+    required this.highlights,
+  });
+
+  final double collaborationIndex;
+  final double shareRate;
+  final double assistRate;
+  final String message;
+  final List<String> highlights;
+
+  CirclePulse copyWith({
+    double? collaborationIndex,
+    double? shareRate,
+    double? assistRate,
+    String? message,
+    List<String>? highlights,
+  }) {
+    return CirclePulse(
+      collaborationIndex: collaborationIndex ?? this.collaborationIndex,
+      shareRate: shareRate ?? this.shareRate,
+      assistRate: assistRate ?? this.assistRate,
+      message: message ?? this.message,
+      highlights: highlights ?? List<String>.from(this.highlights),
+    );
+  }
+}
+
+class PeerBeacon {
+  const PeerBeacon({
+    required this.id,
+    required this.circleId,
+    required this.driverName,
+    required this.message,
+    required this.timeAgo,
+    required this.boosts,
+    required this.tags,
+    required this.isBoosted,
+  });
+
+  final String id;
+  final String circleId;
+  final String driverName;
+  final String message;
+  final String timeAgo;
+  final int boosts;
+  final List<String> tags;
+  final bool isBoosted;
+
+  PeerBeacon copyWith({
+    int? boosts,
+    bool? isBoosted,
+    List<String>? tags,
+  }) {
+    return PeerBeacon(
+      id: id,
+      circleId: circleId,
+      driverName: driverName,
+      message: message,
+      timeAgo: timeAgo,
+      boosts: boosts ?? this.boosts,
+      tags: tags ?? List<String>.from(this.tags),
+      isBoosted: isBoosted ?? this.isBoosted,
+    );
+  }
+}
+
+class CommunitySprint {
+  const CommunitySprint({
+    required this.id,
+    required this.circleId,
+    required this.title,
+    required this.timeframe,
+    required this.description,
+    required this.focusTags,
+    required this.joined,
+  });
+
+  final String id;
+  final String circleId;
+  final String title;
+  final String timeframe;
+  final String description;
+  final List<String> focusTags;
+  final bool joined;
+
+  CommunitySprint copyWith({bool? joined}) {
+    return CommunitySprint(
+      id: id,
+      circleId: circleId,
+      title: title,
+      timeframe: timeframe,
+      description: description,
+      focusTags: List<String>.from(focusTags),
+      joined: joined ?? this.joined,
+    );
+  }
+}
+
+class CommunityResource {
+  const CommunityResource({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.format,
+    required this.duration,
+    required this.vibe,
+    required this.isSaved,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String format;
+  final String duration;
+  final String vibe;
+  final bool isSaved;
+
+  CommunityResource copyWith({bool? isSaved}) {
+    return CommunityResource(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      format: format,
+      duration: duration,
+      vibe: vibe,
+      isSaved: isSaved ?? this.isSaved,
+    );
+  }
+}
+
+class ImpactPulse {
+  const ImpactPulse({
+    required this.city,
+    required this.co2Saved,
+    required this.cleanKm,
+    required this.renewableShare,
+    required this.streakDays,
+    required this.message,
+    required this.highlights,
+  });
+
+  final String city;
+  final double co2Saved;
+  final double cleanKm;
+  final double renewableShare;
+  final int streakDays;
+  final String message;
+  final List<String> highlights;
+
+  ImpactPulse copyWith({
+    String? city,
+    double? co2Saved,
+    double? cleanKm,
+    double? renewableShare,
+    int? streakDays,
+    String? message,
+    List<String>? highlights,
+  }) {
+    return ImpactPulse(
+      city: city ?? this.city,
+      co2Saved: co2Saved ?? this.co2Saved,
+      cleanKm: cleanKm ?? this.cleanKm,
+      renewableShare: renewableShare ?? this.renewableShare,
+      streakDays: streakDays ?? this.streakDays,
+      message: message ?? this.message,
+      highlights: highlights ?? List<String>.from(this.highlights),
+    );
+  }
+}
+
+class ImpactGoal {
+  const ImpactGoal({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.current,
+    required this.target,
+    required this.unit,
+    required this.trend,
+    required this.direction,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final double current;
+  final double target;
+  final String unit;
+  final double trend;
+  final TrendDirection direction;
+
+  double get progress =>
+      target == 0 ? 0 : (current / target).clamp(0.0, 1.0);
+
+  ImpactGoal copyWith({
+    double? current,
+    double? target,
+    double? trend,
+    TrendDirection? direction,
+  }) {
+    return ImpactGoal(
+      id: id,
+      title: title,
+      description: description,
+      current: current ?? this.current,
+      target: target ?? this.target,
+      unit: unit,
+      trend: trend ?? this.trend,
+      direction: direction ?? this.direction,
+    );
+  }
+}
+
+class ImpactInitiative {
+  const ImpactInitiative({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.category,
+    required this.hours,
+    required this.impactScore,
+    required this.joined,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String icon;
+  final String category;
+  final String hours;
+  final double impactScore;
+  final bool joined;
+
+  ImpactInitiative copyWith({
+    double? impactScore,
+    bool? joined,
+    String? hours,
+  }) {
+    return ImpactInitiative(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      icon: icon,
+      category: category,
+      hours: hours ?? this.hours,
+      impactScore: impactScore ?? this.impactScore,
+      joined: joined ?? this.joined,
+    );
+  }
+}
+
+class ImpactAction {
+  const ImpactAction({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.tag,
+    required this.impactValue,
+    required this.completed,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final String tag;
+  final double impactValue;
+  final bool completed;
+
+  ImpactAction copyWith({bool? completed, double? impactValue}) {
+    return ImpactAction(
+      id: id,
+      title: title,
+      description: description,
+      tag: tag,
+      impactValue: impactValue ?? this.impactValue,
+      completed: completed ?? this.completed,
+    );
+  }
+}
+
+class ImpactRipple {
+  const ImpactRipple({
+    required this.id,
+    required this.title,
+    required this.value,
+    required this.unit,
+    required this.change,
+    required this.direction,
+  });
+
+  final String id;
+  final String title;
+  final double value;
+  final String unit;
+  final double change;
+  final TrendDirection direction;
+
+  ImpactRipple copyWith({
+    double? value,
+    double? change,
+    TrendDirection? direction,
+  }) {
+    return ImpactRipple(
+      id: id,
+      title: title,
+      value: value ?? this.value,
+      unit: unit,
+      change: change ?? this.change,
+      direction: direction ?? this.direction,
+    );
+  }
+}
+
+class InnovationPulse {
+  const InnovationPulse({
+    required this.id,
+    required this.headline,
+    required this.readiness,
+    required this.temperature,
+    required this.focusLanes,
+    required this.nextReview,
+    required this.energyBursts,
+  });
+
+  final String id;
+  final String headline;
+  final double readiness;
+  final double temperature;
+  final List<String> focusLanes;
+  final String nextReview;
+  final List<String> energyBursts;
+
+  InnovationPulse copyWith({
+    String? headline,
+    double? readiness,
+    double? temperature,
+    List<String>? focusLanes,
+    String? nextReview,
+    List<String>? energyBursts,
+  }) {
+    return InnovationPulse(
+      id: id,
+      headline: headline ?? this.headline,
+      readiness: readiness ?? this.readiness,
+      temperature: temperature ?? this.temperature,
+      focusLanes:
+          focusLanes != null ? List<String>.from(focusLanes) : List<String>.from(this.focusLanes),
+      nextReview: nextReview ?? this.nextReview,
+      energyBursts: energyBursts != null
+          ? List<String>.from(energyBursts)
+          : List<String>.from(this.energyBursts),
+    );
+  }
+}
+
+class InnovationPrototype {
+  const InnovationPrototype({
+    required this.id,
+    required this.title,
+    required this.summary,
+    required this.stage,
+    required this.progress,
+    required this.confidence,
+    required this.nextStep,
+    required this.tags,
+    required this.lastNote,
+  });
+
+  final String id;
+  final String title;
+  final String summary;
+  final String stage;
+  final double progress;
+  final double confidence;
+  final String nextStep;
+  final List<String> tags;
+  final String lastNote;
+
+  InnovationPrototype copyWith({
+    String? stage,
+    double? progress,
+    double? confidence,
+    String? nextStep,
+    String? lastNote,
+  }) {
+    return InnovationPrototype(
+      id: id,
+      title: title,
+      summary: summary,
+      stage: stage ?? this.stage,
+      progress: progress ?? this.progress,
+      confidence: confidence ?? this.confidence,
+      nextStep: nextStep ?? this.nextStep,
+      tags: List<String>.from(this.tags),
+      lastNote: lastNote ?? this.lastNote,
+    );
+  }
+}
+
+class InnovationExperiment {
+  const InnovationExperiment({
+    required this.id,
+    required this.title,
+    required this.hypothesis,
+    required this.metric,
+    required this.status,
+    required this.signal,
+    required this.confidence,
+  });
+
+  final String id;
+  final String title;
+  final String hypothesis;
+  final String metric;
+  final String status;
+  final String signal;
+  final double confidence;
+
+  InnovationExperiment copyWith({
+    String? status,
+    String? signal,
+    double? confidence,
+  }) {
+    return InnovationExperiment(
+      id: id,
+      title: title,
+      hypothesis: hypothesis,
+      metric: metric,
+      status: status ?? this.status,
+      signal: signal ?? this.signal,
+      confidence: confidence ?? this.confidence,
+    );
+  }
+}
+
+class InnovationBlueprint {
+  const InnovationBlueprint({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.horizon,
+    required this.owner,
+    required this.readiness,
+    required this.phases,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final String horizon;
+  final String owner;
+  final double readiness;
+  final List<String> phases;
+
+  InnovationBlueprint copyWith({
+    double? readiness,
+    List<String>? phases,
+  }) {
+    return InnovationBlueprint(
+      id: id,
+      title: title,
+      description: description,
+      horizon: horizon,
+      owner: owner,
+      readiness: readiness ?? this.readiness,
+      phases: phases != null
+          ? List<String>.from(phases)
+          : List<String>.from(this.phases),
+    );
+  }
+}
+
+class MasteryPulse {
+  const MasteryPulse({
+    required this.id,
+    required this.focusTheme,
+    required this.momentum,
+    required this.energy,
+    required this.microPractice,
+    required this.pathways,
+    required this.coachNote,
+  });
+
+  final String id;
+  final String focusTheme;
+  final double momentum;
+  final double energy;
+  final String microPractice;
+  final List<String> pathways;
+  final String coachNote;
+
+  MasteryPulse copyWith({
+    String? focusTheme,
+    double? momentum,
+    double? energy,
+    String? microPractice,
+    List<String>? pathways,
+    String? coachNote,
+  }) {
+    return MasteryPulse(
+      id: id,
+      focusTheme: focusTheme ?? this.focusTheme,
+      momentum: momentum ?? this.momentum,
+      energy: energy ?? this.energy,
+      microPractice: microPractice ?? this.microPractice,
+      pathways: pathways != null
+          ? List<String>.from(pathways)
+          : List<String>.from(this.pathways),
+      coachNote: coachNote ?? this.coachNote,
+    );
+  }
+}
+
+class MasteryModule {
+  const MasteryModule({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.focusArea,
+    required this.lessons,
+    required this.completedLessons,
+    required this.progress,
+    required this.icon,
+    required this.microPractice,
+    required this.reflectionPrompt,
+    required this.isFocus,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final String focusArea;
+  final int lessons;
+  final int completedLessons;
+  final double progress;
+  final String icon;
+  final String microPractice;
+  final String reflectionPrompt;
+  final bool isFocus;
+
+  MasteryModule copyWith({
+    int? completedLessons,
+    double? progress,
+    bool? isFocus,
+    String? microPractice,
+  }) {
+    return MasteryModule(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      focusArea: focusArea,
+      lessons: lessons,
+      completedLessons: completedLessons ?? this.completedLessons,
+      progress: progress ?? this.progress,
+      icon: icon,
+      microPractice: microPractice ?? this.microPractice,
+      reflectionPrompt: reflectionPrompt,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class MasteryWorkshop {
+  const MasteryWorkshop({
+    required this.id,
+    required this.title,
+    required this.focus,
+    required this.host,
+    required this.date,
+    required this.highlight,
+    required this.enrolled,
+  });
+
+  final String id;
+  final String title;
+  final String focus;
+  final String host;
+  final String date;
+  final String highlight;
+  final bool enrolled;
+
+  MasteryWorkshop copyWith({bool? enrolled}) {
+    return MasteryWorkshop(
+      id: id,
+      title: title,
+      focus: focus,
+      host: host,
+      date: date,
+      highlight: highlight,
+      enrolled: enrolled ?? this.enrolled,
+    );
+  }
+}
+
+class MasteryBadge {
+  const MasteryBadge({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.icon,
+    required this.moduleIds,
+    required this.progress,
+    required this.threshold,
+    required this.unlocked,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final String icon;
+  final List<String> moduleIds;
+  final double progress;
+  final double threshold;
+  final bool unlocked;
+
+  MasteryBadge copyWith({
+    double? progress,
+    bool? unlocked,
+  }) {
+    return MasteryBadge(
+      id: id,
+      title: title,
+      description: description,
+      icon: icon,
+      moduleIds: List<String>.from(moduleIds),
+      progress: progress ?? this.progress,
+      threshold: threshold,
+      unlocked: unlocked ?? this.unlocked,
+    );
+  }
+}
+
+class MasteryReflection {
+  const MasteryReflection({
+    required this.id,
+    required this.prompt,
+    required this.response,
+    required this.timestamp,
+  });
+
+  final String id;
+  final String prompt;
+  final String response;
+  final DateTime timestamp;
+}
+
+class HorizonPulse {
+  const HorizonPulse({
+    required this.headline,
+    required this.alignment,
+    required this.runwayDays,
+    required this.confidence,
+    required this.guidingQuestion,
+    required this.focusThemes,
+    required this.signalHighlights,
+    required this.nextWindow,
+  });
+
+  final String headline;
+  final double alignment;
+  final int runwayDays;
+  final double confidence;
+  final String guidingQuestion;
+  final List<String> focusThemes;
+  final List<String> signalHighlights;
+  final String nextWindow;
+
+  HorizonPulse copyWith({
+    String? headline,
+    double? alignment,
+    int? runwayDays,
+    double? confidence,
+    String? guidingQuestion,
+    List<String>? focusThemes,
+    List<String>? signalHighlights,
+    String? nextWindow,
+  }) {
+    return HorizonPulse(
+      headline: headline ?? this.headline,
+      alignment: alignment ?? this.alignment,
+      runwayDays: runwayDays ?? this.runwayDays,
+      confidence: confidence ?? this.confidence,
+      guidingQuestion: guidingQuestion ?? this.guidingQuestion,
+      focusThemes: focusThemes ?? List<String>.from(this.focusThemes),
+      signalHighlights:
+          signalHighlights ?? List<String>.from(this.signalHighlights),
+      nextWindow: nextWindow ?? this.nextWindow,
+    );
+  }
+}
+
+class HorizonScenario {
+  const HorizonScenario({
+    required this.id,
+    required this.title,
+    required this.timeframe,
+    required this.impact,
+    required this.probability,
+    required this.focus,
+    required this.narrative,
+    this.isFocus = false,
+  });
+
+  final String id;
+  final String title;
+  final String timeframe;
+  final double impact;
+  final double probability;
+  final String focus;
+  final String narrative;
+  final bool isFocus;
+
+  HorizonScenario copyWith({bool? isFocus, double? impact, double? probability}) {
+    return HorizonScenario(
+      id: id,
+      title: title,
+      timeframe: timeframe,
+      impact: impact ?? this.impact,
+      probability: probability ?? this.probability,
+      focus: focus,
+      narrative: narrative,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class HorizonSignal {
+  const HorizonSignal({
+    required this.id,
+    required this.title,
+    required this.category,
+    required this.description,
+    required this.momentum,
+    required this.confidence,
+    this.flagged = false,
+  });
+
+  final String id;
+  final String title;
+  final String category;
+  final String description;
+  final double momentum;
+  final double confidence;
+  final bool flagged;
+
+  HorizonSignal copyWith({bool? flagged, double? momentum, double? confidence}) {
+    return HorizonSignal(
+      id: id,
+      title: title,
+      category: category,
+      description: description,
+      momentum: momentum ?? this.momentum,
+      confidence: confidence ?? this.confidence,
+      flagged: flagged ?? this.flagged,
+    );
+  }
+}
+
+class HorizonRunwayMarker {
+  const HorizonRunwayMarker({
+    required this.id,
+    required this.title,
+    required this.timeframe,
+    required this.priority,
+    required this.notes,
+    this.completed = false,
+  });
+
+  final String id;
+  final String title;
+  final String timeframe;
+  final String priority;
+  final String notes;
+  final bool completed;
+
+  HorizonRunwayMarker copyWith({bool? completed}) {
+    return HorizonRunwayMarker(
+      id: id,
+      title: title,
+      timeframe: timeframe,
+      priority: priority,
+      notes: notes,
+      completed: completed ?? this.completed,
+    );
+  }
+}
+
+class HorizonBlueprint {
+  const HorizonBlueprint({
+    required this.id,
+    required this.pillar,
+    required this.summary,
+    required this.owner,
+    required this.status,
+    required this.confidence,
+    required this.actions,
+    required this.nextWindow,
+  });
+
+  final String id;
+  final String pillar;
+  final String summary;
+  final String owner;
+  final String status;
+  final double confidence;
+  final List<String> actions;
+  final String nextWindow;
+
+  HorizonBlueprint copyWith({
+    String? status,
+    double? confidence,
+    String? nextWindow,
+    List<String>? actions,
+  }) {
+    return HorizonBlueprint(
+      id: id,
+      pillar: pillar,
+      summary: summary,
+      owner: owner,
+      status: status ?? this.status,
+      confidence: confidence ?? this.confidence,
+      actions: actions ?? List<String>.from(this.actions),
+      nextWindow: nextWindow ?? this.nextWindow,
+    );
+  }
+}
+class CosmosPulse {
+  const CosmosPulse({
+    required this.headline,
+    required this.magnetism,
+    required this.signalStrength,
+    required this.activeAlliances,
+    required this.window,
+    required this.highlight,
+    required this.nextTrajectory,
+    required this.focus,
+  });
+
+  final String headline;
+  final double magnetism;
+  final double signalStrength;
+  final int activeAlliances;
+  final String window;
+  final String highlight;
+  final String nextTrajectory;
+  final String focus;
+
+  CosmosPulse copyWith({
+    String? headline,
+    double? magnetism,
+    double? signalStrength,
+    int? activeAlliances,
+    String? window,
+    String? highlight,
+    String? nextTrajectory,
+    String? focus,
+  }) {
+    return CosmosPulse(
+      headline: headline ?? this.headline,
+      magnetism: magnetism ?? this.magnetism,
+      signalStrength: signalStrength ?? this.signalStrength,
+      activeAlliances: activeAlliances ?? this.activeAlliances,
+      window: window ?? this.window,
+      highlight: highlight ?? this.highlight,
+      nextTrajectory: nextTrajectory ?? this.nextTrajectory,
+      focus: focus ?? this.focus,
+    );
+  }
+}
+
+class CosmosConstellation {
+  const CosmosConstellation({
+    required this.id,
+    required this.title,
+    required this.icon,
+    required this.anchor,
+    required this.resonance,
+    required this.window,
+    required this.snapshot,
+    this.isFocus = false,
+  });
+
+  final String id;
+  final String title;
+  final String icon;
+  final String anchor;
+  final double resonance;
+  final String window;
+  final String snapshot;
+  final bool isFocus;
+
+  CosmosConstellation copyWith({
+    bool? isFocus,
+    double? resonance,
+    String? window,
+  }) {
+    return CosmosConstellation(
+      id: id,
+      title: title,
+      icon: icon,
+      anchor: anchor,
+      resonance: resonance ?? this.resonance,
+      window: window ?? this.window,
+      snapshot: snapshot,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class CosmosOrbit {
+  const CosmosOrbit({
+    required this.id,
+    required this.label,
+    required this.window,
+    required this.magnetic,
+    required this.trajectory,
+    required this.tone,
+  });
+
+  final String id;
+  final String label;
+  final String window;
+  final double magnetic;
+  final double trajectory;
+  final String tone;
+
+  CosmosOrbit copyWith({double? magnetic, double? trajectory, String? window}) {
+    return CosmosOrbit(
+      id: id,
+      label: label,
+      window: window ?? this.window,
+      magnetic: magnetic ?? this.magnetic,
+      trajectory: trajectory ?? this.trajectory,
+      tone: tone,
+    );
+  }
+}
+
+class CosmosBeacon {
+  const CosmosBeacon({
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.energy,
+    required this.urgency,
+    this.boosted = false,
+  });
+
+  final String id;
+  final String title;
+  final String subtitle;
+  final double energy;
+  final int urgency;
+  final bool boosted;
+
+  CosmosBeacon copyWith({bool? boosted, double? energy, int? urgency}) {
+    return CosmosBeacon(
+      id: id,
+      title: title,
+      subtitle: subtitle,
+      energy: energy ?? this.energy,
+      urgency: urgency ?? this.urgency,
+      boosted: boosted ?? this.boosted,
+    );
+  }
+}
+
+class CosmosExpedition {
+  const CosmosExpedition({
+    required this.id,
+    required this.title,
+    required this.window,
+    required this.focus,
+    required this.progress,
+    this.enrolled = false,
+  });
+
+  final String id;
+  final String title;
+  final String window;
+  final String focus;
+  final double progress;
+  final bool enrolled;
+
+  CosmosExpedition copyWith({bool? enrolled, double? progress}) {
+    return CosmosExpedition(
+      id: id,
+      title: title,
+      window: window,
+      focus: focus,
+      progress: progress ?? this.progress,
+      enrolled: enrolled ?? this.enrolled,
+    );
+  }
+}
+
+class CosmosArtifact {
+  const CosmosArtifact({
+    required this.id,
+    required this.title,
+    required this.summary,
+    required this.tag,
+    this.saved = false,
+  });
+
+  final String id;
+  final String title;
+  final String summary;
+  final String tag;
+  final bool saved;
+
+  CosmosArtifact copyWith({bool? saved}) {
+    return CosmosArtifact(
+      id: id,
+      title: title,
+      summary: summary,
+      tag: tag,
+      saved: saved ?? this.saved,
+    );
+  }
+}
+
+class FusionPulse {
+  const FusionPulse({
+    required this.headline,
+    required this.alignment,
+    required this.cohesion,
+    required this.window,
+    required this.focus,
+    required this.nextSync,
+    required this.highlight,
+  });
+
+  final String headline;
+  final double alignment;
+  final double cohesion;
+  final String window;
+  final String focus;
+  final String nextSync;
+  final String highlight;
+
+  FusionPulse copyWith({
+    String? headline,
+    double? alignment,
+    double? cohesion,
+    String? window,
+    String? focus,
+    String? nextSync,
+    String? highlight,
+  }) {
+    return FusionPulse(
+      headline: headline ?? this.headline,
+      alignment: alignment ?? this.alignment,
+      cohesion: cohesion ?? this.cohesion,
+      window: window ?? this.window,
+      focus: focus ?? this.focus,
+      nextSync: nextSync ?? this.nextSync,
+      highlight: highlight ?? this.highlight,
+    );
+  }
+}
+
+class FusionStrand {
+  const FusionStrand({
+    required this.id,
+    required this.icon,
+    required this.title,
+    required this.snapshot,
+    required this.alignment,
+    required this.flow,
+    this.isFocus = false,
+  });
+
+  final String id;
+  final String icon;
+  final String title;
+  final String snapshot;
+  final double alignment;
+  final double flow;
+  final bool isFocus;
+
+  FusionStrand copyWith({bool? isFocus, double? alignment, double? flow}) {
+    return FusionStrand(
+      id: id,
+      icon: icon,
+      title: title,
+      snapshot: snapshot,
+      alignment: alignment ?? this.alignment,
+      flow: flow ?? this.flow,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class FusionCanvas {
+  const FusionCanvas({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.threads,
+    required this.heat,
+    required this.cohesion,
+  });
+
+  final String id;
+  final String title;
+  final String description;
+  final List<String> threads;
+  final double heat;
+  final double cohesion;
+
+  FusionCanvas copyWith({double? heat, double? cohesion}) {
+    return FusionCanvas(
+      id: id,
+      title: title,
+      description: description,
+      threads: List<String>.from(threads),
+      heat: heat ?? this.heat,
+      cohesion: cohesion ?? this.cohesion,
+    );
+  }
+}
+
+class FusionExperiment {
+  const FusionExperiment({
+    required this.id,
+    required this.title,
+    required this.intent,
+    required this.stage,
+    required this.confidence,
+    this.active = false,
+  });
+
+  final String id;
+  final String title;
+  final String intent;
+  final String stage;
+  final double confidence;
+  final bool active;
+
+  FusionExperiment copyWith({bool? active, String? stage, double? confidence}) {
+    return FusionExperiment(
+      id: id,
+      title: title,
+      intent: intent,
+      stage: stage ?? this.stage,
+      confidence: confidence ?? this.confidence,
+      active: active ?? this.active,
+    );
+  }
+}
+
+class FusionSignal {
+  const FusionSignal({
+    required this.id,
+    required this.title,
+    required this.detail,
+    required this.urgency,
+    this.captured = false,
+  });
+
+  final String id;
+  final String title;
+  final String detail;
+  final int urgency;
+  final bool captured;
+
+  FusionSignal copyWith({bool? captured, int? urgency}) {
+    return FusionSignal(
+      id: id,
+      title: title,
+      detail: detail,
+      urgency: urgency ?? this.urgency,
+      captured: captured ?? this.captured,
+    );
+  }
+}
+
+class OdysseyPulse {
+  const OdysseyPulse({
+    required this.headline,
+    required this.rhythm,
+    required this.momentum,
+    required this.window,
+    required this.focus,
+    required this.nextMilestone,
+    required this.storyBeat,
+  });
+
+  final String headline;
+  final double rhythm;
+  final double momentum;
+  final String window;
+  final String focus;
+  final String nextMilestone;
+  final String storyBeat;
+
+  OdysseyPulse copyWith({
+    String? headline,
+    double? rhythm,
+    double? momentum,
+    String? window,
+    String? focus,
+    String? nextMilestone,
+    String? storyBeat,
+  }) {
+    return OdysseyPulse(
+      headline: headline ?? this.headline,
+      rhythm: rhythm ?? this.rhythm,
+      momentum: momentum ?? this.momentum,
+      window: window ?? this.window,
+      focus: focus ?? this.focus,
+      nextMilestone: nextMilestone ?? this.nextMilestone,
+      storyBeat: storyBeat ?? this.storyBeat,
+    );
+  }
+}
+
+class OdysseyChapter {
+  const OdysseyChapter({
+    required this.id,
+    required this.title,
+    required this.motif,
+    required this.progress,
+    required this.spotlight,
+    this.isFocus = false,
+  });
+
+  final String id;
+  final String title;
+  final String motif;
+  final double progress;
+  final String spotlight;
+  final bool isFocus;
+
+  OdysseyChapter copyWith({
+    bool? isFocus,
+    double? progress,
+    String? motif,
+    String? spotlight,
+  }) {
+    return OdysseyChapter(
+      id: id,
+      title: title,
+      motif: motif ?? this.motif,
+      progress: progress ?? this.progress,
+      spotlight: spotlight ?? this.spotlight,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class OdysseyRoute {
+  const OdysseyRoute({
+    required this.id,
+    required this.title,
+    required this.stage,
+    required this.distance,
+    required this.readiness,
+    required this.signal,
+    this.tracking = false,
+  });
+
+  final String id;
+  final String title;
+  final String stage;
+  final double distance;
+  final double readiness;
+  final String signal;
+  final bool tracking;
+
+  OdysseyRoute copyWith({bool? tracking, double? readiness, String? stage}) {
+    return OdysseyRoute(
+      id: id,
+      title: title,
+      stage: stage ?? this.stage,
+      distance: distance,
+      readiness: readiness ?? this.readiness,
+      signal: signal,
+      tracking: tracking ?? this.tracking,
+    );
+  }
+}
+
+class OdysseyBeacon {
+  const OdysseyBeacon({
+    required this.id,
+    required this.title,
+    required this.intent,
+    required this.eta,
+    required this.energy,
+    this.boosted = false,
+  });
+
+  final String id;
+  final String title;
+  final String intent;
+  final String eta;
+  final double energy;
+  final bool boosted;
+
+  OdysseyBeacon copyWith({bool? boosted, double? energy, String? eta}) {
+    return OdysseyBeacon(
+      id: id,
+      title: title,
+      intent: intent,
+      eta: eta ?? this.eta,
+      energy: energy ?? this.energy,
+      boosted: boosted ?? this.boosted,
+    );
+  }
+}
+
+class OdysseyReflection {
+  const OdysseyReflection({
+    required this.id,
+    required this.prompt,
+    required this.lastEntry,
+    required this.sentiment,
+    required this.energy,
+  });
+
+  final String id;
+  final String prompt;
+  final String lastEntry;
+  final String sentiment;
+  final double energy;
+
+  OdysseyReflection copyWith({
+    String? lastEntry,
+    String? sentiment,
+    double? energy,
+  }) {
+    return OdysseyReflection(
+      id: id,
+      prompt: prompt,
+      lastEntry: lastEntry ?? this.lastEntry,
+      sentiment: sentiment ?? this.sentiment,
+      energy: energy ?? this.energy,
+    );
+  }
+}
+
+class ZenithPulse {
+  const ZenithPulse({
+    required this.headline,
+    required this.clarity,
+    required this.acceleration,
+    required this.altitude,
+    required this.momentum,
+    required this.window,
+    required this.message,
+  });
+
+  final String headline;
+  final double clarity;
+  final double acceleration;
+  final double altitude;
+  final double momentum;
+  final String window;
+  final String message;
+
+  ZenithPulse copyWith({
+    String? headline,
+    double? clarity,
+    double? acceleration,
+    double? altitude,
+    double? momentum,
+    String? window,
+    String? message,
+  }) {
+    return ZenithPulse(
+      headline: headline ?? this.headline,
+      clarity: clarity ?? this.clarity,
+      acceleration: acceleration ?? this.acceleration,
+      altitude: altitude ?? this.altitude,
+      momentum: momentum ?? this.momentum,
+      window: window ?? this.window,
+      message: message ?? this.message,
+    );
+  }
+}
+
+class ZenithVector {
+  const ZenithVector({
+    required this.id,
+    required this.icon,
+    required this.title,
+    required this.summary,
+    required this.momentum,
+    this.isFocus = false,
+  });
+
+  final String id;
+  final String icon;
+  final String title;
+  final String summary;
+  final double momentum;
+  final bool isFocus;
+
+  ZenithVector copyWith({bool? isFocus, double? momentum, String? summary}) {
+    return ZenithVector(
+      id: id,
+      icon: icon,
+      title: title,
+      summary: summary ?? this.summary,
+      momentum: momentum ?? this.momentum,
+      isFocus: isFocus ?? this.isFocus,
+    );
+  }
+}
+
+class ZenithPath {
+  const ZenithPath({
+    required this.id,
+    required this.title,
+    required this.window,
+    required this.distanceKm,
+    required this.progress,
+    this.active = false,
+  });
+
+  final String id;
+  final String title;
+  final String window;
+  final double distanceKm;
+  final double progress;
+  final bool active;
+
+  ZenithPath copyWith({bool? active, double? progress}) {
+    return ZenithPath(
+      id: id,
+      title: title,
+      window: window,
+      distanceKm: distanceKm,
+      progress: progress ?? this.progress,
+      active: active ?? this.active,
+    );
+  }
+}
+
+class ZenithSignal {
+  const ZenithSignal({
+    required this.id,
+    required this.title,
+    required this.detail,
+    required this.severity,
+    this.acknowledged = false,
+  });
+
+  final String id;
+  final String title;
+  final String detail;
+  final int severity;
+  final bool acknowledged;
+
+  ZenithSignal copyWith({bool? acknowledged, String? detail, int? severity}) {
+    return ZenithSignal(
+      id: id,
+      title: title,
+      detail: detail ?? this.detail,
+      severity: severity ?? this.severity,
+      acknowledged: acknowledged ?? this.acknowledged,
+    );
+  }
+}

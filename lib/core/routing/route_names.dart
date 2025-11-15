@@ -1,0 +1,37 @@
+class RouteNames {
+  static const splash = '/';
+  static const onboarding = '/onboarding';
+  static const login = '/login';
+  static const register = '/register';
+  static const forgotPassword = '/forgot-password';
+  static const home = '/home';
+  static const tripDetails = '/trip-details';
+  static const onTrip = '/on-trip';
+  static const arrived = '/arrived';
+  static const earnings = '/earnings';
+  static const history = '/history';
+  static const myRides = '/my-rides';
+  static const performance = '/performance';
+  static const profile = '/profile';
+  static const settings = '/settings';
+  static const chatList = '/chat';
+  static const chatDetail = '/chat-detail';
+  static const documents = '/documents';
+  static const help = '/help';
+  static const catalog = '/catalog';
+  static const compare = '/compare';
+  static const search = '/search';
+  static const insights = '/insights';
+  static const strategyLab = '/strategy-lab';
+  static const wellness = '/wellness';
+  static const momentum = '/momentum';
+  static const community = '/community';
+  static const impact = '/impact';
+  static const innovation = '/innovation';
+  static const mastery = '/mastery';
+  static const horizon = '/horizon';
+  static const cosmos = '/cosmos';
+  static const fusion = '/fusion';
+  static const odyssey = '/odyssey';
+  static const zenith = '/zenith';
+}
